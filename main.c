@@ -16,22 +16,36 @@
 #define SCL PB2
 #define LED PB4
 
-enum {usi_idle,usi_start,usi_address_sent,usi_byte_sent,usi_stop,usi_nack_start,usi_read_ack};
+enum {usi_idle,usi_start,usi_address_sent,usi_byte_sent,usi_stop,usi_nack,usi_read_ack};
+
+#define I2C_BUFF_LEN 3
+#define OLED_ADDR_W	0x78 //Device Address: 0x3C. Write: 0x78 | Read: 
 	
 //Macros
 #define TWI_DELAY() _delay_us(5)
 #define LED_ON     PORTB|=(0x01<<LED) //LED on
+
+#define SDA_LOW		PORTB &= ~(0x01<<SDA);
+#define SDA_HIGH	PORTB |= (0x01<<SDA);
+
+#define SCL_LOW		PORTB &= ~(0x01<<SCL);
+#define SCL_HIGH	PORTB |=  (0x01<<SCL);
 
 //Global variables
 volatile uint8_t usi_status = 0x00;
 volatile uint8_t usi_state = usi_idle;
 static char a = 0;
 
+volatile uint8_t i2c_buff[I2C_BUFF_LEN];
+volatile uint8_t i2c_indx = 0;
+
+
 //Function prototypes
 void attiny_timer_init(void);
 void attiny_i2c_init(void);
 void attiny_init(void);
 void attiny_i2c_tx(void);
+void attiny_i2c_send_byte(char addr, char reg, char data);
 
 //Function definitions
 void attiny_timer_init()
@@ -118,7 +132,7 @@ Para conducir: DDRB = 1 (salida)  y PORTB = 0 (la línea se va a bajo)
 void attiny_i2c_tx ()
 {
 	//set the
-	uint8_t i2c_data = 0x78; //0xC4; //(0x62<<1) | 0x00;
+	//uint8_t i2c_data = 0x78; //0xC4; //(0x62<<1) | 0x00;
 
 
 	
@@ -144,8 +158,9 @@ void attiny_i2c_tx ()
 	PORTB |= (0x01<<SDA);
 
 	//set the address to be tx
-	USIDR = i2c_data;
-
+	USIDR = i2c_buff[0];//i2c_data;
+	//advance i2c index
+	i2c_indx+=1;
 	//clean flag counter OV and restart counter to start transmission
 	USISR = (1 << USISIF) | (1 << USIOIF) | (0x00 << USICNT3);
 
@@ -177,6 +192,29 @@ void attiny_init()
 	  PORTB&=~(0x01<<LED); //LED off
 }
 
+
+/*	
+	@fn: void attiny_i2c_send_byte
+	@params:
+		addr: device address
+		register: register to be addressed
+		data: byte to be transmitted
+	@returns: none
+*/
+void attiny_i2c_send_byte(char addr, char reg, char data)
+{
+	//TODO: change blocking wait
+	while(usi_state|=usi_idle);
+	//reset i2c index
+	i2c_indx = 0;
+	//load i2c data buffer
+	i2c_buff[0]=addr;
+	i2c_buff[1]=reg;
+	i2c_buff[2]=data;
+	//start Tx
+	attiny_i2c_tx();
+}
+
 //ISRs
 ISR(TIMER0_COMPA_vect)
 {
@@ -197,11 +235,9 @@ ISR(TIMER0_COMPA_vect)
 
 ISR(USI_OVF_vect)
 {
-	//do something
-	//PORTB|=(0x01<<LED); //LED on
+
 	usi_status = USISR;
 
-	
 	//USI counter OVF
 	if(((usi_status&0x40)>>6)==1)
 	{
@@ -210,59 +246,79 @@ ISR(USI_OVF_vect)
 
 	}
 
-
+	//I2C FSM
 	switch (usi_state)
 	{
-
+		
+		//idle state: nothing to do, keep there
 		case usi_idle:
-		usi_state = usi_idle;
-		break;
+			usi_state = usi_idle;
+			break;
+		//Tx started and address+w/r sent	
 		case usi_start:
-		
-		//we sent the start and address, now we prepare to read de ACK
-		
-		USISR = (USISR&0xF0)|(0x0E); //set the counter at 14, to read 1 bit of ack
-		DDRB&=~(0x01<<SDA); //set SDA as input...
-		PORTB&=~(0x01<<SDA); //an release the line
+			
+			//we sent the start and address, now we prepare to read de ACK
+			USISR = (USISR&0xF0)|(0x0E); //set the counter at 14, to read 1 bit of ack
+			DDRB&=~(0x01<<SDA); //set SDA as input...
+			PORTB&=~(0x01<<SDA); //an release the line
 
-		usi_state = usi_read_ack;
+			usi_state = usi_read_ack;
 		
 
-		break;
+			break;
 
 		case usi_read_ack:
-		if(!(USIDR&0x01))
-		{
-			LED_ON;
-			//ACK
-			//prepare to send next byte
-			DDRB |= (1<<SDA); //SDA as Output
-			// Free SDA so the USI takes control of the line
-			//DDRB &= ~(1<<SDA);
-			PORTB |= (0x01<<SDA);
+			//check of ACK of the device
+			if(!(USIDR&0x01))
+			{
+				//check if there is available data in the buffer. Else, exit
+				if (i2c_indx<I2C_BUFF_LEN)
+				{
+					LED_ON;
 
-			//set counter to original value
+					//pop next data from buffer
+					USIDR = i2c_buff[i2c_indx];
+					//advance i2c index
+					i2c_indx+=1;					
+					//ACK
+					//prepare to send next byte
+					PORTB |= (0x01<<SDA);
+					DDRB |= (1<<SDA); //SDA as Output
+					// Free SDA so the USI takes control of the line
+					//DDRB &= ~(1<<SDA);
+					
+					//set counter to original value
+					USISR = (1 << USISIF) | (1 << USIOIF) | (0x00 << USICNT3);
+									
+					usi_state = usi_start;
+				}
+				else
+				{
+					usi_state = usi_stop;
+				}
 
-			USIDR = 0xBA;
-			USISR = (1 << USISIF) | (1 << USIOIF) | (0x00 << USICNT3);
-			usi_state = usi_address_sent;
-		}
-		else
-		{
-			//NACK
-			usi_state = usi_nack_start;
-		}
+			}
+			else
+			{
+				//NACK
+				usi_state = usi_nack;
+			}
 
-
-		break;
-		case usi_address_sent:
-		usi_state = usi_idle;
-		break;
-		case usi_nack_start:
-		usi_state = usi_idle;
+			break;
+			
+		case usi_nack:
+			//TODO: implement nack contingency
+			usi_state = usi_idle;
+			break;
+		case usi_stop:
+			//TODO: implement propper i2c stop
+					
+			
+			usi_state = usi_idle;
+			break;
 		default:
-		usi_state = usi_idle;
-		break;
+			usi_state = usi_idle;
+			break;
 	}
 
 
@@ -281,7 +337,14 @@ int main(void)
     {
 		if (a==0)
 		{
-			attiny_i2c_tx();
+			//attiny_i2c_tx();
+			//turn on display
+			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xAF);
+			//full-on display
+			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
+			//display sleep mode
+			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
+			
 			a=1;
 		}
     }
