@@ -109,7 +109,7 @@ int main(void)
 			//turn on display
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xAF);
 			//full-on display
-			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
+			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA5);
 			//display sleep mode
 			//attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 			

@@ -621,8 +621,8 @@ int main(void)
  274:	88 e7       	ldi	r24, 0x78	; 120
  276:	25 df       	rcall	.-438    	; 0xc2 <attiny_i2c_send_byte>
 			//full-on display
-			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
- 278:	44 ea       	ldi	r20, 0xA4	; 164
+			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA5);
+ 278:	45 ea       	ldi	r20, 0xA5	; 165
  27a:	60 e0       	ldi	r22, 0x00	; 0
  27c:	88 e7       	ldi	r24, 0x78	; 120
  27e:	21 df       	rcall	.-446    	; 0xc2 <attiny_i2c_send_byte>
