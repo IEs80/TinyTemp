@@ -16,10 +16,13 @@
 #endif //OLED_ADDR_W
 
 #define OLED_CONTROL_BYTE 0x00
+#define OLED_GDDRAMW_BYTE 0xFF //TODO: CHECK!
 
-#define OLED_CMD_WAKEUP 0xAF
-#define OLED_CMD_ON		0xA4
-#define OLED_CMD_SLEEP	0xA5
+#define OLED_CMD_WAKEUP			0xAF
+#define OLED_CMD_SLEEP			0xAE
+#define OLED_CMD_ON				0xA4 //Output follows RAM content
+#define OLED_CMD_ON_NORAM		0xA5 //Output ignores RAM content	
+#define OLED_CMD_SETCONTRAST	0x81 //double byte cmd
 
 //Macros
 
