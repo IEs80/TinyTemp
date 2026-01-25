@@ -3,31 +3,31 @@ GccApplication1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         0000052e  00000000  00000000  00000094  2**1
+  0 .text         00000552  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000000c  00800060  0000052e  000005c2  2**0
+  1 .data         00000014  00800060  00000552  000005e6  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000000d  0080006c  0080006c  000005ce  2**0
+  2 .bss          0000000d  00800074  00800074  000005fa  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000005ce  2**0
+  3 .comment      00000030  00000000  00000000  000005fa  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000600  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000062c  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000b8  00000000  00000000  0000063c  2**0
+  5 .debug_aranges 000000b8  00000000  00000000  00000668  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00000f45  00000000  00000000  000006f4  2**0
+  6 .debug_info   00000fdf  00000000  00000000  00000720  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000008bb  00000000  00000000  00001639  2**0
+  7 .debug_abbrev 000008fe  00000000  00000000  000016ff  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000009a1  00000000  00000000  00001ef4  2**0
+  8 .debug_line   000009c5  00000000  00000000  00001ffd  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000184  00000000  00000000  00002898  2**2
+  9 .debug_frame  00000184  00000000  00000000  000029c4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000514  00000000  00000000  00002a1c  2**0
+ 10 .debug_str    00000514  00000000  00000000  00002b48  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000006bb  00000000  00000000  00002f30  2**0
+ 11 .debug_loc    000006bb  00000000  00000000  0000305c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000088  00000000  00000000  000035eb  2**0
+ 12 .debug_ranges 00000088  00000000  00000000  00003717  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -211,18 +211,18 @@ Disassembly of section .text:
  152:	10 e0       	ldi	r17, 0x00	; 0
  154:	a0 e6       	ldi	r26, 0x60	; 96
  156:	b0 e0       	ldi	r27, 0x00	; 0
- 158:	ee e2       	ldi	r30, 0x2E	; 46
+ 158:	e2 e5       	ldi	r30, 0x52	; 82
  15a:	f5 e0       	ldi	r31, 0x05	; 5
  15c:	02 c0       	rjmp	.+4      	; 0x162 <__do_copy_data+0x10>
  15e:	05 90       	lpm	r0, Z+
  160:	0d 92       	st	X+, r0
- 162:	ac 36       	cpi	r26, 0x6C	; 108
+ 162:	a4 37       	cpi	r26, 0x74	; 116
  164:	b1 07       	cpc	r27, r17
  166:	d9 f7       	brne	.-10     	; 0x15e <__do_copy_data+0xc>
 
 00000168 <__do_clear_bss>:
  168:	20 e0       	ldi	r18, 0x00	; 0
- 16a:	ac e6       	ldi	r26, 0x6C	; 108
+ 16a:	a4 e7       	ldi	r26, 0x74	; 116
  16c:	b0 e0       	ldi	r27, 0x00	; 0
  16e:	01 c0       	rjmp	.+2      	; 0x172 <.do_clear_bss_start>
 
@@ -230,11 +230,11 @@ Disassembly of section .text:
  170:	1d 92       	st	X+, r1
 
 00000172 <.do_clear_bss_start>:
- 172:	a9 37       	cpi	r26, 0x79	; 121
+ 172:	a1 38       	cpi	r26, 0x81	; 129
  174:	b2 07       	cpc	r27, r18
  176:	e1 f7       	brne	.-8      	; 0x170 <.do_clear_bss_loop>
  178:	20 d1       	rcall	.+576    	; 0x3ba <main>
- 17a:	d7 c1       	rjmp	.+942    	; 0x52a <_exit>
+ 17a:	e9 c1       	rjmp	.+978    	; 0x54e <_exit>
 
 0000017c <__bad_interrupt>:
  17c:	41 cf       	rjmp	.-382    	; 0x0 <__vectors>
@@ -246,7 +246,7 @@ Disassembly of section .text:
 	}
 	//start Tx
 	attiny_i2c_tx();
- 17e:	10 92 6f 00 	sts	0x006F, r1	; 0x80006f <usi_state>
+ 17e:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <usi_state>
  182:	87 b3       	in	r24, 0x17	; 23
  184:	8e 7f       	andi	r24, 0xFE	; 254
  186:	87 bb       	out	0x17, r24	; 23
@@ -296,29 +296,29 @@ Disassembly of section .text:
  1da:	88 b3       	in	r24, 0x18	; 24
  1dc:	81 60       	ori	r24, 0x01	; 1
  1de:	88 bb       	out	0x18, r24	; 24
- 1e0:	e0 91 6e 00 	lds	r30, 0x006E	; 0x80006e <i2c_indx>
+ 1e0:	e0 91 76 00 	lds	r30, 0x0076	; 0x800076 <i2c_indx>
  1e4:	f0 e0       	ldi	r31, 0x00	; 0
- 1e6:	ee 58       	subi	r30, 0x8E	; 142
+ 1e6:	e6 58       	subi	r30, 0x86	; 134
  1e8:	ff 4f       	sbci	r31, 0xFF	; 255
  1ea:	80 81       	ld	r24, Z
  1ec:	8f b9       	out	0x0f, r24	; 15
- 1ee:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <i2c_indx>
+ 1ee:	80 91 76 00 	lds	r24, 0x0076	; 0x800076 <i2c_indx>
  1f2:	8f 5f       	subi	r24, 0xFF	; 255
- 1f4:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <i2c_indx>
+ 1f4:	80 93 76 00 	sts	0x0076, r24	; 0x800076 <i2c_indx>
  1f8:	80 ec       	ldi	r24, 0xC0	; 192
  1fa:	8e b9       	out	0x0e, r24	; 14
  1fc:	81 e0       	ldi	r24, 0x01	; 1
- 1fe:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <usi_state>
+ 1fe:	80 93 77 00 	sts	0x0077, r24	; 0x800077 <usi_state>
  202:	08 95       	ret
 
 00000204 <attiny_i2c_send_byte>:
- 204:	90 91 6f 00 	lds	r25, 0x006F	; 0x80006f <usi_state>
+ 204:	90 91 77 00 	lds	r25, 0x0077	; 0x800077 <usi_state>
  208:	91 11       	cpse	r25, r1
  20a:	fc cf       	rjmp	.-8      	; 0x204 <attiny_i2c_send_byte>
- 20c:	10 92 6e 00 	sts	0x006E, r1	; 0x80006e <i2c_indx>
+ 20c:	10 92 76 00 	sts	0x0076, r1	; 0x800076 <i2c_indx>
  210:	93 e0       	ldi	r25, 0x03	; 3
- 212:	90 93 6c 00 	sts	0x006C, r25	; 0x80006c <__data_end>
- 216:	e2 e7       	ldi	r30, 0x72	; 114
+ 212:	90 93 74 00 	sts	0x0074, r25	; 0x800074 <__data_end>
+ 216:	ea e7       	ldi	r30, 0x7A	; 122
  218:	f0 e0       	ldi	r31, 0x00	; 0
  21a:	80 83       	st	Z, r24
  21c:	61 83       	std	Z+1, r22	; 0x01
@@ -344,11 +344,11 @@ ISR(USI_OVF_vect)
 
 	usi_status = USISR;
  236:	8e b1       	in	r24, 0x0e	; 14
- 238:	80 93 70 00 	sts	0x0070, r24	; 0x800070 <usi_status>
+ 238:	80 93 78 00 	sts	0x0078, r24	; 0x800078 <usi_status>
 
 	//USI counter OVF
 	if(((usi_status&0x40)>>6)==1)
- 23c:	80 91 70 00 	lds	r24, 0x0070	; 0x800070 <usi_status>
+ 23c:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <usi_status>
  240:	86 ff       	sbrs	r24, 6
  242:	02 c0       	rjmp	.+4      	; 0x248 <__vector_14+0x24>
 	{
@@ -362,7 +362,7 @@ ISR(USI_OVF_vect)
 	
 	//USI counter SIF
 	if(((usi_status&0x80)>>7)==1)
- 248:	80 91 70 00 	lds	r24, 0x0070	; 0x800070 <usi_status>
+ 248:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <usi_status>
  24c:	88 23       	and	r24, r24
  24e:	14 f4       	brge	.+4      	; 0x254 <__vector_14+0x30>
 	{
@@ -374,7 +374,7 @@ ISR(USI_OVF_vect)
 
 	//I2C FSM
 	switch (usi_state)
- 254:	80 91 6f 00 	lds	r24, 0x006F	; 0x80006f <usi_state>
+ 254:	80 91 77 00 	lds	r24, 0x0077	; 0x800077 <usi_state>
  258:	81 30       	cpi	r24, 0x01	; 1
  25a:	51 f0       	breq	.+20     	; 0x270 <__stack+0x11>
  25c:	30 f0       	brcs	.+12     	; 0x26a <__stack+0xb>
@@ -389,7 +389,7 @@ ISR(USI_OVF_vect)
 		//idle state: nothing to do, keep there
 		case usi_idle:
 		usi_state = usi_idle;
- 26a:	10 92 6f 00 	sts	0x006F, r1	; 0x80006f <usi_state>
+ 26a:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <usi_state>
 		break;
  26e:	69 c0       	rjmp	.+210    	; 0x342 <__stack+0xe3>
 		//Tx started and address+w/r sent
@@ -414,7 +414,7 @@ ISR(USI_OVF_vect)
 		
 		usi_state = usi_read_ack;
  284:	84 e0       	ldi	r24, 0x04	; 4
- 286:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <usi_state>
+ 286:	80 93 77 00 	sts	0x0077, r24	; 0x800077 <usi_state>
 		
 
 		break;
@@ -428,8 +428,8 @@ ISR(USI_OVF_vect)
 		{
 			//check if there is available data in the buffer. Else, exit
 			if (i2c_indx<i2c_tx_bytes)
- 290:	90 91 6e 00 	lds	r25, 0x006E	; 0x80006e <i2c_indx>
- 294:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <__data_end>
+ 290:	90 91 76 00 	lds	r25, 0x0076	; 0x800076 <i2c_indx>
+ 294:	80 91 74 00 	lds	r24, 0x0074	; 0x800074 <__data_end>
  298:	98 17       	cp	r25, r24
  29a:	c0 f4       	brcc	.+48     	; 0x2cc <__stack+0x6d>
 			{
@@ -437,17 +437,17 @@ ISR(USI_OVF_vect)
 
 				//pop next data from buffer
 				USIDR = i2c_buff[i2c_indx];
- 29c:	e0 91 6e 00 	lds	r30, 0x006E	; 0x80006e <i2c_indx>
+ 29c:	e0 91 76 00 	lds	r30, 0x0076	; 0x800076 <i2c_indx>
  2a0:	f0 e0       	ldi	r31, 0x00	; 0
- 2a2:	ee 58       	subi	r30, 0x8E	; 142
+ 2a2:	e6 58       	subi	r30, 0x86	; 134
  2a4:	ff 4f       	sbci	r31, 0xFF	; 255
  2a6:	80 81       	ld	r24, Z
  2a8:	8f b9       	out	0x0f, r24	; 15
 				//advance i2c index
 				i2c_indx+=1;
- 2aa:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <i2c_indx>
+ 2aa:	80 91 76 00 	lds	r24, 0x0076	; 0x800076 <i2c_indx>
  2ae:	8f 5f       	subi	r24, 0xFF	; 255
- 2b0:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <i2c_indx>
+ 2b0:	80 93 76 00 	sts	0x0076, r24	; 0x800076 <i2c_indx>
 				//ACK
 				//prepare to send next byte
 				PORTB |= (0x01<<SDA);
@@ -468,7 +468,7 @@ ISR(USI_OVF_vect)
 				
 				usi_state = usi_byte_sent;
  2c4:	81 e0       	ldi	r24, 0x01	; 1
- 2c6:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <usi_state>
+ 2c6:	80 93 77 00 	sts	0x0077, r24	; 0x800077 <usi_state>
  2ca:	3b c0       	rjmp	.+118    	; 0x342 <__stack+0xe3>
 			else
 			{
@@ -514,7 +514,7 @@ ISR(USI_OVF_vect)
  2f4:	8e 7f       	andi	r24, 0xFE	; 254
  2f6:	88 bb       	out	0x18, r24	; 24
 				usi_state = usi_idle;
- 2f8:	10 92 6f 00 	sts	0x006F, r1	; 0x80006f <usi_state>
+ 2f8:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <usi_state>
  2fc:	22 c0       	rjmp	.+68     	; 0x342 <__stack+0xe3>
 
 		}
@@ -523,7 +523,7 @@ ISR(USI_OVF_vect)
 			//NACK
 			usi_state = usi_nack;
  2fe:	83 e0       	ldi	r24, 0x03	; 3
- 300:	80 93 6f 00 	sts	0x006F, r24	; 0x80006f <usi_state>
+ 300:	80 93 77 00 	sts	0x0077, r24	; 0x800077 <usi_state>
  304:	1e c0       	rjmp	.+60     	; 0x342 <__stack+0xe3>
 		}
 
@@ -532,7 +532,7 @@ ISR(USI_OVF_vect)
 		case usi_nack:
 		f_nack = 1; //to be handled outside the ISR
  306:	81 e0       	ldi	r24, 0x01	; 1
- 308:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <f_nack>
+ 308:	80 93 75 00 	sts	0x0075, r24	; 0x800075 <f_nack>
 		
 		//STOP TX
 		//SCL HIGH and SDA TRANSITIONS TO HIGH
@@ -570,12 +570,12 @@ ISR(USI_OVF_vect)
  336:	88 bb       	out	0x18, r24	; 24
 		
 		usi_state = usi_idle;
- 338:	10 92 6f 00 	sts	0x006F, r1	; 0x80006f <usi_state>
+ 338:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <usi_state>
 		break;
  33c:	02 c0       	rjmp	.+4      	; 0x342 <__stack+0xe3>
 		default:
 		usi_state = usi_idle;
- 33e:	10 92 6f 00 	sts	0x006F, r1	; 0x80006f <usi_state>
+ 33e:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <usi_state>
 		break;
 	}
 
@@ -681,7 +681,7 @@ ISR(TIMER0_COMPA_vect)
  39c:	88 bf       	out	0x38, r24	; 56
 	
 	if(usi_state!=usi_idle)
- 39e:	80 91 6f 00 	lds	r24, 0x006F	; 0x80006f <usi_state>
+ 39e:	80 91 77 00 	lds	r24, 0x0077	; 0x800077 <usi_state>
  3a2:	88 23       	and	r24, r24
  3a4:	19 f0       	breq	.+6      	; 0x3ac <__vector_10+0x20>
 	{
@@ -733,9 +733,9 @@ int main(void)
     while (1) 
     {
 		if (a==0)
- 3dc:	80 91 71 00 	lds	r24, 0x0071	; 0x800071 <a>
+ 3dc:	80 91 79 00 	lds	r24, 0x0079	; 0x800079 <a>
  3e0:	81 11       	cpse	r24, r1
- 3e2:	16 c0       	rjmp	.+44     	; 0x410 <__LOCK_REGION_LENGTH__+0x10>
+ 3e2:	1b c0       	rjmp	.+54     	; 0x41a <__LOCK_REGION_LENGTH__+0x1a>
 		{
 			//attiny_i2c_tx();
 			//turn on display
@@ -754,316 +754,345 @@ int main(void)
 			//attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 			oled_clean(standar_mode);
  3f4:	80 e0       	ldi	r24, 0x00	; 0
- 3f6:	32 d0       	rcall	.+100    	; 0x45c <oled_clean>
+ 3f6:	37 d0       	rcall	.+110    	; 0x466 <oled_clean>
 			
 			//write text
-			oled_print("HELLO, FER!",0,0);
- 3f8:	40 e0       	ldi	r20, 0x00	; 0
- 3fa:	60 e0       	ldi	r22, 0x00	; 0
+			oled_print("TEMP: 0°C",2,32);
+ 3f8:	40 e2       	ldi	r20, 0x20	; 32
+ 3fa:	62 e0       	ldi	r22, 0x02	; 2
  3fc:	80 e6       	ldi	r24, 0x60	; 96
  3fe:	90 e0       	ldi	r25, 0x00	; 0
- 400:	57 d0       	rcall	.+174    	; 0x4b0 <oled_print>
+ 400:	5c d0       	rcall	.+184    	; 0x4ba <oled_print>
+			oled_print("HUM:  70%",5,32);
+ 402:	40 e2       	ldi	r20, 0x20	; 32
+ 404:	65 e0       	ldi	r22, 0x05	; 5
+ 406:	8a e6       	ldi	r24, 0x6A	; 106
+ 408:	90 e0       	ldi	r25, 0x00	; 0
+ 40a:	57 d0       	rcall	.+174    	; 0x4ba <oled_print>
 			//full-on display (using gdram)
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
- 402:	44 ea       	ldi	r20, 0xA4	; 164
- 404:	60 e0       	ldi	r22, 0x00	; 0
- 406:	88 e7       	ldi	r24, 0x78	; 120
- 408:	fd de       	rcall	.-518    	; 0x204 <attiny_i2c_send_byte>
+ 40c:	44 ea       	ldi	r20, 0xA4	; 164
+ 40e:	60 e0       	ldi	r22, 0x00	; 0
+ 410:	88 e7       	ldi	r24, 0x78	; 120
+ 412:	f8 de       	rcall	.-528    	; 0x204 <attiny_i2c_send_byte>
 			a=1;
- 40a:	81 e0       	ldi	r24, 0x01	; 1
- 40c:	80 93 71 00 	sts	0x0071, r24	; 0x800071 <a>
+ 414:	81 e0       	ldi	r24, 0x01	; 1
+ 416:	80 93 79 00 	sts	0x0079, r24	; 0x800079 <a>
 		}
 		
 		if(f_nack)
- 410:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <f_nack>
- 414:	88 23       	and	r24, r24
- 416:	11 f3       	breq	.-60     	; 0x3dc <main+0x22>
+ 41a:	80 91 75 00 	lds	r24, 0x0075	; 0x800075 <f_nack>
+ 41e:	88 23       	and	r24, r24
+ 420:	e9 f2       	breq	.-70     	; 0x3dc <main+0x22>
 		{
 			f_nack = 0;
- 418:	10 92 6d 00 	sts	0x006D, r1	; 0x80006d <f_nack>
+ 422:	10 92 75 00 	sts	0x0075, r1	; 0x800075 <f_nack>
 			LED_ON;
- 41c:	88 b3       	in	r24, 0x18	; 24
- 41e:	80 61       	ori	r24, 0x10	; 16
- 420:	88 bb       	out	0x18, r24	; 24
- 422:	dc cf       	rjmp	.-72     	; 0x3dc <main+0x22>
+ 426:	88 b3       	in	r24, 0x18	; 24
+ 428:	80 61       	ori	r24, 0x10	; 16
+ 42a:	88 bb       	out	0x18, r24	; 24
+ 42c:	d7 cf       	rjmp	.-82     	; 0x3dc <main+0x22>
 
-00000424 <set_page>:
+0000042e <set_page>:
 	
 */
 void set_page(uint8_t page)
 {
 	//0xb0 - 0xb7
 	if(page >= 0 && page <=7)
- 424:	88 30       	cpi	r24, 0x08	; 8
- 426:	30 f4       	brcc	.+12     	; 0x434 <set_page+0x10>
- 428:	48 2f       	mov	r20, r24
+ 42e:	88 30       	cpi	r24, 0x08	; 8
+ 430:	30 f4       	brcc	.+12     	; 0x43e <set_page+0x10>
+ 432:	48 2f       	mov	r20, r24
 	{
 		attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0xB0|(0x0F&page)));
- 42a:	4f 70       	andi	r20, 0x0F	; 15
- 42c:	40 6b       	ori	r20, 0xB0	; 176
- 42e:	60 e0       	ldi	r22, 0x00	; 0
- 430:	88 e7       	ldi	r24, 0x78	; 120
- 432:	e8 de       	rcall	.-560    	; 0x204 <attiny_i2c_send_byte>
- 434:	08 95       	ret
+ 434:	4f 70       	andi	r20, 0x0F	; 15
+ 436:	40 6b       	ori	r20, 0xB0	; 176
+ 438:	60 e0       	ldi	r22, 0x00	; 0
+ 43a:	88 e7       	ldi	r24, 0x78	; 120
+ 43c:	e3 de       	rcall	.-570    	; 0x204 <attiny_i2c_send_byte>
+ 43e:	08 95       	ret
 
-00000436 <set_column>:
+00000440 <set_column>:
 	@brief: sets display column
 	@params: column number (0 to 127)
 	@returns: -
 */
 void set_column(uint8_t column)
 {
- 436:	cf 93       	push	r28
+ 440:	cf 93       	push	r28
 	
 	if(column>=0 && column<128)
- 438:	88 23       	and	r24, r24
- 43a:	74 f0       	brlt	.+28     	; 0x458 <set_column+0x22>
+ 442:	88 23       	and	r24, r24
+ 444:	74 f0       	brlt	.+28     	; 0x462 <set_column+0x22>
 	{
 		//add column offset
 		column+=2;
- 43c:	c2 e0       	ldi	r28, 0x02	; 2
- 43e:	c8 0f       	add	r28, r24
+ 446:	c2 e0       	ldi	r28, 0x02	; 2
+ 448:	c8 0f       	add	r28, r24
 		attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0x0F&column)); //lower column address bits
- 440:	4c 2f       	mov	r20, r28
- 442:	4f 70       	andi	r20, 0x0F	; 15
- 444:	60 e0       	ldi	r22, 0x00	; 0
- 446:	88 e7       	ldi	r24, 0x78	; 120
- 448:	dd de       	rcall	.-582    	; 0x204 <attiny_i2c_send_byte>
-		attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0x10|((0xF0&column)>>4))); //higger column address bits				
  44a:	4c 2f       	mov	r20, r28
- 44c:	42 95       	swap	r20
- 44e:	4f 70       	andi	r20, 0x0F	; 15
- 450:	40 61       	ori	r20, 0x10	; 16
- 452:	60 e0       	ldi	r22, 0x00	; 0
- 454:	88 e7       	ldi	r24, 0x78	; 120
- 456:	d6 de       	rcall	.-596    	; 0x204 <attiny_i2c_send_byte>
+ 44c:	4f 70       	andi	r20, 0x0F	; 15
+ 44e:	60 e0       	ldi	r22, 0x00	; 0
+ 450:	88 e7       	ldi	r24, 0x78	; 120
+ 452:	d8 de       	rcall	.-592    	; 0x204 <attiny_i2c_send_byte>
+		attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0x10|((0xF0&column)>>4))); //higger column address bits				
+ 454:	4c 2f       	mov	r20, r28
+ 456:	42 95       	swap	r20
+ 458:	4f 70       	andi	r20, 0x0F	; 15
+ 45a:	40 61       	ori	r20, 0x10	; 16
+ 45c:	60 e0       	ldi	r22, 0x00	; 0
+ 45e:	88 e7       	ldi	r24, 0x78	; 120
+ 460:	d1 de       	rcall	.-606    	; 0x204 <attiny_i2c_send_byte>
 	}
 
 }
- 458:	cf 91       	pop	r28
- 45a:	08 95       	ret
+ 462:	cf 91       	pop	r28
+ 464:	08 95       	ret
 
-0000045c <oled_clean>:
+00000466 <oled_clean>:
 	@param: 
 		mode: defines if device is in standard or inverted mode
 	@return:
 */
 void oled_clean(uint8_t mode)
 {
- 45c:	cf 93       	push	r28
- 45e:	df 93       	push	r29
+ 466:	cf 93       	push	r28
+ 468:	df 93       	push	r29
 	uint8_t page_index = 0;
 	uint8_t colu_index = 0;
 
 
 	
 	for(page_index=0;page_index<OLED_PAGES;page_index++)
- 460:	d0 e0       	ldi	r29, 0x00	; 0
- 462:	1c c0       	rjmp	.+56     	; 0x49c <oled_clean+0x40>
+ 46a:	d0 e0       	ldi	r29, 0x00	; 0
+ 46c:	1c c0       	rjmp	.+56     	; 0x4a6 <oled_clean+0x40>
 	{
 			//increase page
 			attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0xB0|(0x0F&page_index)));
- 464:	4d 2f       	mov	r20, r29
- 466:	4f 70       	andi	r20, 0x0F	; 15
- 468:	40 6b       	ori	r20, 0xB0	; 176
- 46a:	60 e0       	ldi	r22, 0x00	; 0
- 46c:	88 e7       	ldi	r24, 0x78	; 120
- 46e:	ca de       	rcall	.-620    	; 0x204 <attiny_i2c_send_byte>
+ 46e:	4d 2f       	mov	r20, r29
+ 470:	4f 70       	andi	r20, 0x0F	; 15
+ 472:	40 6b       	ori	r20, 0xB0	; 176
+ 474:	60 e0       	ldi	r22, 0x00	; 0
+ 476:	88 e7       	ldi	r24, 0x78	; 120
+ 478:	c5 de       	rcall	.-630    	; 0x204 <attiny_i2c_send_byte>
 			
 			//set col address to 0
 			attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0x02));
- 470:	42 e0       	ldi	r20, 0x02	; 2
- 472:	60 e0       	ldi	r22, 0x00	; 0
- 474:	88 e7       	ldi	r24, 0x78	; 120
- 476:	c6 de       	rcall	.-628    	; 0x204 <attiny_i2c_send_byte>
+ 47a:	42 e0       	ldi	r20, 0x02	; 2
+ 47c:	60 e0       	ldi	r22, 0x00	; 0
+ 47e:	88 e7       	ldi	r24, 0x78	; 120
+ 480:	c1 de       	rcall	.-638    	; 0x204 <attiny_i2c_send_byte>
 			attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0x10));
- 478:	40 e1       	ldi	r20, 0x10	; 16
- 47a:	60 e0       	ldi	r22, 0x00	; 0
- 47c:	88 e7       	ldi	r24, 0x78	; 120
- 47e:	c2 de       	rcall	.-636    	; 0x204 <attiny_i2c_send_byte>
+ 482:	40 e1       	ldi	r20, 0x10	; 16
+ 484:	60 e0       	ldi	r22, 0x00	; 0
+ 486:	88 e7       	ldi	r24, 0x78	; 120
+ 488:	bd de       	rcall	.-646    	; 0x204 <attiny_i2c_send_byte>
 		
 			//write all 00s to memory
 			for(colu_index=0;colu_index<OLED_WIDTH;colu_index++)
- 480:	c0 e0       	ldi	r28, 0x00	; 0
- 482:	05 c0       	rjmp	.+10     	; 0x48e <oled_clean+0x32>
+ 48a:	c0 e0       	ldi	r28, 0x00	; 0
+ 48c:	05 c0       	rjmp	.+10     	; 0x498 <oled_clean+0x32>
 			{
 				attiny_i2c_send_byte(OLED_ADDR_W,OLED_GDDRAMW_BYTE,0x00);
- 484:	40 e0       	ldi	r20, 0x00	; 0
- 486:	60 e4       	ldi	r22, 0x40	; 64
- 488:	88 e7       	ldi	r24, 0x78	; 120
- 48a:	bc de       	rcall	.-648    	; 0x204 <attiny_i2c_send_byte>
+ 48e:	40 e0       	ldi	r20, 0x00	; 0
+ 490:	60 e4       	ldi	r22, 0x40	; 64
+ 492:	88 e7       	ldi	r24, 0x78	; 120
+ 494:	b7 de       	rcall	.-658    	; 0x204 <attiny_i2c_send_byte>
 			//set col address to 0
 			attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0x02));
 			attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,(0x10));
 		
 			//write all 00s to memory
 			for(colu_index=0;colu_index<OLED_WIDTH;colu_index++)
- 48c:	cf 5f       	subi	r28, 0xFF	; 255
- 48e:	cc 23       	and	r28, r28
- 490:	cc f7       	brge	.-14     	; 0x484 <oled_clean+0x28>
- 492:	8d e0       	ldi	r24, 0x0D	; 13
- 494:	8a 95       	dec	r24
- 496:	f1 f7       	brne	.-4      	; 0x494 <oled_clean+0x38>
- 498:	00 00       	nop
+ 496:	cf 5f       	subi	r28, 0xFF	; 255
+ 498:	cc 23       	and	r28, r28
+ 49a:	cc f7       	brge	.-14     	; 0x48e <oled_clean+0x28>
+ 49c:	8d e0       	ldi	r24, 0x0D	; 13
+ 49e:	8a 95       	dec	r24
+ 4a0:	f1 f7       	brne	.-4      	; 0x49e <oled_clean+0x38>
+ 4a2:	00 00       	nop
 	uint8_t page_index = 0;
 	uint8_t colu_index = 0;
 
 
 	
 	for(page_index=0;page_index<OLED_PAGES;page_index++)
- 49a:	df 5f       	subi	r29, 0xFF	; 255
- 49c:	d8 30       	cpi	r29, 0x08	; 8
- 49e:	10 f3       	brcs	.-60     	; 0x464 <oled_clean+0x8>
+ 4a4:	df 5f       	subi	r29, 0xFF	; 255
+ 4a6:	d8 30       	cpi	r29, 0x08	; 8
+ 4a8:	10 f3       	brcs	.-60     	; 0x46e <oled_clean+0x8>
 			}
 			
 
 			TWI_DELAY(); //it needs to be addedd		
 	}
 }
- 4a0:	df 91       	pop	r29
- 4a2:	cf 91       	pop	r28
- 4a4:	08 95       	ret
+ 4aa:	df 91       	pop	r29
+ 4ac:	cf 91       	pop	r28
+ 4ae:	08 95       	ret
 
-000004a6 <oled_write_byte>:
+000004b0 <oled_write_byte>:
 		c: byte to be written to GDRAM
 	@return:
 */
 void oled_write_byte(uint8_t c)
 {
 	attiny_i2c_send_byte(OLED_ADDR_W,OLED_GDDRAMW_BYTE,c);
- 4a6:	48 2f       	mov	r20, r24
- 4a8:	60 e4       	ldi	r22, 0x40	; 64
- 4aa:	88 e7       	ldi	r24, 0x78	; 120
- 4ac:	ab de       	rcall	.-682    	; 0x204 <attiny_i2c_send_byte>
- 4ae:	08 95       	ret
+ 4b0:	48 2f       	mov	r20, r24
+ 4b2:	60 e4       	ldi	r22, 0x40	; 64
+ 4b4:	88 e7       	ldi	r24, 0x78	; 120
+ 4b6:	a6 de       	rcall	.-692    	; 0x204 <attiny_i2c_send_byte>
+ 4b8:	08 95       	ret
 
-000004b0 <oled_print>:
+000004ba <oled_print>:
 		page:	the page on to write the text
 		column: the column on to write the text
 	@return:
 */
 void oled_print(char* data,uint8_t page, uint8_t column)
 {
- 4b0:	df 92       	push	r13
- 4b2:	ef 92       	push	r14
- 4b4:	ff 92       	push	r15
- 4b6:	0f 93       	push	r16
- 4b8:	1f 93       	push	r17
- 4ba:	cf 93       	push	r28
- 4bc:	df 93       	push	r29
- 4be:	7c 01       	movw	r14, r24
- 4c0:	86 2f       	mov	r24, r22
- 4c2:	c4 2f       	mov	r28, r20
+ 4ba:	df 92       	push	r13
+ 4bc:	ef 92       	push	r14
+ 4be:	ff 92       	push	r15
+ 4c0:	0f 93       	push	r16
+ 4c2:	1f 93       	push	r17
+ 4c4:	cf 93       	push	r28
+ 4c6:	df 93       	push	r29
+ 4c8:	7c 01       	movw	r14, r24
+ 4ca:	86 2f       	mov	r24, r22
+ 4cc:	c4 2f       	mov	r28, r20
 	uint8_t character = ' ';	//stores current popped character
 	uint16_t font_index = 0;	//current index for the font table 
 	uint8_t pixel_slice = 0;	//current slice of the character to be drawn
 	uint8_t slice_index = 0;	//
 	
 	text_length = strlen(data);
- 4c4:	f7 01       	movw	r30, r14
- 4c6:	01 90       	ld	r0, Z+
- 4c8:	00 20       	and	r0, r0
- 4ca:	e9 f7       	brne	.-6      	; 0x4c6 <oled_print+0x16>
- 4cc:	31 97       	sbiw	r30, 0x01	; 1
- 4ce:	de 2e       	mov	r13, r30
- 4d0:	de 18       	sub	r13, r14
+ 4ce:	f7 01       	movw	r30, r14
+ 4d0:	01 90       	ld	r0, Z+
+ 4d2:	00 20       	and	r0, r0
+ 4d4:	e9 f7       	brne	.-6      	; 0x4d0 <oled_print+0x16>
+ 4d6:	31 97       	sbiw	r30, 0x01	; 1
+ 4d8:	de 2e       	mov	r13, r30
+ 4da:	de 18       	sub	r13, r14
 	
 	//set page
 	set_page(page);
- 4d2:	a8 df       	rcall	.-176    	; 0x424 <set_page>
+ 4dc:	a8 df       	rcall	.-176    	; 0x42e <set_page>
 	
 	//set column
 	set_column(column);
- 4d4:	8c 2f       	mov	r24, r28
- 4d6:	af df       	rcall	.-162    	; 0x436 <set_column>
+ 4de:	8c 2f       	mov	r24, r28
+ 4e0:	af df       	rcall	.-162    	; 0x440 <set_column>
 	
 	//TODO: check if the text has space to be displayed, given the column number
 	
 	
 	//extract character
 	for(i=0;i<text_length;i++)
- 4d8:	d0 e0       	ldi	r29, 0x00	; 0
- 4da:	1d c0       	rjmp	.+58     	; 0x516 <oled_print+0x66>
+ 4e2:	d0 e0       	ldi	r29, 0x00	; 0
+ 4e4:	2a c0       	rjmp	.+84     	; 0x53a <oled_print+0x80>
 	{
 		//pop character from string
 		character = data[i];
- 4dc:	f7 01       	movw	r30, r14
- 4de:	ed 0f       	add	r30, r29
- 4e0:	f1 1d       	adc	r31, r1
- 4e2:	00 81       	ld	r16, Z
-		
-		// Calculate start index in Flash memory
-		//sustract "32" because we don't include the first 32 invisible characters
-		//multiply by 5, because each character consists of 5 bytes
-		font_index = (character - FONT_TABLE_OFFSET) * FONT_TABBLE_CHAR_LEN;
- 4e4:	10 e0       	ldi	r17, 0x00	; 0
- 4e6:	00 52       	subi	r16, 0x20	; 32
- 4e8:	11 09       	sbc	r17, r1
- 4ea:	c8 01       	movw	r24, r16
- 4ec:	88 0f       	add	r24, r24
- 4ee:	99 1f       	adc	r25, r25
- 4f0:	88 0f       	add	r24, r24
- 4f2:	99 1f       	adc	r25, r25
- 4f4:	08 0f       	add	r16, r24
- 4f6:	19 1f       	adc	r17, r25
-		
-		//draw character
-		for(slice_index=0;slice_index<FONT_TABBLE_CHAR_LEN;slice_index++)
- 4f8:	c0 e0       	ldi	r28, 0x00	; 0
- 4fa:	08 c0       	rjmp	.+16     	; 0x50c <oled_print+0x5c>
+ 4e6:	f7 01       	movw	r30, r14
+ 4e8:	ed 0f       	add	r30, r29
+ 4ea:	f1 1d       	adc	r31, r1
+ 4ec:	00 81       	ld	r16, Z
+		if(character=='°')
+ 4ee:	00 3b       	cpi	r16, 0xB0	; 176
+ 4f0:	59 f4       	brne	.+22     	; 0x508 <oled_print+0x4e>
 		{
-			//read the character slice from the font table in flash memory
-			pixel_slice = pgm_read_byte(&font5x7[font_index + slice_index]);
- 4fc:	f8 01       	movw	r30, r16
- 4fe:	ec 0f       	add	r30, r28
- 500:	f1 1d       	adc	r31, r1
- 502:	e2 5e       	subi	r30, 0xE2	; 226
- 504:	ff 4f       	sbci	r31, 0xFF	; 255
- 506:	84 91       	lpm	r24, Z
-			oled_write_byte(pixel_slice);	
- 508:	ce df       	rcall	.-100    	; 0x4a6 <oled_write_byte>
-		//sustract "32" because we don't include the first 32 invisible characters
-		//multiply by 5, because each character consists of 5 bytes
-		font_index = (character - FONT_TABLE_OFFSET) * FONT_TABBLE_CHAR_LEN;
+			// 5x7 Representation of '°'
+			//0x06, 0x09, 0x09, 0x06, 0x00
+			oled_write_byte(0x06);	
+ 4f2:	86 e0       	ldi	r24, 0x06	; 6
+ 4f4:	dd df       	rcall	.-70     	; 0x4b0 <oled_write_byte>
+			oled_write_byte(0x09);	
+ 4f6:	89 e0       	ldi	r24, 0x09	; 9
+ 4f8:	db df       	rcall	.-74     	; 0x4b0 <oled_write_byte>
+			oled_write_byte(0x09);	
+ 4fa:	89 e0       	ldi	r24, 0x09	; 9
+ 4fc:	d9 df       	rcall	.-78     	; 0x4b0 <oled_write_byte>
+			oled_write_byte(0x06);	
+ 4fe:	86 e0       	ldi	r24, 0x06	; 6
+ 500:	d7 df       	rcall	.-82     	; 0x4b0 <oled_write_byte>
+			oled_write_byte(0x00);	
+ 502:	80 e0       	ldi	r24, 0x00	; 0
+ 504:	d5 df       	rcall	.-86     	; 0x4b0 <oled_write_byte>
+ 506:	18 c0       	rjmp	.+48     	; 0x538 <oled_print+0x7e>
+		else
+		{
+			// Calculate start index in Flash memory
+			//sustract "32" because we don't include the first 32 invisible characters //WITH Adafruit font table, is not neccesarry
+			//multiply by 5, because each character consists of 5 bytes
+			font_index = (character - FONT_TABLE_OFFSET) * FONT_TABBLE_CHAR_LEN;
+ 508:	10 e0       	ldi	r17, 0x00	; 0
+ 50a:	00 52       	subi	r16, 0x20	; 32
+ 50c:	11 09       	sbc	r17, r1
+ 50e:	c8 01       	movw	r24, r16
+ 510:	88 0f       	add	r24, r24
+ 512:	99 1f       	adc	r25, r25
+ 514:	88 0f       	add	r24, r24
+ 516:	99 1f       	adc	r25, r25
+ 518:	08 0f       	add	r16, r24
+ 51a:	19 1f       	adc	r17, r25
 		
-		//draw character
-		for(slice_index=0;slice_index<FONT_TABBLE_CHAR_LEN;slice_index++)
- 50a:	cf 5f       	subi	r28, 0xFF	; 255
- 50c:	c5 30       	cpi	r28, 0x05	; 5
- 50e:	b0 f3       	brcs	.-20     	; 0x4fc <oled_print+0x4c>
-			//read the character slice from the font table in flash memory
-			pixel_slice = pgm_read_byte(&font5x7[font_index + slice_index]);
-			oled_write_byte(pixel_slice);	
-		}
-		//leave one pixel column separation
-		oled_write_byte(0x00);
- 510:	80 e0       	ldi	r24, 0x00	; 0
- 512:	c9 df       	rcall	.-110    	; 0x4a6 <oled_write_byte>
+			//draw character
+			for(slice_index=0;slice_index<FONT_TABBLE_CHAR_LEN;slice_index++)
+ 51c:	c0 e0       	ldi	r28, 0x00	; 0
+ 51e:	08 c0       	rjmp	.+16     	; 0x530 <oled_print+0x76>
+			{
+				//read the character slice from the font table in flash memory
+				pixel_slice = pgm_read_byte(&font5x7[font_index + slice_index]);
+ 520:	f8 01       	movw	r30, r16
+ 522:	ec 0f       	add	r30, r28
+ 524:	f1 1d       	adc	r31, r1
+ 526:	e2 5e       	subi	r30, 0xE2	; 226
+ 528:	ff 4f       	sbci	r31, 0xFF	; 255
+ 52a:	84 91       	lpm	r24, Z
+				oled_write_byte(pixel_slice);	
+ 52c:	c1 df       	rcall	.-126    	; 0x4b0 <oled_write_byte>
+			//sustract "32" because we don't include the first 32 invisible characters //WITH Adafruit font table, is not neccesarry
+			//multiply by 5, because each character consists of 5 bytes
+			font_index = (character - FONT_TABLE_OFFSET) * FONT_TABBLE_CHAR_LEN;
+		
+			//draw character
+			for(slice_index=0;slice_index<FONT_TABBLE_CHAR_LEN;slice_index++)
+ 52e:	cf 5f       	subi	r28, 0xFF	; 255
+ 530:	c5 30       	cpi	r28, 0x05	; 5
+ 532:	b0 f3       	brcs	.-20     	; 0x520 <oled_print+0x66>
+				//read the character slice from the font table in flash memory
+				pixel_slice = pgm_read_byte(&font5x7[font_index + slice_index]);
+				oled_write_byte(pixel_slice);	
+			}
+			//leave one pixel column separation
+			oled_write_byte(0x00);
+ 534:	80 e0       	ldi	r24, 0x00	; 0
+ 536:	bc df       	rcall	.-136    	; 0x4b0 <oled_write_byte>
 	
 	//TODO: check if the text has space to be displayed, given the column number
 	
 	
 	//extract character
 	for(i=0;i<text_length;i++)
- 514:	df 5f       	subi	r29, 0xFF	; 255
- 516:	dd 15       	cp	r29, r13
- 518:	08 f3       	brcs	.-62     	; 0x4dc <oled_print+0x2c>
-		//leave one pixel column separation
-		oled_write_byte(0x00);
-			
+ 538:	df 5f       	subi	r29, 0xFF	; 255
+ 53a:	dd 15       	cp	r29, r13
+ 53c:	a0 f2       	brcs	.-88     	; 0x4e6 <oled_print+0x2c>
+			//leave one pixel column separation
+			oled_write_byte(0x00);
+		}
 	}
 		
- 51a:	df 91       	pop	r29
- 51c:	cf 91       	pop	r28
- 51e:	1f 91       	pop	r17
- 520:	0f 91       	pop	r16
- 522:	ff 90       	pop	r15
- 524:	ef 90       	pop	r14
- 526:	df 90       	pop	r13
- 528:	08 95       	ret
+ 53e:	df 91       	pop	r29
+ 540:	cf 91       	pop	r28
+ 542:	1f 91       	pop	r17
+ 544:	0f 91       	pop	r16
+ 546:	ff 90       	pop	r15
+ 548:	ef 90       	pop	r14
+ 54a:	df 90       	pop	r13
+ 54c:	08 95       	ret
 
-0000052a <_exit>:
- 52a:	f8 94       	cli
+0000054e <_exit>:
+ 54e:	f8 94       	cli
 
-0000052c <__stop_program>:
- 52c:	ff cf       	rjmp	.-2      	; 0x52c <__stop_program>
+00000550 <__stop_program>:
+ 550:	ff cf       	rjmp	.-2      	; 0x550 <__stop_program>

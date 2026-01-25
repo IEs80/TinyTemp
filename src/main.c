@@ -119,7 +119,8 @@ int main(void)
 			oled_clean(standar_mode);
 			
 			//write text
-			oled_print("HELLO, WOLRD!",0,0);
+			oled_print("TEMP: 0°C",2,32);
+			oled_print("HUM:  70%",5,32);
 			//full-on display (using gdram)
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 			a=1;
