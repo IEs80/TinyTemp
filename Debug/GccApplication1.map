@@ -2,13 +2,15 @@ Archive member included to satisfy reference by file (symbol)
 
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
                               C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o (exit)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+                              src/oled.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
                               src/i2c_driver.o (__do_clear_bss)
 
 Allocating common symbols
 Common symbol       size              file
 
-i2c_buff            0x3               src/i2c_driver.o
+i2c_buff            0x7               src/i2c_driver.o
 
 Discarded input sections
 
@@ -17,15 +19,20 @@ Discarded input sections
  .text          0x00000000        0x0 src/i2c_driver.o
  .data          0x00000000        0x0 src/i2c_driver.o
  .bss           0x00000000        0x0 src/i2c_driver.o
+ .text.attiny_i2c_send_bytes
+                0x00000000       0x32 src/i2c_driver.o
  .text          0x00000000        0x0 src/main.o
  .data          0x00000000        0x0 src/main.o
  .bss           0x00000000        0x0 src/main.o
  .text          0x00000000        0x0 src/oled.o
  .data          0x00000000        0x0 src/oled.o
  .bss           0x00000000        0x0 src/oled.o
- .debug_line    0x00000000        0x0 src/oled.o
- .debug_str     0x00000000      0x10f src/oled.o
- .comment       0x00000000       0x31 src/oled.o
+ .text.set_page
+                0x00000000        0x2 src/oled.o
+ .data.scroll_setup_r
+                0x00000000        0x6 src/oled.o
+ .data.shift_setup_r
+                0x00000000        0x7 src/oled.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
@@ -42,6 +49,22 @@ Discarded input sections
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  .text.libgcc.fixed
                 0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .text.libgcc.div
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .text.libgcc.prologue
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .text.libgcc.builtins
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .text.libgcc.fmul
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+ .text.libgcc.fixed
+                0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
@@ -186,7 +209,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x29e
+.text           0x00000000      0x340
  *(.vectors)
  .vectors       0x00000000       0x1e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
                 0x00000000                __vector_default
@@ -227,8 +250,10 @@ END GROUP
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x0000002a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
-                0x0000002a                __do_clear_bss
+ .init4         0x0000002a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_copy_data.o)
+                0x0000002a                __do_copy_data
+ .init4         0x00000040       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_clear_bss.o)
+                0x00000040                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -239,53 +264,56 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000003a        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
+ .init9         0x00000050        0x4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
  *(.init9)
  *(.text)
- .text          0x0000003e        0x2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
-                0x0000003e                __vector_1
-                0x0000003e                __vector_12
-                0x0000003e                __bad_interrupt
-                0x0000003e                __vector_6
-                0x0000003e                __vector_3
-                0x0000003e                __vector_11
-                0x0000003e                __vector_13
-                0x0000003e                __vector_7
-                0x0000003e                __vector_5
-                0x0000003e                __vector_4
-                0x0000003e                __vector_9
-                0x0000003e                __vector_2
-                0x0000003e                __vector_8
-                0x00000040                . = ALIGN (0x2)
+ .text          0x00000054        0x2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
+                0x00000054                __vector_1
+                0x00000054                __vector_12
+                0x00000054                __bad_interrupt
+                0x00000054                __vector_6
+                0x00000054                __vector_3
+                0x00000054                __vector_11
+                0x00000054                __vector_13
+                0x00000054                __vector_7
+                0x00000054                __vector_5
+                0x00000054                __vector_4
+                0x00000054                __vector_9
+                0x00000054                __vector_2
+                0x00000054                __vector_8
+                0x00000056                . = ALIGN (0x2)
  *(.text.*)
  .text.attiny_i2c_init
-                0x00000040       0x22 src/i2c_driver.o
-                0x00000040                attiny_i2c_init
+                0x00000056       0x22 src/i2c_driver.o
+                0x00000056                attiny_i2c_init
  .text.attiny_i2c_tx
-                0x00000062       0x60 src/i2c_driver.o
-                0x00000062                attiny_i2c_tx
+                0x00000078       0x64 src/i2c_driver.o
+                0x00000078                attiny_i2c_tx
  .text.attiny_i2c_send_byte
-                0x000000c2       0x1a src/i2c_driver.o
-                0x000000c2                attiny_i2c_send_byte
+                0x000000dc       0x20 src/i2c_driver.o
+                0x000000dc                attiny_i2c_send_byte
  .text.__vector_14
-                0x000000dc      0x124 src/i2c_driver.o
-                0x000000dc                __vector_14
+                0x000000fc      0x130 src/i2c_driver.o
+                0x000000fc                __vector_14
  .text.attiny_timer_init
-                0x00000200       0x24 src/main.o
-                0x00000200                attiny_timer_init
+                0x0000022c       0x24 src/main.o
+                0x0000022c                attiny_timer_init
  .text.attiny_init
-                0x00000224       0x14 src/main.o
-                0x00000224                attiny_init
+                0x00000250       0x14 src/main.o
+                0x00000250                attiny_init
  .text.__vector_10
-                0x00000238       0x2e src/main.o
-                0x00000238                __vector_10
- .text.main     0x00000266       0x34 src/main.o
-                0x00000266                main
-                0x0000029a                . = ALIGN (0x2)
+                0x00000264       0x2e src/main.o
+                0x00000264                __vector_10
+ .text.main     0x00000292       0x60 src/main.o
+                0x00000292                main
+ .text.oled_clean
+                0x000002f2       0x4a src/oled.o
+                0x000002f2                oled_clean
+                0x0000033c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000029a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
-                0x0000029a                _exit
-                0x0000029a                exit
+ .fini9         0x0000033c        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+                0x0000033c                _exit
+                0x0000033c                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -304,12 +332,12 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000029a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+ .fini0         0x0000033c        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000029e                _etext = .
+                0x00000340                _etext = .
 
-.data           0x00800060        0x0 load address 0x0000029e
-                [!provide]                PROVIDE (__data_start, .)
+.data           0x00800060        0x0 load address 0x00000340
+                0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
  *(.gnu.linkonce.d*)
@@ -318,35 +346,38 @@ END GROUP
  *(.gnu.linkonce.r*)
                 0x00800060                . = ALIGN (0x2)
                 0x00800060                _edata = .
-                [!provide]                PROVIDE (__data_end, .)
+                0x00800060                PROVIDE (__data_end, .)
 
-.bss            0x00800060        0x8
+.bss            0x00800060        0xd
                 0x00800060                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.f_nack    0x00800060        0x1 src/i2c_driver.o
-                0x00800060                f_nack
- .bss.i2c_indx  0x00800061        0x1 src/i2c_driver.o
-                0x00800061                i2c_indx
+ .bss.i2c_tx_bytes
+                0x00800060        0x1 src/i2c_driver.o
+                0x00800060                i2c_tx_bytes
+ .bss.f_nack    0x00800061        0x1 src/i2c_driver.o
+                0x00800061                f_nack
+ .bss.i2c_indx  0x00800062        0x1 src/i2c_driver.o
+                0x00800062                i2c_indx
  .bss.usi_state
-                0x00800062        0x1 src/i2c_driver.o
-                0x00800062                usi_state
- .bss.usi_status
                 0x00800063        0x1 src/i2c_driver.o
-                0x00800063                usi_status
- .bss.a         0x00800064        0x1 src/main.o
+                0x00800063                usi_state
+ .bss.usi_status
+                0x00800064        0x1 src/i2c_driver.o
+                0x00800064                usi_status
+ .bss.a         0x00800065        0x1 src/main.o
  *(COMMON)
- COMMON         0x00800065        0x3 src/i2c_driver.o
-                0x00800065                i2c_buff
-                0x00800068                PROVIDE (__bss_end, .)
-                0x0000029e                __data_load_start = LOADADDR (.data)
-                0x0000029e                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800066        0x7 src/i2c_driver.o
+                0x00800066                i2c_buff
+                0x0080006d                PROVIDE (__bss_end, .)
+                0x00000340                __data_load_start = LOADADDR (.data)
+                0x00000340                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800068        0x0
+.noinit         0x0080006d        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800068                _end = .
+                0x0080006d                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -391,6 +422,7 @@ END GROUP
  .comment       0x00000000       0x30 src/i2c_driver.o
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 src/main.o
+ .comment       0x00000030       0x31 src/oled.o
 
 .note.gnu.avr.deviceinfo
                 0x00000000       0x3c
@@ -412,51 +444,60 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0x70
+.debug_aranges  0x00000000       0xa0
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x38 src/i2c_driver.o
+                0x00000000       0x40 src/i2c_driver.o
  .debug_aranges
-                0x00000038       0x38 src/main.o
+                0x00000040       0x38 src/main.o
+ .debug_aranges
+                0x00000078       0x28 src/oled.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x8a6
+.debug_info     0x00000000      0xcdc
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x420 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
- .debug_info    0x00000420      0x2e3 src/i2c_driver.o
- .debug_info    0x00000703      0x1a3 src/main.o
+ .debug_info    0x00000420      0x349 src/i2c_driver.o
+ .debug_info    0x00000769      0x32c src/main.o
+ .debug_info    0x00000a95      0x247 src/oled.o
 
-.debug_abbrev   0x00000000      0x67a
+.debug_abbrev   0x00000000      0x87d
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x3e8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
- .debug_abbrev  0x000003e8      0x170 src/i2c_driver.o
- .debug_abbrev  0x00000558      0x122 src/main.o
+ .debug_abbrev  0x000003e8      0x18e src/i2c_driver.o
+ .debug_abbrev  0x00000576      0x1a5 src/main.o
+ .debug_abbrev  0x0000071b      0x162 src/oled.o
 
-.debug_line     0x00000000      0x605
+.debug_line     0x00000000      0x8c3
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0xf2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
- .debug_line    0x000000f2      0x34d src/i2c_driver.o
- .debug_line    0x0000043f      0x1c6 src/main.o
+ .debug_line    0x000000f2      0x3a6 src/i2c_driver.o
+ .debug_line    0x00000498      0x24e src/main.o
+ .debug_line    0x000006e6      0x1dd src/oled.o
 
-.debug_frame    0x00000000       0xd4
+.debug_frame    0x00000000      0x128
  *(.debug_frame)
- .debug_frame   0x00000000       0x70 src/i2c_driver.o
- .debug_frame   0x00000070       0x64 src/main.o
+ .debug_frame   0x00000000       0x84 src/i2c_driver.o
+ .debug_frame   0x00000084       0x64 src/main.o
+ .debug_frame   0x000000e8       0x40 src/oled.o
 
-.debug_str      0x00000000      0x3ff
+.debug_str      0x00000000      0x492
  *(.debug_str)
  .debug_str     0x00000000      0x169 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
- .debug_str     0x00000169      0x259 src/i2c_driver.o
-                                0x292 (size before relaxing)
- .debug_str     0x000003c2       0x3d src/main.o
-                                0x226 (size before relaxing)
+ .debug_str     0x00000169      0x27c src/i2c_driver.o
+                                0x2c0 (size before relaxing)
+ .debug_str     0x000003e5       0x63 src/main.o
+                                0x297 (size before relaxing)
+ .debug_str     0x00000448       0x4a src/oled.o
+                                0x238 (size before relaxing)
 
-.debug_loc      0x00000000      0x1d5
+.debug_loc      0x00000000      0x42a
  *(.debug_loc)
- .debug_loc     0x00000000      0x199 src/i2c_driver.o
- .debug_loc     0x00000199       0x3c src/main.o
+ .debug_loc     0x00000000      0x240 src/i2c_driver.o
+ .debug_loc     0x00000240      0x10b src/main.o
+ .debug_loc     0x0000034b       0xdf src/oled.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -476,10 +517,11 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0x50
+.debug_ranges   0x00000000       0x70
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x28 src/i2c_driver.o
- .debug_ranges  0x00000028       0x28 src/main.o
+ .debug_ranges  0x00000000       0x30 src/i2c_driver.o
+ .debug_ranges  0x00000030       0x28 src/main.o
+ .debug_ranges  0x00000058       0x18 src/oled.o
 
 .debug_macro
  *(.debug_macro)

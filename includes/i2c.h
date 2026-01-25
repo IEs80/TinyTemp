@@ -8,6 +8,7 @@
 
 #ifndef I2C_H_
 #define I2C_H_
+#define F_CPU 8000000UL
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -19,7 +20,7 @@
 
 enum {usi_idle,usi_byte_sent,usi_address_sent,usi_nack,usi_read_ack};
 
-#define I2C_BUFF_LEN 3
+#define I2C_BUFF_LEN 7
 #define OLED_ADDR_W	0x78 //Device Address: 0x3C. Write: 0x78 | Read:
 
 //macros
@@ -44,4 +45,5 @@ void attiny_i2c_init(void);
 void attiny_init(void);
 void attiny_i2c_tx(void);
 void attiny_i2c_send_byte(char addr, char reg, char data);
+void attiny_i2c_send_bytes(uint8_t *, uint8_t bytes);
 #endif /* I2C_H_ */

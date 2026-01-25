@@ -3,8 +3,9 @@
  *
  * Created: 12/1/2026 23:45:53
  *  Author: IESz
+ * brief: SSH1106 oled utility functions
  */ 
-
+#include <avr/io.h>
 
 #ifndef OLED_H_
 #define OLED_H_
@@ -14,6 +15,10 @@
 #ifndef	OLED_ADDR_W
 	#define OLED_ADDR_W 0x78 //Device Address: 0x3C. Write: 0x78 | Read: 
 #endif //OLED_ADDR_W
+
+#define OLED_WIDTH	128
+#define OLED_HIGHT	64
+#define OLED_PAGES 8
 
 #define OLED_CONTROL_BYTE 0x00
 #define OLED_GDDRAMW_BYTE 0x40 
@@ -32,36 +37,51 @@
 #define OLED_CMD_SET_PAG_ADDR	0x22 //vertical or horizontal addressing modes
 
 
-enum {horizontal_addressing,vertical_addressing,page_addressing}; //RESET: page_addressing
+enum {standar_mode,inverted_mode}; 
 //Addressing mode
 
 
 //Macros
 
 
-//Global variables
-// [0] Command: Right Horizontal Scroll
-// [1] A: Dummy
-// [2] B: Start at Page 0
-// [3] C: Slow Speed (256 frames)
-// [4] D: End at Page 7 (Bottom of screen)
-// [5] E: Dummy
-// [6] F: Dummy
-volatile uint8_t shift_setup_r[]  = { 0x26, 0x00, 0x00, 0x03, 0x07, 0x00, 0xFF };
-
-
-//Global variables
-// [0] Command: Right Horizontal Scroll
-// [1] A: Dummy
-// [2] B: Start at Page 0
-// [3] C: Slow Speed (256 frames)
-// [4] D: End at Page 7 (Bottom of screen)
-// [5] E: Vertical Scrolling Offset
-volatile uint8_t scroll_setup_r[]  = { 0x29, 0x00, 0x00, 0x03, 0x07, 0x00};	
-
-volatile uint8_t addressing_mode = page_addressing; //keep track of the selected addressing mode
-
 //Function prototypes
+
+/*
+	@fn:	set_shift
+	@brief:	sets the configuration for the horizontal screen shift
+		byte order:
+					29h/2Ah: vertical and right horizontal /vertical and left horizotnal scroll
+					00h
+					xxh: start page address (000b-111b)
+					xxh: time interval
+					xxh: end page address
+					xxh: vertical scrolling offset
+					
+	@param: 
+	@return:
+	
+	
+	
+*/
+void set_shift(uint8_t *);
+
+/*
+	@fn:	set_shift
+	@brief:	sets the configuration for the horizontal screen shift
+		byte order:
+					26h/27h: right/left scroll
+					00h
+					xxh: start page address (000b-111b)
+					xxh: time interval
+					xxh: end page address
+					00h
+					ffh
+	@param: 
+	@return:
+	
+	
+	
+*/
 void set_shift(uint8_t *);
 
 //0xb0 - 0xb7
@@ -73,7 +93,16 @@ void set_row(uint8_t row);
 
 void set_addr_mode(uint8_t mode);
 
-void set_addr_mode(uint8_t mode);
+
+
+/*
+	@fn:	oled_clean
+	@brief:	Set memory all memory to 0 (or 1 if inverted mode is selected)
+	@param: 
+		mode: defines if device is in standard or inverted mode
+	@return:
+*/
+void oled_clean(uint8_t mode);
 
 #endif /* OLED_H_ */
 
@@ -81,6 +110,6 @@ void set_addr_mode(uint8_t mode);
 /*
 	TODO: 
 		definir funciones para implementar comandos de seteo de página y columna
-		modificar i2c para poder enviar comandos multi-byte (no sólo 3 bytes). Utilzar memcpy 
+		modificar i2c para poder enviar comandos multi-byte (no sólo 3 bytes). Utilizar memcpy 
 		
 */

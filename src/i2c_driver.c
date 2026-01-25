@@ -7,6 +7,7 @@
 
 
 #include "i2c.h"
+#include <string.h>
 
 //global variables (actually reserve RAM space)
 volatile uint8_t usi_status = 0x00;
@@ -14,6 +15,7 @@ volatile uint8_t usi_state = usi_idle;
 volatile uint8_t i2c_buff[I2C_BUFF_LEN];
 volatile uint8_t i2c_indx = 0;
 volatile uint8_t f_nack = 0;
+volatile uint8_t i2c_tx_bytes = 0;
 
 //
 
@@ -129,6 +131,8 @@ void attiny_i2c_send_byte(char addr, char reg, char data)
 	while(usi_state!=usi_idle);
 	//reset i2c index
 	i2c_indx = 0;
+	//set bytes to 3 to send 1 byte of information
+	i2c_tx_bytes = 3;
 	//load i2c data buffer
 	i2c_buff[0]=addr;
 	i2c_buff[1]=reg;
@@ -137,6 +141,32 @@ void attiny_i2c_send_byte(char addr, char reg, char data)
 	attiny_i2c_tx();
 }
 
+
+/*	
+	@fn: void attiny_i2c_send_byte
+	@params:
+		addr: device address
+		register: register to be addressed
+		data: byte to be transmitted
+	@returns: none
+*/
+void attiny_i2c_send_bytes(uint8_t *buff,uint8_t bytes)
+{
+	uint8_t i = 0;
+	//TODO: change blocking wait
+	while(usi_state!=usi_idle);
+	//reset i2c index
+	i2c_indx = 0;
+	//set bytes to be tx
+	i2c_tx_bytes = bytes;
+	//load i2c data buffer
+	for(i=0;i<bytes;i++)
+	{
+		i2c_buff[i] = buff[i];
+	}
+	//start Tx
+	attiny_i2c_tx();
+}
 
 
 ISR(USI_OVF_vect)
@@ -188,7 +218,7 @@ ISR(USI_OVF_vect)
 		if(!(USIDR&0x01))
 		{
 			//check if there is available data in the buffer. Else, exit
-			if (i2c_indx<I2C_BUFF_LEN)
+			if (i2c_indx<i2c_tx_bytes)
 			{
 				
 
@@ -259,3 +289,5 @@ ISR(USI_OVF_vect)
 	}
 
 }
+
+

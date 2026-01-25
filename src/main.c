@@ -12,6 +12,7 @@
 
 //includes
 #include "i2c.h"
+#include "oled.h"
 
 //Defines
 #define LED PB4
@@ -99,7 +100,10 @@ int main(void)
 {
 	//Init ATtiny
 	attiny_init();
-	
+	TWI_DELAY();
+	TWI_DELAY();
+	TWI_DELAY();
+	TWI_DELAY();
     /* Replace with your application code */
     while (1) 
     {
@@ -112,7 +116,9 @@ int main(void)
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA5);
 			//display sleep mode
 			//attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
-			
+			oled_clean(standar_mode);
+			//full-on display (using gdram)
+			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 			a=1;
 		}
 		
