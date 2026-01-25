@@ -117,6 +117,9 @@ int main(void)
 			//display sleep mode
 			//attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 			oled_clean(standar_mode);
+			
+			//write text
+			oled_print("HELLO, FER!",0,0);
 			//full-on display (using gdram)
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 			a=1;

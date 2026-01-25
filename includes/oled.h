@@ -6,6 +6,9 @@
  * brief: SSH1106 oled utility functions
  */ 
 #include <avr/io.h>
+#include <avr/pgmspace.h>
+#include "string.h"
+
 
 #ifndef OLED_H_
 #define OLED_H_
@@ -36,6 +39,8 @@
 #define OLED_CMD_SET_COL_ADDR	0x21 //vertical or horizontal addressing modes
 #define OLED_CMD_SET_PAG_ADDR	0x22 //vertical or horizontal addressing modes
 
+#define FONT_TABLE_OFFSET		32
+#define FONT_TABBLE_CHAR_LEN	5
 
 enum {standar_mode,inverted_mode}; 
 //Addressing mode
@@ -103,6 +108,33 @@ void set_addr_mode(uint8_t mode);
 	@return:
 */
 void oled_clean(uint8_t mode);
+
+
+/*
+	@fn:	oled_write_byte
+	@brief:	writes one byte to OLED GDRAM
+	@param: 
+		c: byte to be written to GDRAM
+	@return:
+*/
+void oled_write_byte(uint8_t c);
+
+
+/*
+	@fn:	oled_print
+	@brief:	prints text on the display
+	@param: 
+		data:	text to be printed ()
+		page:	the page on to write the text
+		column: the column on to write the text
+	@return:
+*/
+void oled_print(char* data,uint8_t page, uint8_t column);
+
+
+//tables
+// "PROGMEM" tells the compiler: "Keep this in Flash, do not load into RAM"
+extern const uint8_t font5x7[] PROGMEM;
 
 #endif /* OLED_H_ */
 
