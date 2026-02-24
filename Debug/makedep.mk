@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\drivers\dht_driver.c
+
 src\i2c_driver.c
 
 src\main.c

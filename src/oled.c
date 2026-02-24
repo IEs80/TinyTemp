@@ -211,7 +211,13 @@ const uint8_t font5x7[] PROGMEM = {
 	0x61, 0x51, 0x49, 0x45, 0x43  // Z
 };
 
-
+// Define the icons in Flash to save RAM
+static const uint8_t weathericons[][16] PROGMEM = {
+	{0xff, 0xff, 0xff, 0x7f, 0x7f, 0xf7, 0x1f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x1f, 0x2f, 0xf7, 0x7f}, // 0: Sun
+	{0x80, 0xc0, 0xe0, 0xf8, 0xf8, 0xf8, 0xf8, 0xfe, 0xfe, 0xfe, 0xfe, 0x7e, 0x7e, 0x7c, 0x78, 0x00}, // 1: Cloud
+	{0x80, 0xc0, 0xe0, 0xf8, 0xf8, 0xf8, 0xf8, 0xfe, 0xfe, 0xfe, 0xfe, 0x7e, 0x7e, 0x7c, 0x78, 0x00}, // 2: Rain
+	{0x80, 0xc0, 0xe0, 0xf8, 0xf8, 0xf8, 0xf8, 0xfe, 0xfe, 0xfe, 0xfe, 0x7e, 0x7e, 0x7c, 0x78, 0x00}  // 3: Snow
+};
 
 
 /*
@@ -310,7 +316,7 @@ void oled_write_byte(uint8_t c)
 		column: the column on to write the text
 	@return:
 */
-void oled_print(char* data,uint8_t page, uint8_t column)
+void oled_print_text(char* data,uint8_t page, uint8_t column)
 {
 	uint8_t i = 0;
 	uint8_t text_length = 0;	//stores text total length
@@ -365,4 +371,51 @@ void oled_print(char* data,uint8_t page, uint8_t column)
 		}
 	}
 		
+}
+
+
+
+
+/*
+	@fn:	oled_print
+	@brief:	prints text on the display
+	@param: 
+		data:	text to be printed ()
+		page:	the page on to write the text
+		column: the column on to write the text
+	@return:
+*/
+void oled_draw_weather(uint8_t id,uint8_t page, uint8_t column)
+{
+	
+	//uint16_t font_index = 0;	//current index for the font table 
+	uint8_t pixel_slice = 0;	//current slice of the character to be drawn
+	uint8_t slice_index = 0;	//
+
+	
+	//set page
+	set_page(page);
+	
+	//set column
+	set_column(column);
+	
+	//TODO: check if the text has space to be displayed, given the column number
+	
+
+		// Calculate start index in Flash memory
+		//sustract "32" because we don't include the first 32 invisible characters //WITH Adafruit font table, is not neccesarry
+		//multiply by 5, because each character consists of 5 bytes
+		//font_index = id * 16;
+		
+		
+		
+		//draw character
+		for(slice_index=0;slice_index<16;slice_index++)
+		{
+			//read the character slice from the font table in flash memory
+			pixel_slice = pgm_read_byte(&weathericons[id][slice_index]);
+			oled_write_byte(pixel_slice);	
+			
+		}	
+
 }

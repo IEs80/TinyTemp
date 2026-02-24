@@ -149,10 +149,16 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="includes\dht.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="includes\i2c.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="includes\oled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\dht_driver.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\i2c_driver.c">

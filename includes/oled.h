@@ -43,6 +43,7 @@
 #define FONT_TABBLE_CHAR_LEN	5
 
 enum {standar_mode,inverted_mode}; 
+enum {sunny,cloudy,rainy,snowy};
 //Addressing mode
 
 
@@ -129,8 +130,19 @@ void oled_write_byte(uint8_t c);
 		column: the column on to write the text
 	@return:
 */
-void oled_print(char* data,uint8_t page, uint8_t column);
+void oled_print_text(char* data,uint8_t page, uint8_t column);
 
+
+/*
+	@fn:	oled_draw_weather
+	@brief:	draws weather icon on the display
+	@param: 
+		data:	icon to be drawn
+		page:	the page on to write the text
+		column: the column on to write the text
+	@return:
+*/
+void oled_draw_weather(uint8_t id,uint8_t page, uint8_t column);
 
 //tables
 // "PROGMEM" tells the compiler: "Keep this in Flash, do not load into RAM"

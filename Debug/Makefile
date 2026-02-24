@@ -42,6 +42,7 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../src/drivers/dht_driver.c \
 ../src/i2c_driver.c \
 ../src/main.c \
 ../src/oled.c
@@ -54,21 +55,25 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+src/drivers/dht_driver.o \
 src/i2c_driver.o \
 src/main.o \
 src/oled.o
 
 OBJS_AS_ARGS +=  \
+src/drivers/dht_driver.o \
 src/i2c_driver.o \
 src/main.o \
 src/oled.o
 
 C_DEPS +=  \
+src/drivers/dht_driver.d \
 src/i2c_driver.d \
 src/main.d \
 src/oled.d
 
 C_DEPS_AS_ARGS +=  \
+src/drivers/dht_driver.d \
 src/i2c_driver.d \
 src/main.d \
 src/oled.d
@@ -87,6 +92,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+src/drivers/dht_driver.o: ../src/drivers/dht_driver.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 src/i2c_driver.o: ../src/i2c_driver.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0

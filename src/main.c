@@ -13,6 +13,7 @@
 //includes
 #include "i2c.h"
 #include "oled.h"
+#include "dht.h"
 
 //Defines
 #define LED PB4
@@ -20,7 +21,8 @@
 #define LED_ON     PORTB|=(0x01<<LED) //LED on
 
 //Global variables
-static char a = 0;
+static char a = 1;
+static char	b = 0;
 extern volatile uint8_t usi_state;	//defined in i2c_driver.c
 extern volatile uint8_t f_nack;		//defined in i2c_driver.c
 
@@ -54,6 +56,18 @@ void attiny_timer_init()
 	//habilita TIMER0 COMPA interrupt
 	TIMSK |= (1 << OCIE0A);
 }
+
+void attiny_timer_deinit()
+{
+	//disable TIMER0 COMPA interrupt
+	TIMSK &= ~(1 << OCIE0A);	
+	
+	//disable clock source for TIMER0
+	TCCR0B &= ~((1 << CS02) | (1 << CS01) | (1 << CS00));
+}
+
+
+
 
 /*
 	Attiny Init
@@ -98,8 +112,14 @@ ISR(TIMER0_COMPA_vect)
 
 int main(void)
 {
+	
+	DDRB |= (0x01<<LED); //LED as Out
+	DDRB |= (0x01<<PB3);
+	PORTB&=~(0x01<<LED); //LED off
+	PORTB&=~(0x01<<PB3);
+	
 	//Init ATtiny
-	attiny_init();
+	//attiny_init();
 	TWI_DELAY();
 	TWI_DELAY();
 	TWI_DELAY();
@@ -119,12 +139,33 @@ int main(void)
 			oled_clean(standar_mode);
 			
 			//write text
-			oled_print("TEMP: 0°C",2,32);
-			oled_print("HUM:  70%",5,32);
+			//oled_print_text("TEMP: 0°C",2,32);
+			//oled_print_text("HUM:  70%",5,32);
+			oled_draw_weather(sunny,2,32);
 			//full-on display (using gdram)
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
+			
+			attiny_timer_deinit();
+
 			a=1;
 		}
+		
+
+		if(b==0)
+		{
+
+			//PORTB|=(0x01<<PB3); //ON
+			//_delay_ms(500);
+			//PORTB &= ~((0x01 << PB3)); //OFF
+			//_delay_ms(500);
+			
+			attiny_dht_init();
+			timer1_init();
+			dht_start();
+			b=1;
+		}
+
+		
 		
 		if(f_nack)
 		{
