@@ -10,22 +10,18 @@
 
 
 //Global variables
-volatile uint8_t dht_temp_int = 0;
-volatile uint8_t dht_temp_dec = 0;
-volatile uint8_t dht_rh_int = 0;
-volatile uint8_t dht_rh_dec = 0;
+volatile uint8_t	_v_dht_temp_int = 0;
+volatile uint8_t	_v_dht_temp_dec = 0;
+volatile uint8_t	_v_dht_rh_int = 0;
+volatile uint8_t	_v_dht_rh_dec = 0;
+volatile uint8_t	_v_dht_data_shift_index = 7;
+volatile uint16_t	_v_dht_temporizer = 0;
+volatile uint8_t	f_dht_error = 0;	 
+volatile uint8_t	f_pcint = 0;
 
-volatile uint8_t dht_data_shift_index = 7;
+volatile	uint8_t dht_state = dht_idle;
 
-volatile uint16_t dht_temporizer = 0;
-
-volatile uint8_t f_dht_error = 0;	 
-
-#define HIGH 1
-#define LOW 0
-
-
-enum DHT_ERROR_FLAGS{START_ERROR,COM_ERROR};
+volatile uint8_t _v_dht_time = 0;
 
 void setPin(uint8_t pin,uint8_t state)
 {
@@ -49,6 +45,87 @@ void attiny_dht_init()
 	//set DHT_PIN as output
 	DDRB |= (0x01<<DHT_PIN); //DHT_PIN as Out
 	PORTB|=(0x01<<DHT_PIN); //DHT_PIN ON (line in idle state)
+	
+	
+	//RED LED
+	//DDRB |= (0x01<<PB5); //DHT_PIN as Out
+	//PORTB&=~(0x01<<PB5); //DHT_PIN ON (line in idle state)
+}
+
+
+/*	
+	@fn:  init_pcint
+	@brief: enables pin change interrupts for PB3
+	@params: none
+	@returns: none
+*/
+void init_pcint()
+{
+	
+	
+	// General Interrupt Mask Register
+	//bit 6: 0 (INT0 disabled)
+	//bit 5: 1 (PCINT enabled)
+	GIMSK|=(0x01<<PCIE);
+	
+	//GIFR: General Interrupt Flag Register
+	
+	
+	//Pin Change Mask Register
+	//bit 3: PCINT3 (PB3)
+	PCMSK |= (0x01<<DHT_PIN);
+	
+	//enables global interrupts
+	sei();
+}
+
+
+/*	
+	@fn:  init_pcint
+	@brief: disables pin change interrupts for PB3
+	@params: none
+	@returns: none
+*/
+void deinit_pcint()
+{
+	
+
+	//Pin Change Mask Register
+	//bit 3: PCINT3 (PB3)
+	PCMSK &=~(0x01<<DHT_PIN);
+	
+	// General Interrupt Mask Register
+	//bit 6: 0 (INT0 disabled)
+	//bit 5: 1 (PCINT enabled)
+	GIMSK&=~(0x01<<5);
+	
+	//GIFR: General Interrupt Flag Register
+	
+}
+
+
+ISR(PCINT0_vect)
+{
+	
+	//clear interrupt flag
+	GIFR|=(0x01<<5);
+	
+	//raise flag
+	f_pcint = 1;
+	
+	
+	switch(dht_state)
+	{
+		case dht_send_start:
+			TCNT1 = 0;
+			_v_dht_time = 0;
+			break;
+		
+	}
+	
+	PORTB|=(0x01<<PB4) ;	
+	
+
 }
 
 
@@ -90,6 +167,8 @@ void timer1_init()
 */
 void dht_start()
 {
+	
+	
 	//set TIMER1 pre-scaler to 4096
 	TCCR1 = 0x0E;
 	
@@ -106,27 +185,34 @@ void dht_start()
 	//and release the line
 	PORTB&=~(0x01<<DHT_PIN); 
 	
-	while(TCNT1<20); //wait
-	PORTB|=(0x01<<PB4) ;
+	//while(TCNT1<20); //wait
+
 	//set TIMER1 pre-scaler to 8
 	TCCR1 = 0x04;
-	TCNT1 = 0;
+	
 	
 	//check for DHT response signal:
 	//	80uS LOW, then 80uS HIGH
 	while(!f_dht_error)
 	{
+		//The DHT takes some u-seconds to respond
+		while((PINB>>DHT_PIN)&0x01);
+		init_pcint();
+
+		
 		//check for LOW state
-		while(TCNT1<80)
+		while(TCNT1<=80)
 		{
 			//check DHT_PIN status
 			if((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==1)
 			{
+				
 				f_dht_error = START_ERROR;
+				break;
 			}
 		}
 		
-		//rest timer count 
+		//reset timer count 
 		TCNT1 = 0;
 		//check for HIGH state
 		while(TCNT1<80)
@@ -134,15 +220,28 @@ void dht_start()
 			//check DHT_PIN status
 			if((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==0)
 			{
+				
 				f_dht_error = START_ERROR;
+				break;
 			}
 		}
-				
+		
+		
+
 	}
 	
 	if(f_dht_error){
 		//stop timer1
 		//return 1
+		//PORTB&=~(0x01<<PB4) ;
+		//PORTB|=(0x01<<PB5) ;	
+		
+	}
+	else
+	{
+		//PORTB&=~(0x01<<PB5) ;
+		//PORTB|=(0x01<<PB4) ;	
+		
 	}
 
 }
@@ -153,13 +252,45 @@ void dht_start()
 	@params: none
 	@returns: none
 */
-//void dht_read()
-//{
-
-	//sends start signal
+void dht_read()
+{
+	//dht_start();
 	
-	//reads rh and temp values
+	switch(dht_state)
+	{
+		case dht_idle:
+			timer1_init();
+			dht_state = dht_send_start;
+			break;
+			
+		case dht_send_start:
+			//sends start signal
+			dht_start();
+			if(f_dht_error!=NO_ERROR)
+			{
+				dht_state = dht_error;
+			}
+			else
+			{
+				dht_state = dht_read_response;
+			}
+			break;
+		
+		//reads rh and temp values
+		case dht_read_response:
+			break;
+		case dht_read_bits:
+			break;
+		
+		//check for stop signal
+		case dht_stop:
+			dht_state = dht_idle;
+			break;
+		
+		case dht_error:
+			break;
+		default:
+			break; 
+	}
 	
-	//check for stop signal
-	 
-//}
+}

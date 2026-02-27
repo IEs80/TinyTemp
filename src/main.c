@@ -18,7 +18,9 @@
 //Defines
 #define LED PB4
 //Macros
-#define LED_ON     PORTB|=(0x01<<LED) //LED on
+#define GLED_ON     PORTB|=(0x01<<LED) //LED on
+#define YLED_ON     PORTB|=(0x01<<LED) //LED on
+#define RLED_ON     PORTB|=(0x01<<LED) //LED on
 
 //Global variables
 static char a = 1;
@@ -117,6 +119,7 @@ int main(void)
 	DDRB |= (0x01<<PB3);
 	PORTB&=~(0x01<<LED); //LED off
 	PORTB&=~(0x01<<PB3);
+
 	
 	//Init ATtiny
 	//attiny_init();
@@ -160,7 +163,7 @@ int main(void)
 			//_delay_ms(500);
 			
 			attiny_dht_init();
-			timer1_init();
+			
 			dht_start();
 			b=1;
 		}
@@ -170,7 +173,7 @@ int main(void)
 		if(f_nack)
 		{
 			f_nack = 0;
-			LED_ON;
+			GLED_ON;
 		}
 	
 	}
