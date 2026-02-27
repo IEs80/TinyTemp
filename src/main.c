@@ -127,6 +127,8 @@ int main(void)
 	TWI_DELAY();
 	TWI_DELAY();
 	TWI_DELAY();
+	
+	attiny_dht_init();
     /* Replace with your application code */
     while (1) 
     {
@@ -153,7 +155,7 @@ int main(void)
 			a=1;
 		}
 		
-
+		
 		if(b==0)
 		{
 
@@ -162,10 +164,11 @@ int main(void)
 			//PORTB &= ~((0x01 << PB3)); //OFF
 			//_delay_ms(500);
 			
-			attiny_dht_init();
+		
 			
-			dht_start();
-			b=1;
+			//dht_start();
+			dht_read();
+			//b=1;
 		}
 
 		

@@ -3,31 +3,31 @@ GccApplication1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000494  00000000  00000000  00000094  2**1
+  0 .text         00000548  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000002  00800060  00000494  00000528  2**0
+  1 .data         00000002  00800060  00000548  000005dc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000000e  00800062  00800062  0000052a  2**0
+  2 .bss          00000014  00800062  00800062  000005de  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000052a  2**0
+  3 .comment      00000030  00000000  00000000  000005de  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  0000055c  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000610  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000120  00000000  00000000  00000598  2**0
+  5 .debug_aranges 00000128  00000000  00000000  0000064c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001384  00000000  00000000  000006b8  2**0
+  6 .debug_info   000013f2  00000000  00000000  00000774  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000a1b  00000000  00000000  00001a3c  2**0
+  7 .debug_abbrev 00000a16  00000000  00000000  00001b66  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000d17  00000000  00000000  00002457  2**0
+  8 .debug_line   00000d5f  00000000  00000000  0000257c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000254  00000000  00000000  00003170  2**2
+  9 .debug_frame  00000268  00000000  00000000  000032dc  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000006bb  00000000  00000000  000033c4  2**0
+ 10 .debug_str    0000071a  00000000  00000000  00003544  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000087c  00000000  00000000  00003a7f  2**0
+ 11 .debug_loc    000008ce  00000000  00000000  00003c5e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000e0  00000000  00000000  000042fb  2**0
+ 12 .debug_ranges 000000e8  00000000  00000000  0000452c  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -35,7 +35,7 @@ Disassembly of section .text:
 00000000 <__vectors>:
    0:	2e c0       	rjmp	.+92     	; 0x5e <__ctors_end>
    2:	48 c0       	rjmp	.+144    	; 0x94 <__bad_interrupt>
-   4:	57 c0       	rjmp	.+174    	; 0xb4 <__vector_2>
+   4:	59 c0       	rjmp	.+178    	; 0xb8 <__vector_2>
    6:	46 c0       	rjmp	.+140    	; 0x94 <__bad_interrupt>
    8:	45 c0       	rjmp	.+138    	; 0x94 <__bad_interrupt>
    a:	44 c0       	rjmp	.+136    	; 0x94 <__bad_interrupt>
@@ -43,11 +43,11 @@ Disassembly of section .text:
    e:	42 c0       	rjmp	.+132    	; 0x94 <__bad_interrupt>
   10:	41 c0       	rjmp	.+130    	; 0x94 <__bad_interrupt>
   12:	40 c0       	rjmp	.+128    	; 0x94 <__bad_interrupt>
-  14:	78 c1       	rjmp	.+752    	; 0x306 <__vector_10>
+  14:	da c1       	rjmp	.+948    	; 0x3ca <__vector_10>
   16:	3e c0       	rjmp	.+124    	; 0x94 <__bad_interrupt>
   18:	3d c0       	rjmp	.+122    	; 0x94 <__bad_interrupt>
   1a:	3c c0       	rjmp	.+120    	; 0x94 <__bad_interrupt>
-  1c:	d5 c0       	rjmp	.+426    	; 0x1c8 <__vector_14>
+  1c:	37 c1       	rjmp	.+622    	; 0x28c <__vector_14>
 
 0000001e <__trampolines_end>:
   1e:	ff ff       	.word	0xffff	; ????
@@ -58,7 +58,7 @@ Disassembly of section .text:
   28:	0f 0f       	add	r16, r31
   2a:	1f 2f       	mov	r17, r31
   2c:	f7 7f       	andi	r31, 0xF7	; 247
-  2e:	80 c0       	rjmp	.+256    	; 0x130 <dht_start+0x50>
+  2e:	80 c0       	rjmp	.+256    	; 0x130 <dht_start+0x12>
   30:	e0 f8       	bld	r14, 0
   32:	f8 f8       	.word	0xf8f8	; ????
   34:	f8 fe       	.word	0xfef8	; ????
@@ -66,7 +66,7 @@ Disassembly of section .text:
   38:	fe 7e       	andi	r31, 0xEE	; 238
   3a:	7e 7c       	andi	r23, 0xCE	; 206
   3c:	78 00       	.word	0x0078	; ????
-  3e:	80 c0       	rjmp	.+256    	; 0x140 <dht_start+0x60>
+  3e:	80 c0       	rjmp	.+256    	; 0x140 <dht_start+0x22>
   40:	e0 f8       	bld	r14, 0
   42:	f8 f8       	.word	0xf8f8	; ????
   44:	f8 fe       	.word	0xfef8	; ????
@@ -74,7 +74,7 @@ Disassembly of section .text:
   48:	fe 7e       	andi	r31, 0xEE	; 238
   4a:	7e 7c       	andi	r23, 0xCE	; 206
   4c:	78 00       	.word	0x0078	; ????
-  4e:	80 c0       	rjmp	.+256    	; 0x150 <attiny_i2c_tx+0xc>
+  4e:	80 c0       	rjmp	.+256    	; 0x150 <dht_response+0xc>
   50:	e0 f8       	bld	r14, 0
   52:	f8 f8       	.word	0xf8f8	; ????
   54:	f8 fe       	.word	0xfef8	; ????
@@ -95,8 +95,8 @@ Disassembly of section .text:
   6a:	10 e0       	ldi	r17, 0x00	; 0
   6c:	a0 e6       	ldi	r26, 0x60	; 96
   6e:	b0 e0       	ldi	r27, 0x00	; 0
-  70:	e4 e9       	ldi	r30, 0x94	; 148
-  72:	f4 e0       	ldi	r31, 0x04	; 4
+  70:	e8 e4       	ldi	r30, 0x48	; 72
+  72:	f5 e0       	ldi	r31, 0x05	; 5
   74:	02 c0       	rjmp	.+4      	; 0x7a <__do_copy_data+0x10>
   76:	05 90       	lpm	r0, Z+
   78:	0d 92       	st	X+, r0
@@ -114,11 +114,11 @@ Disassembly of section .text:
   88:	1d 92       	st	X+, r1
 
 0000008a <.do_clear_bss_start>:
-  8a:	a0 37       	cpi	r26, 0x70	; 112
+  8a:	a6 37       	cpi	r26, 0x76	; 118
   8c:	b2 07       	cpc	r27, r18
   8e:	e1 f7       	brne	.-8      	; 0x88 <.do_clear_bss_loop>
-  90:	51 d1       	rcall	.+674    	; 0x334 <main>
-  92:	fe c1       	rjmp	.+1020   	; 0x490 <_exit>
+  90:	b3 d1       	rcall	.+870    	; 0x3f8 <main>
+  92:	58 c2       	rjmp	.+1200   	; 0x544 <_exit>
 
 00000094 <__bad_interrupt>:
   94:	b5 cf       	rjmp	.-150    	; 0x0 <__vectors>
@@ -145,861 +145,973 @@ Disassembly of section .text:
   aa:	85 b3       	in	r24, 0x15	; 21
   ac:	88 60       	ori	r24, 0x08	; 8
   ae:	85 bb       	out	0x15, r24	; 21
-  b0:	78 94       	sei
-  b2:	08 95       	ret
+  b0:	80 e2       	ldi	r24, 0x20	; 32
+  b2:	8a bf       	out	0x3a, r24	; 58
+  b4:	78 94       	sei
+  b6:	08 95       	ret
 
-000000b4 <__vector_2>:
+000000b8 <__vector_2>:
 	
 }
 
 
 ISR(PCINT0_vect)
 {
-  b4:	1f 92       	push	r1
-  b6:	0f 92       	push	r0
-  b8:	0f b6       	in	r0, 0x3f	; 63
+  b8:	1f 92       	push	r1
   ba:	0f 92       	push	r0
-  bc:	11 24       	eor	r1, r1
-  be:	8f 93       	push	r24
-	PORTB|=(0x01<<PB4) ;	
-  c0:	88 b3       	in	r24, 0x18	; 24
-  c2:	80 61       	ori	r24, 0x10	; 16
-  c4:	88 bb       	out	0x18, r24	; 24
+  bc:	0f b6       	in	r0, 0x3f	; 63
+  be:	0f 92       	push	r0
+  c0:	11 24       	eor	r1, r1
+  c2:	8f 93       	push	r24
+  c4:	9f 93       	push	r25
 	
 	//clear interrupt flag
 	GIFR|=(0x01<<5);
   c6:	8a b7       	in	r24, 0x3a	; 58
   c8:	80 62       	ori	r24, 0x20	; 32
   ca:	8a bf       	out	0x3a, r24	; 58
-}
-  cc:	8f 91       	pop	r24
-  ce:	0f 90       	pop	r0
-  d0:	0f be       	out	0x3f, r0	; 63
-  d2:	0f 90       	pop	r0
-  d4:	1f 90       	pop	r1
-  d6:	18 95       	reti
+	
+	//raise flag
+	f_pcint = 1;
+  cc:	81 e0       	ldi	r24, 0x01	; 1
+  ce:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <f_pcint>
+	
+	
+	switch(dht_state)
+  d2:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
+  d6:	82 30       	cpi	r24, 0x02	; 2
+  d8:	b9 f4       	brne	.+46     	; 0x108 <__vector_2+0x50>
+	{
+		case dht_send_start:
+			break;
+		case dht_read_response:
+			if(f_measuring)
+  da:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <f_measuring>
+  de:	88 23       	and	r24, r24
+  e0:	59 f0       	breq	.+22     	; 0xf8 <__vector_2+0x40>
+			{
+				
+				_v_dht_temporizer = TCNT1;
+  e2:	8f b5       	in	r24, 0x2f	; 47
+  e4:	90 e0       	ldi	r25, 0x00	; 0
+  e6:	90 93 69 00 	sts	0x0069, r25	; 0x800069 <_v_dht_temporizer+0x1>
+  ea:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <_v_dht_temporizer>
+				TCNT1 = 0;
+  ee:	1f bc       	out	0x2f, r1	; 47
+				f_measure_ready = 1;
+  f0:	81 e0       	ldi	r24, 0x01	; 1
+  f2:	80 93 63 00 	sts	0x0063, r24	; 0x800063 <f_measure_ready>
+  f6:	08 c0       	rjmp	.+16     	; 0x108 <__vector_2+0x50>
+			}
+			else
+			{
+				
+				TCNT1 = 0;
+  f8:	1f bc       	out	0x2f, r1	; 47
+				_v_dht_temporizer = 0;
+  fa:	10 92 69 00 	sts	0x0069, r1	; 0x800069 <_v_dht_temporizer+0x1>
+  fe:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <_v_dht_temporizer>
+				f_measuring = 1;
+ 102:	81 e0       	ldi	r24, 0x01	; 1
+ 104:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <f_measuring>
+	}
+	
+		
+	
 
-000000d8 <timer1_init>:
+}
+ 108:	9f 91       	pop	r25
+ 10a:	8f 91       	pop	r24
+ 10c:	0f 90       	pop	r0
+ 10e:	0f be       	out	0x3f, r0	; 63
+ 110:	0f 90       	pop	r0
+ 112:	1f 90       	pop	r1
+ 114:	18 95       	reti
+
+00000116 <timer1_init>:
 		bit7:	0 (Don't clear on compare match)
 		bit6:	0 (PWM Enable off)
 		bit5-4: 00 (0 because we don't use the compare match)
 		bit3-0:	0100 (CK/8 = 1MHz)
 	*/
 	TCCR1 = 0x04;
-  d8:	84 e0       	ldi	r24, 0x04	; 4
-  da:	80 bf       	out	0x30, r24	; 48
+ 116:	84 e0       	ldi	r24, 0x04	; 4
+ 118:	80 bf       	out	0x30, r24	; 48
 	Bit 0: 0
 	*/
 	//PLLCSR = 0x02;
 	 
 	//set the count to 0
 	TCNT1 = 0x00;
-  dc:	1f bc       	out	0x2f, r1	; 47
-  de:	08 95       	ret
+ 11a:	1f bc       	out	0x2f, r1	; 47
+ 11c:	08 95       	ret
 
-000000e0 <dht_start>:
+0000011e <dht_start>:
 void dht_start()
 {
 	
 	
 	//set TIMER1 pre-scaler to 4096
 	TCCR1 = 0x0E;
-  e0:	8e e0       	ldi	r24, 0x0E	; 14
-  e2:	80 bf       	out	0x30, r24	; 48
+ 11e:	8e e0       	ldi	r24, 0x0E	; 14
+ 120:	80 bf       	out	0x30, r24	; 48
 	
 	//set DHT_PIN to low
 	PORTB&=~(0x01<<DHT_PIN); 
-  e4:	88 b3       	in	r24, 0x18	; 24
-  e6:	87 7f       	andi	r24, 0xF7	; 247
-  e8:	88 bb       	out	0x18, r24	; 24
+ 122:	88 b3       	in	r24, 0x18	; 24
+ 124:	87 7f       	andi	r24, 0xF7	; 247
+ 126:	88 bb       	out	0x18, r24	; 24
 	//set counter to 0
 	TCNT1=0x00;	
-  ea:	1f bc       	out	0x2f, r1	; 47
+ 128:	1f bc       	out	0x2f, r1	; 47
 	
 	//wait for the 18mS
 	while(TCNT1<18);
-  ec:	8f b5       	in	r24, 0x2f	; 47
-  ee:	82 31       	cpi	r24, 0x12	; 18
-  f0:	e8 f3       	brcs	.-6      	; 0xec <dht_start+0xc>
+ 12a:	8f b5       	in	r24, 0x2f	; 47
+ 12c:	82 31       	cpi	r24, 0x12	; 18
+ 12e:	e8 f3       	brcs	.-6      	; 0x12a <dht_start+0xc>
 
 	//set DHT_PIN as input...
 	DDRB&=~(0x01<<DHT_PIN); 
-  f2:	87 b3       	in	r24, 0x17	; 23
-  f4:	87 7f       	andi	r24, 0xF7	; 247
-  f6:	87 bb       	out	0x17, r24	; 23
+ 130:	87 b3       	in	r24, 0x17	; 23
+ 132:	87 7f       	andi	r24, 0xF7	; 247
+ 134:	87 bb       	out	0x17, r24	; 23
 	//and release the line
 	PORTB&=~(0x01<<DHT_PIN); 
-  f8:	88 b3       	in	r24, 0x18	; 24
-  fa:	87 7f       	andi	r24, 0xF7	; 247
-  fc:	88 bb       	out	0x18, r24	; 24
+ 136:	88 b3       	in	r24, 0x18	; 24
+ 138:	87 7f       	andi	r24, 0xF7	; 247
+ 13a:	88 bb       	out	0x18, r24	; 24
 	
-	//while(TCNT1<20); //wait
-
-	//set TIMER1 pre-scaler to 8
+	
+	//set TIMER1 pre-scaler to 8, so one tick equals 1uS
 	TCCR1 = 0x04;
-  fe:	84 e0       	ldi	r24, 0x04	; 4
- 100:	80 bf       	out	0x30, r24	; 48
-	
-	
-	//check for DHT response signal:
-	//	80uS LOW, then 80uS HIGH
-	while(!f_dht_error)
- 102:	19 c0       	rjmp	.+50     	; 0x136 <dht_start+0x56>
-	{
-		//The DHT takes some u-seconds to respond
-		while((PINB>>DHT_PIN)&0x01);
- 104:	b3 99       	sbic	0x16, 3	; 22
- 106:	fe cf       	rjmp	.-4      	; 0x104 <dht_start+0x24>
-		init_pcint();
- 108:	cd df       	rcall	.-102    	; 0xa4 <init_pcint>
-		
-		TCNT1 = 0;
- 10a:	1f bc       	out	0x2f, r1	; 47
-		//check for LOW state
-		while(TCNT1<=80)
- 10c:	06 c0       	rjmp	.+12     	; 0x11a <dht_start+0x3a>
-		{
-			//check DHT_PIN status
-			if((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==1)
- 10e:	b0 9b       	sbis	0x16, 0	; 22
- 110:	04 c0       	rjmp	.+8      	; 0x11a <dht_start+0x3a>
-			{
-				
-				f_dht_error = START_ERROR;
- 112:	81 e0       	ldi	r24, 0x01	; 1
- 114:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
-				break;
- 118:	03 c0       	rjmp	.+6      	; 0x120 <dht_start+0x40>
-		while((PINB>>DHT_PIN)&0x01);
-		init_pcint();
-		
-		TCNT1 = 0;
-		//check for LOW state
-		while(TCNT1<=80)
- 11a:	8f b5       	in	r24, 0x2f	; 47
- 11c:	81 35       	cpi	r24, 0x51	; 81
- 11e:	b8 f3       	brcs	.-18     	; 0x10e <dht_start+0x2e>
-				break;
-			}
-		}
-		
-		//reset timer count 
-		TCNT1 = 0;
- 120:	1f bc       	out	0x2f, r1	; 47
-		//check for HIGH state
-		while(TCNT1<80)
- 122:	06 c0       	rjmp	.+12     	; 0x130 <dht_start+0x50>
-		{
-			//check DHT_PIN status
-			if((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==0)
- 124:	b0 99       	sbic	0x16, 0	; 22
- 126:	04 c0       	rjmp	.+8      	; 0x130 <dht_start+0x50>
-			{
-				
-				f_dht_error = START_ERROR;
- 128:	81 e0       	ldi	r24, 0x01	; 1
- 12a:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
-				break;
- 12e:	03 c0       	rjmp	.+6      	; 0x136 <dht_start+0x56>
-		}
-		
-		//reset timer count 
-		TCNT1 = 0;
-		//check for HIGH state
-		while(TCNT1<80)
- 130:	8f b5       	in	r24, 0x2f	; 47
- 132:	80 35       	cpi	r24, 0x50	; 80
- 134:	b8 f3       	brcs	.-18     	; 0x124 <dht_start+0x44>
-	TCCR1 = 0x04;
-	
-	
-	//check for DHT response signal:
-	//	80uS LOW, then 80uS HIGH
-	while(!f_dht_error)
- 136:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
- 13a:	88 23       	and	r24, r24
- 13c:	19 f3       	breq	.-58     	; 0x104 <dht_start+0x24>
-		
-		
-
-	}
-	
-	if(f_dht_error){
- 13e:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
+ 13c:	84 e0       	ldi	r24, 0x04	; 4
+ 13e:	80 bf       	out	0x30, r24	; 48
+	//set counter to 0
+	TCNT1=0x00;
+ 140:	1f bc       	out	0x2f, r1	; 47
  142:	08 95       	ret
 
-00000144 <attiny_i2c_tx>:
+00000144 <dht_response>:
+		
+
+		
+		//check for DHT response signal:
+		//	80uS LOW, then 80uS HIGH
+		if(f_measure_ready)
+ 144:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <f_measure_ready>
+ 148:	88 23       	and	r24, r24
+ 14a:	09 f1       	breq	.+66     	; 0x18e <dht_response+0x4a>
+		{
+			f_measure_ready = 0;
+ 14c:	10 92 63 00 	sts	0x0063, r1	; 0x800063 <f_measure_ready>
+			//check if the obtained measure is between accepted time limits (time limits obtained empirically with logic analyzer)
+			if( (78<=_v_dht_temporizer) && (87>=_v_dht_temporizer))
+ 150:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <_v_dht_temporizer>
+ 154:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <_v_dht_temporizer+0x1>
+ 158:	8e 34       	cpi	r24, 0x4E	; 78
+ 15a:	91 05       	cpc	r25, r1
+ 15c:	a8 f0       	brcs	.+42     	; 0x188 <dht_response+0x44>
+ 15e:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <_v_dht_temporizer>
+ 162:	90 91 69 00 	lds	r25, 0x0069	; 0x800069 <_v_dht_temporizer+0x1>
+ 166:	88 35       	cpi	r24, 0x58	; 88
+ 168:	91 05       	cpc	r25, r1
+ 16a:	70 f4       	brcc	.+28     	; 0x188 <dht_response+0x44>
+			{
+				//re-init temporizer
+				_v_dht_temporizer = 0;
+ 16c:	10 92 69 00 	sts	0x0069, r1	; 0x800069 <_v_dht_temporizer+0x1>
+ 170:	10 92 68 00 	sts	0x0068, r1	; 0x800068 <_v_dht_temporizer>
+				//we have to read to pulses, so before continuing in the state machine, we repeat for the second pulse 
+				if(_v_response_pulses<2)
+ 174:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <_v_response_pulses>
+ 178:	82 30       	cpi	r24, 0x02	; 2
+ 17a:	48 f4       	brcc	.+18     	; 0x18e <dht_response+0x4a>
+				{
+					_v_response_pulses++;
+ 17c:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <_v_response_pulses>
+ 180:	8f 5f       	subi	r24, 0xFF	; 255
+ 182:	80 93 67 00 	sts	0x0067, r24	; 0x800067 <_v_response_pulses>
+ 186:	08 95       	ret
+				}
+				
+			}
+			else
+			{
+				f_dht_error = RESPONSE_ERROR;
+ 188:	82 e0       	ldi	r24, 0x02	; 2
+ 18a:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <f_dht_error>
+ 18e:	08 95       	ret
+
+00000190 <dht_read>:
+*/
+void dht_read()
+{
+	//dht_start();
+	
+	switch(dht_state)
+ 190:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <__data_end>
+ 194:	82 30       	cpi	r24, 0x02	; 2
+ 196:	01 f1       	breq	.+64     	; 0x1d8 <dht_read+0x48>
+ 198:	28 f4       	brcc	.+10     	; 0x1a4 <dht_read+0x14>
+ 19a:	88 23       	and	r24, r24
+ 19c:	41 f0       	breq	.+16     	; 0x1ae <dht_read+0x1e>
+ 19e:	81 30       	cpi	r24, 0x01	; 1
+ 1a0:	59 f0       	breq	.+22     	; 0x1b8 <dht_read+0x28>
+ 1a2:	08 95       	ret
+ 1a4:	84 30       	cpi	r24, 0x04	; 4
+ 1a6:	49 f1       	breq	.+82     	; 0x1fa <dht_read+0x6a>
+ 1a8:	85 30       	cpi	r24, 0x05	; 5
+ 1aa:	51 f1       	breq	.+84     	; 0x200 <__DATA_REGION_LENGTH__>
+ 1ac:	08 95       	ret
+	{
+		case dht_idle:
+			timer1_init();
+ 1ae:	b3 df       	rcall	.-154    	; 0x116 <timer1_init>
+			dht_state = dht_send_start;
+ 1b0:	81 e0       	ldi	r24, 0x01	; 1
+ 1b2:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+			break;
+ 1b6:	08 95       	ret
+			
+		case dht_send_start:
+			//sends start signal
+			dht_start();
+ 1b8:	b2 df       	rcall	.-156    	; 0x11e <dht_start>
+			if(f_dht_error!=NO_ERROR)
+ 1ba:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <f_dht_error>
+ 1be:	88 23       	and	r24, r24
+ 1c0:	21 f0       	breq	.+8      	; 0x1ca <dht_read+0x3a>
+			{
+				dht_state = dht_error;
+ 1c2:	85 e0       	ldi	r24, 0x05	; 5
+ 1c4:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+ 1c8:	08 95       	ret
+			}
+			else
+			{
+				while( !(PINB & (0x01 << DHT_PIN)) );
+ 1ca:	b3 9b       	sbis	0x16, 3	; 22
+ 1cc:	fe cf       	rjmp	.-4      	; 0x1ca <dht_read+0x3a>
+				//inits Pin Change Interrupts
+				init_pcint();
+ 1ce:	6a df       	rcall	.-300    	; 0xa4 <init_pcint>
+				dht_state = dht_read_response;
+ 1d0:	82 e0       	ldi	r24, 0x02	; 2
+ 1d2:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+ 1d6:	08 95       	ret
+			break;
+		
+		//reads rh and temp values
+		case dht_read_response:
+			
+			dht_response();
+ 1d8:	b5 df       	rcall	.-150    	; 0x144 <dht_response>
+			if(f_dht_error!=NO_ERROR)
+ 1da:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <f_dht_error>
+ 1de:	88 23       	and	r24, r24
+ 1e0:	21 f0       	breq	.+8      	; 0x1ea <dht_read+0x5a>
+			{
+				
+				dht_state = dht_error;
+ 1e2:	85 e0       	ldi	r24, 0x05	; 5
+ 1e4:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+ 1e8:	08 95       	ret
+			}
+			else
+			{
+				
+				if(_v_response_pulses == 2)
+ 1ea:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <_v_response_pulses>
+ 1ee:	82 30       	cpi	r24, 0x02	; 2
+ 1f0:	51 f4       	brne	.+20     	; 0x206 <__DATA_REGION_LENGTH__+0x6>
+				{
+					
+					dht_state = dht_read_bits;	
+ 1f2:	83 e0       	ldi	r24, 0x03	; 3
+ 1f4:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <__data_end>
+ 1f8:	08 95       	ret
+			
+			break;
+		
+		//check for stop signal
+		case dht_stop:
+			dht_state = dht_idle;
+ 1fa:	10 92 62 00 	sts	0x0062, r1	; 0x800062 <__data_end>
+			break;
+ 1fe:	08 95       	ret
+		
+		case dht_error:
+			PORTB|=(0x01<<PB4) ;
+ 200:	88 b3       	in	r24, 0x18	; 24
+ 202:	80 61       	ori	r24, 0x10	; 16
+ 204:	88 bb       	out	0x18, r24	; 24
+ 206:	08 95       	ret
+
+00000208 <attiny_i2c_tx>:
 	for(i=0;i<bytes;i++)
 	{
 		i2c_buff[i] = buff[i];
 	}
 	//start Tx
 	attiny_i2c_tx();
- 144:	87 b3       	in	r24, 0x17	; 23
- 146:	8e 7f       	andi	r24, 0xFE	; 254
- 148:	87 bb       	out	0x17, r24	; 23
- 14a:	87 b3       	in	r24, 0x17	; 23
- 14c:	8b 7f       	andi	r24, 0xFB	; 251
- 14e:	87 bb       	out	0x17, r24	; 23
- 150:	88 b3       	in	r24, 0x18	; 24
- 152:	8e 7f       	andi	r24, 0xFE	; 254
- 154:	88 bb       	out	0x18, r24	; 24
- 156:	88 b3       	in	r24, 0x18	; 24
- 158:	8b 7f       	andi	r24, 0xFB	; 251
- 15a:	88 bb       	out	0x18, r24	; 24
- 15c:	87 b3       	in	r24, 0x17	; 23
- 15e:	81 60       	ori	r24, 0x01	; 1
- 160:	87 bb       	out	0x17, r24	; 23
- 162:	88 b3       	in	r24, 0x18	; 24
- 164:	8e 7f       	andi	r24, 0xFE	; 254
- 166:	88 bb       	out	0x18, r24	; 24
- 168:	8d e0       	ldi	r24, 0x0D	; 13
- 16a:	8a 95       	dec	r24
- 16c:	f1 f7       	brne	.-4      	; 0x16a <attiny_i2c_tx+0x26>
- 16e:	00 00       	nop
- 170:	87 b3       	in	r24, 0x17	; 23
- 172:	84 60       	ori	r24, 0x04	; 4
- 174:	87 bb       	out	0x17, r24	; 23
- 176:	8d e0       	ldi	r24, 0x0D	; 13
- 178:	8a 95       	dec	r24
- 17a:	f1 f7       	brne	.-4      	; 0x178 <attiny_i2c_tx+0x34>
- 17c:	00 00       	nop
- 17e:	88 b3       	in	r24, 0x18	; 24
- 180:	81 60       	ori	r24, 0x01	; 1
- 182:	88 bb       	out	0x18, r24	; 24
- 184:	e0 91 65 00 	lds	r30, 0x0065	; 0x800065 <i2c_indx>
- 188:	f0 e0       	ldi	r31, 0x00	; 0
- 18a:	e7 59       	subi	r30, 0x97	; 151
- 18c:	ff 4f       	sbci	r31, 0xFF	; 255
- 18e:	80 81       	ld	r24, Z
- 190:	8f b9       	out	0x0f, r24	; 15
- 192:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <i2c_indx>
- 196:	8f 5f       	subi	r24, 0xFF	; 255
- 198:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <i2c_indx>
- 19c:	80 ec       	ldi	r24, 0xC0	; 192
- 19e:	8e b9       	out	0x0e, r24	; 14
- 1a0:	81 e0       	ldi	r24, 0x01	; 1
- 1a2:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <usi_state>
- 1a6:	08 95       	ret
+ 208:	87 b3       	in	r24, 0x17	; 23
+ 20a:	8e 7f       	andi	r24, 0xFE	; 254
+ 20c:	87 bb       	out	0x17, r24	; 23
+ 20e:	87 b3       	in	r24, 0x17	; 23
+ 210:	8b 7f       	andi	r24, 0xFB	; 251
+ 212:	87 bb       	out	0x17, r24	; 23
+ 214:	88 b3       	in	r24, 0x18	; 24
+ 216:	8e 7f       	andi	r24, 0xFE	; 254
+ 218:	88 bb       	out	0x18, r24	; 24
+ 21a:	88 b3       	in	r24, 0x18	; 24
+ 21c:	8b 7f       	andi	r24, 0xFB	; 251
+ 21e:	88 bb       	out	0x18, r24	; 24
+ 220:	87 b3       	in	r24, 0x17	; 23
+ 222:	81 60       	ori	r24, 0x01	; 1
+ 224:	87 bb       	out	0x17, r24	; 23
+ 226:	88 b3       	in	r24, 0x18	; 24
+ 228:	8e 7f       	andi	r24, 0xFE	; 254
+ 22a:	88 bb       	out	0x18, r24	; 24
+ 22c:	8d e0       	ldi	r24, 0x0D	; 13
+ 22e:	8a 95       	dec	r24
+ 230:	f1 f7       	brne	.-4      	; 0x22e <attiny_i2c_tx+0x26>
+ 232:	00 00       	nop
+ 234:	87 b3       	in	r24, 0x17	; 23
+ 236:	84 60       	ori	r24, 0x04	; 4
+ 238:	87 bb       	out	0x17, r24	; 23
+ 23a:	8d e0       	ldi	r24, 0x0D	; 13
+ 23c:	8a 95       	dec	r24
+ 23e:	f1 f7       	brne	.-4      	; 0x23c <attiny_i2c_tx+0x34>
+ 240:	00 00       	nop
+ 242:	88 b3       	in	r24, 0x18	; 24
+ 244:	81 60       	ori	r24, 0x01	; 1
+ 246:	88 bb       	out	0x18, r24	; 24
+ 248:	e0 91 6c 00 	lds	r30, 0x006C	; 0x80006c <i2c_indx>
+ 24c:	f0 e0       	ldi	r31, 0x00	; 0
+ 24e:	e1 59       	subi	r30, 0x91	; 145
+ 250:	ff 4f       	sbci	r31, 0xFF	; 255
+ 252:	80 81       	ld	r24, Z
+ 254:	8f b9       	out	0x0f, r24	; 15
+ 256:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <i2c_indx>
+ 25a:	8f 5f       	subi	r24, 0xFF	; 255
+ 25c:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <i2c_indx>
+ 260:	80 ec       	ldi	r24, 0xC0	; 192
+ 262:	8e b9       	out	0x0e, r24	; 14
+ 264:	81 e0       	ldi	r24, 0x01	; 1
+ 266:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <usi_state>
+ 26a:	08 95       	ret
 
-000001a8 <attiny_i2c_send_byte>:
- 1a8:	90 91 66 00 	lds	r25, 0x0066	; 0x800066 <usi_state>
- 1ac:	91 11       	cpse	r25, r1
- 1ae:	fc cf       	rjmp	.-8      	; 0x1a8 <attiny_i2c_send_byte>
- 1b0:	10 92 65 00 	sts	0x0065, r1	; 0x800065 <i2c_indx>
- 1b4:	93 e0       	ldi	r25, 0x03	; 3
- 1b6:	90 93 63 00 	sts	0x0063, r25	; 0x800063 <i2c_tx_bytes>
- 1ba:	e9 e6       	ldi	r30, 0x69	; 105
- 1bc:	f0 e0       	ldi	r31, 0x00	; 0
- 1be:	80 83       	st	Z, r24
- 1c0:	61 83       	std	Z+1, r22	; 0x01
- 1c2:	42 83       	std	Z+2, r20	; 0x02
- 1c4:	bf df       	rcall	.-130    	; 0x144 <attiny_i2c_tx>
- 1c6:	08 95       	ret
+0000026c <attiny_i2c_send_byte>:
+ 26c:	90 91 6d 00 	lds	r25, 0x006D	; 0x80006d <usi_state>
+ 270:	91 11       	cpse	r25, r1
+ 272:	fc cf       	rjmp	.-8      	; 0x26c <attiny_i2c_send_byte>
+ 274:	10 92 6c 00 	sts	0x006C, r1	; 0x80006c <i2c_indx>
+ 278:	93 e0       	ldi	r25, 0x03	; 3
+ 27a:	90 93 6a 00 	sts	0x006A, r25	; 0x80006a <i2c_tx_bytes>
+ 27e:	ef e6       	ldi	r30, 0x6F	; 111
+ 280:	f0 e0       	ldi	r31, 0x00	; 0
+ 282:	80 83       	st	Z, r24
+ 284:	61 83       	std	Z+1, r22	; 0x01
+ 286:	42 83       	std	Z+2, r20	; 0x02
+ 288:	bf df       	rcall	.-130    	; 0x208 <attiny_i2c_tx>
+ 28a:	08 95       	ret
 
-000001c8 <__vector_14>:
+0000028c <__vector_14>:
 }
 
 
 ISR(USI_OVF_vect)
 {
- 1c8:	1f 92       	push	r1
- 1ca:	0f 92       	push	r0
- 1cc:	0f b6       	in	r0, 0x3f	; 63
- 1ce:	0f 92       	push	r0
- 1d0:	11 24       	eor	r1, r1
- 1d2:	8f 93       	push	r24
- 1d4:	9f 93       	push	r25
- 1d6:	ef 93       	push	r30
- 1d8:	ff 93       	push	r31
+ 28c:	1f 92       	push	r1
+ 28e:	0f 92       	push	r0
+ 290:	0f b6       	in	r0, 0x3f	; 63
+ 292:	0f 92       	push	r0
+ 294:	11 24       	eor	r1, r1
+ 296:	8f 93       	push	r24
+ 298:	9f 93       	push	r25
+ 29a:	ef 93       	push	r30
+ 29c:	ff 93       	push	r31
 
 	usi_status = USISR;
- 1da:	8e b1       	in	r24, 0x0e	; 14
- 1dc:	80 93 67 00 	sts	0x0067, r24	; 0x800067 <usi_status>
+ 29e:	8e b1       	in	r24, 0x0e	; 14
+ 2a0:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <usi_status>
 
 	//USI counter OVF
 	if(((usi_status&0x40)>>6)==1)
- 1e0:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <usi_status>
- 1e4:	86 ff       	sbrs	r24, 6
- 1e6:	02 c0       	rjmp	.+4      	; 0x1ec <__vector_14+0x24>
+ 2a4:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <usi_status>
+ 2a8:	86 ff       	sbrs	r24, 6
+ 2aa:	02 c0       	rjmp	.+4      	; 0x2b0 <__vector_14+0x24>
 	{
 		//clean USI counter OVF flag
 		USISR = (1 << USIOIF);
- 1e8:	80 e4       	ldi	r24, 0x40	; 64
- 1ea:	8e b9       	out	0x0e, r24	; 14
+ 2ac:	80 e4       	ldi	r24, 0x40	; 64
+ 2ae:	8e b9       	out	0x0e, r24	; 14
 
 	}
 	
 	
 	//USI counter SIF
 	if(((usi_status&0x80)>>7)==1)
- 1ec:	80 91 67 00 	lds	r24, 0x0067	; 0x800067 <usi_status>
- 1f0:	88 23       	and	r24, r24
- 1f2:	14 f4       	brge	.+4      	; 0x1f8 <__vector_14+0x30>
+ 2b0:	80 91 6e 00 	lds	r24, 0x006E	; 0x80006e <usi_status>
+ 2b4:	88 23       	and	r24, r24
+ 2b6:	14 f4       	brge	.+4      	; 0x2bc <__vector_14+0x30>
 	{
 		//clean USI counter OVF flag
 		USISR = (1 << USISIF);
- 1f4:	80 e8       	ldi	r24, 0x80	; 128
- 1f6:	8e b9       	out	0x0e, r24	; 14
+ 2b8:	80 e8       	ldi	r24, 0x80	; 128
+ 2ba:	8e b9       	out	0x0e, r24	; 14
 	}
 
 	//I2C FSM
 	switch (usi_state)
- 1f8:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <usi_state>
- 1fc:	81 30       	cpi	r24, 0x01	; 1
- 1fe:	51 f0       	breq	.+20     	; 0x214 <__DATA_REGION_LENGTH__+0x14>
- 200:	30 f0       	brcs	.+12     	; 0x20e <__DATA_REGION_LENGTH__+0xe>
- 202:	83 30       	cpi	r24, 0x03	; 3
- 204:	09 f4       	brne	.+2      	; 0x208 <__DATA_REGION_LENGTH__+0x8>
- 206:	51 c0       	rjmp	.+162    	; 0x2aa <__stack+0x4b>
- 208:	84 30       	cpi	r24, 0x04	; 4
- 20a:	91 f0       	breq	.+36     	; 0x230 <__DATA_REGION_LENGTH__+0x30>
- 20c:	6a c0       	rjmp	.+212    	; 0x2e2 <__stack+0x83>
+ 2bc:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <usi_state>
+ 2c0:	81 30       	cpi	r24, 0x01	; 1
+ 2c2:	51 f0       	breq	.+20     	; 0x2d8 <__vector_14+0x4c>
+ 2c4:	30 f0       	brcs	.+12     	; 0x2d2 <__vector_14+0x46>
+ 2c6:	83 30       	cpi	r24, 0x03	; 3
+ 2c8:	09 f4       	brne	.+2      	; 0x2cc <__vector_14+0x40>
+ 2ca:	51 c0       	rjmp	.+162    	; 0x36e <__vector_14+0xe2>
+ 2cc:	84 30       	cpi	r24, 0x04	; 4
+ 2ce:	91 f0       	breq	.+36     	; 0x2f4 <__vector_14+0x68>
+ 2d0:	6a c0       	rjmp	.+212    	; 0x3a6 <__vector_14+0x11a>
 	{
 		
 		//idle state: nothing to do, keep there
 		case usi_idle:
 		usi_state = usi_idle;
- 20e:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <usi_state>
+ 2d2:	10 92 6d 00 	sts	0x006D, r1	; 0x80006d <usi_state>
 		break;
- 212:	69 c0       	rjmp	.+210    	; 0x2e6 <__stack+0x87>
+ 2d6:	69 c0       	rjmp	.+210    	; 0x3aa <__vector_14+0x11e>
 		//Tx started and address+w/r sent
 		case usi_byte_sent:
 		
 		
 		//we sent the start and address, now we prepare to read de ACK
 		USISR = (USISR&0xF0)|(0x0E); //set the counter at 14, to read 1 bit of ack
- 214:	8e b1       	in	r24, 0x0e	; 14
- 216:	80 7f       	andi	r24, 0xF0	; 240
- 218:	8e 60       	ori	r24, 0x0E	; 14
- 21a:	8e b9       	out	0x0e, r24	; 14
+ 2d8:	8e b1       	in	r24, 0x0e	; 14
+ 2da:	80 7f       	andi	r24, 0xF0	; 240
+ 2dc:	8e 60       	ori	r24, 0x0E	; 14
+ 2de:	8e b9       	out	0x0e, r24	; 14
 		DDRB&=~(0x01<<SDA); //set SDA as input...
- 21c:	87 b3       	in	r24, 0x17	; 23
- 21e:	8e 7f       	andi	r24, 0xFE	; 254
- 220:	87 bb       	out	0x17, r24	; 23
+ 2e0:	87 b3       	in	r24, 0x17	; 23
+ 2e2:	8e 7f       	andi	r24, 0xFE	; 254
+ 2e4:	87 bb       	out	0x17, r24	; 23
 		PORTB&=~(0x01<<SDA); //an release the line
- 222:	88 b3       	in	r24, 0x18	; 24
- 224:	8e 7f       	andi	r24, 0xFE	; 254
- 226:	88 bb       	out	0x18, r24	; 24
+ 2e6:	88 b3       	in	r24, 0x18	; 24
+ 2e8:	8e 7f       	andi	r24, 0xFE	; 254
+ 2ea:	88 bb       	out	0x18, r24	; 24
 		
 		
 		usi_state = usi_read_ack;
- 228:	84 e0       	ldi	r24, 0x04	; 4
- 22a:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <usi_state>
+ 2ec:	84 e0       	ldi	r24, 0x04	; 4
+ 2ee:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <usi_state>
 		
 
 		break;
- 22e:	5b c0       	rjmp	.+182    	; 0x2e6 <__stack+0x87>
+ 2f2:	5b c0       	rjmp	.+182    	; 0x3aa <__vector_14+0x11e>
 
 		case usi_read_ack:
 		//check of ACK of the device
 		if(!(USIDR&0x01))
- 230:	78 99       	sbic	0x0f, 0	; 15
- 232:	37 c0       	rjmp	.+110    	; 0x2a2 <__stack+0x43>
+ 2f4:	78 99       	sbic	0x0f, 0	; 15
+ 2f6:	37 c0       	rjmp	.+110    	; 0x366 <__vector_14+0xda>
 		{
 			//check if there is available data in the buffer. Else, exit
 			if (i2c_indx<i2c_tx_bytes)
- 234:	90 91 65 00 	lds	r25, 0x0065	; 0x800065 <i2c_indx>
- 238:	80 91 63 00 	lds	r24, 0x0063	; 0x800063 <i2c_tx_bytes>
- 23c:	98 17       	cp	r25, r24
- 23e:	c0 f4       	brcc	.+48     	; 0x270 <__stack+0x11>
+ 2f8:	90 91 6c 00 	lds	r25, 0x006C	; 0x80006c <i2c_indx>
+ 2fc:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <i2c_tx_bytes>
+ 300:	98 17       	cp	r25, r24
+ 302:	c0 f4       	brcc	.+48     	; 0x334 <__vector_14+0xa8>
 			{
 				
 
 				//pop next data from buffer
 				USIDR = i2c_buff[i2c_indx];
- 240:	e0 91 65 00 	lds	r30, 0x0065	; 0x800065 <i2c_indx>
- 244:	f0 e0       	ldi	r31, 0x00	; 0
- 246:	e7 59       	subi	r30, 0x97	; 151
- 248:	ff 4f       	sbci	r31, 0xFF	; 255
- 24a:	80 81       	ld	r24, Z
- 24c:	8f b9       	out	0x0f, r24	; 15
+ 304:	e0 91 6c 00 	lds	r30, 0x006C	; 0x80006c <i2c_indx>
+ 308:	f0 e0       	ldi	r31, 0x00	; 0
+ 30a:	e1 59       	subi	r30, 0x91	; 145
+ 30c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 30e:	80 81       	ld	r24, Z
+ 310:	8f b9       	out	0x0f, r24	; 15
 				//advance i2c index
 				i2c_indx+=1;
- 24e:	80 91 65 00 	lds	r24, 0x0065	; 0x800065 <i2c_indx>
- 252:	8f 5f       	subi	r24, 0xFF	; 255
- 254:	80 93 65 00 	sts	0x0065, r24	; 0x800065 <i2c_indx>
+ 312:	80 91 6c 00 	lds	r24, 0x006C	; 0x80006c <i2c_indx>
+ 316:	8f 5f       	subi	r24, 0xFF	; 255
+ 318:	80 93 6c 00 	sts	0x006C, r24	; 0x80006c <i2c_indx>
 				//ACK
 				//prepare to send next byte
 				PORTB |= (0x01<<SDA);
- 258:	88 b3       	in	r24, 0x18	; 24
- 25a:	81 60       	ori	r24, 0x01	; 1
- 25c:	88 bb       	out	0x18, r24	; 24
+ 31c:	88 b3       	in	r24, 0x18	; 24
+ 31e:	81 60       	ori	r24, 0x01	; 1
+ 320:	88 bb       	out	0x18, r24	; 24
 				DDRB |= (1<<SDA); //SDA as Output
- 25e:	87 b3       	in	r24, 0x17	; 23
- 260:	81 60       	ori	r24, 0x01	; 1
- 262:	87 bb       	out	0x17, r24	; 23
+ 322:	87 b3       	in	r24, 0x17	; 23
+ 324:	81 60       	ori	r24, 0x01	; 1
+ 326:	87 bb       	out	0x17, r24	; 23
 				// Free SDA so the USI takes control of the line
 				//DDRB &= ~(1<<SDA);
 				
 				//set counter to original value
 				USISR = (1 << USISIF) | (1 << USIOIF) | (0x00 << USICNT3);
- 264:	80 ec       	ldi	r24, 0xC0	; 192
- 266:	8e b9       	out	0x0e, r24	; 14
+ 328:	80 ec       	ldi	r24, 0xC0	; 192
+ 32a:	8e b9       	out	0x0e, r24	; 14
 				
 				usi_state = usi_byte_sent;
- 268:	81 e0       	ldi	r24, 0x01	; 1
- 26a:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <usi_state>
- 26e:	3b c0       	rjmp	.+118    	; 0x2e6 <__stack+0x87>
+ 32c:	81 e0       	ldi	r24, 0x01	; 1
+ 32e:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <usi_state>
+ 332:	3b c0       	rjmp	.+118    	; 0x3aa <__vector_14+0x11e>
 			else
 			{
 				//if we reicived ACK and there is not another byte to Tx, then STOP sequence
 				
 				//SCL HIGH and SDA TRANSITIONS TO HIGH
 				PORTB &= ~(0x01<<SDA);
- 270:	88 b3       	in	r24, 0x18	; 24
- 272:	8e 7f       	andi	r24, 0xFE	; 254
- 274:	88 bb       	out	0x18, r24	; 24
+ 334:	88 b3       	in	r24, 0x18	; 24
+ 336:	8e 7f       	andi	r24, 0xFE	; 254
+ 338:	88 bb       	out	0x18, r24	; 24
 				DDRB |= (1<<SDA); //SDA as Output
- 276:	87 b3       	in	r24, 0x17	; 23
- 278:	81 60       	ori	r24, 0x01	; 1
- 27a:	87 bb       	out	0x17, r24	; 23
+ 33a:	87 b3       	in	r24, 0x17	; 23
+ 33c:	81 60       	ori	r24, 0x01	; 1
+ 33e:	87 bb       	out	0x17, r24	; 23
 				
 				//Free SCL line (goes to high)
 				DDRB &= ~(0x01<<SCL);
- 27c:	87 b3       	in	r24, 0x17	; 23
- 27e:	8b 7f       	andi	r24, 0xFB	; 251
- 280:	87 bb       	out	0x17, r24	; 23
+ 340:	87 b3       	in	r24, 0x17	; 23
+ 342:	8b 7f       	andi	r24, 0xFB	; 251
+ 344:	87 bb       	out	0x17, r24	; 23
 				PORTB &=~(0x01<<SCL);
- 282:	88 b3       	in	r24, 0x18	; 24
- 284:	8b 7f       	andi	r24, 0xFB	; 251
- 286:	88 bb       	out	0x18, r24	; 24
+ 346:	88 b3       	in	r24, 0x18	; 24
+ 348:	8b 7f       	andi	r24, 0xFB	; 251
+ 34a:	88 bb       	out	0x18, r24	; 24
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 288:	8d e0       	ldi	r24, 0x0D	; 13
- 28a:	8a 95       	dec	r24
- 28c:	f1 f7       	brne	.-4      	; 0x28a <__stack+0x2b>
- 28e:	00 00       	nop
+ 34c:	8d e0       	ldi	r24, 0x0D	; 13
+ 34e:	8a 95       	dec	r24
+ 350:	f1 f7       	brne	.-4      	; 0x34e <__vector_14+0xc2>
+ 352:	00 00       	nop
 				TWI_DELAY()
 				//Free SDA line (goes to high)
 				DDRB &= ~(0x01<<SDA);
- 290:	87 b3       	in	r24, 0x17	; 23
- 292:	8e 7f       	andi	r24, 0xFE	; 254
- 294:	87 bb       	out	0x17, r24	; 23
+ 354:	87 b3       	in	r24, 0x17	; 23
+ 356:	8e 7f       	andi	r24, 0xFE	; 254
+ 358:	87 bb       	out	0x17, r24	; 23
 				PORTB &=~(0x01<<SDA);
- 296:	88 b3       	in	r24, 0x18	; 24
- 298:	8e 7f       	andi	r24, 0xFE	; 254
- 29a:	88 bb       	out	0x18, r24	; 24
+ 35a:	88 b3       	in	r24, 0x18	; 24
+ 35c:	8e 7f       	andi	r24, 0xFE	; 254
+ 35e:	88 bb       	out	0x18, r24	; 24
 				usi_state = usi_idle;
- 29c:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <usi_state>
- 2a0:	22 c0       	rjmp	.+68     	; 0x2e6 <__stack+0x87>
+ 360:	10 92 6d 00 	sts	0x006D, r1	; 0x80006d <usi_state>
+ 364:	22 c0       	rjmp	.+68     	; 0x3aa <__vector_14+0x11e>
 
 		}
 		else
 		{
 			//NACK
 			usi_state = usi_nack;
- 2a2:	83 e0       	ldi	r24, 0x03	; 3
- 2a4:	80 93 66 00 	sts	0x0066, r24	; 0x800066 <usi_state>
- 2a8:	1e c0       	rjmp	.+60     	; 0x2e6 <__stack+0x87>
+ 366:	83 e0       	ldi	r24, 0x03	; 3
+ 368:	80 93 6d 00 	sts	0x006D, r24	; 0x80006d <usi_state>
+ 36c:	1e c0       	rjmp	.+60     	; 0x3aa <__vector_14+0x11e>
 		}
 
 		break;
 		
 		case usi_nack:
 		f_nack = 1; //to be handled outside the ISR
- 2aa:	81 e0       	ldi	r24, 0x01	; 1
- 2ac:	80 93 64 00 	sts	0x0064, r24	; 0x800064 <f_nack>
+ 36e:	81 e0       	ldi	r24, 0x01	; 1
+ 370:	80 93 6b 00 	sts	0x006B, r24	; 0x80006b <f_nack>
 		
 		//STOP TX
 		//SCL HIGH and SDA TRANSITIONS TO HIGH
 		PORTB &= ~(0x01<<SDA);
- 2b0:	88 b3       	in	r24, 0x18	; 24
- 2b2:	8e 7f       	andi	r24, 0xFE	; 254
- 2b4:	88 bb       	out	0x18, r24	; 24
+ 374:	88 b3       	in	r24, 0x18	; 24
+ 376:	8e 7f       	andi	r24, 0xFE	; 254
+ 378:	88 bb       	out	0x18, r24	; 24
 		DDRB |= (1<<SDA); //SDA as Output
- 2b6:	87 b3       	in	r24, 0x17	; 23
- 2b8:	81 60       	ori	r24, 0x01	; 1
- 2ba:	87 bb       	out	0x17, r24	; 23
+ 37a:	87 b3       	in	r24, 0x17	; 23
+ 37c:	81 60       	ori	r24, 0x01	; 1
+ 37e:	87 bb       	out	0x17, r24	; 23
 		
 		//Free SCL line (goes to high)
 		DDRB &= ~(0x01<<SCL);
- 2bc:	87 b3       	in	r24, 0x17	; 23
- 2be:	8b 7f       	andi	r24, 0xFB	; 251
- 2c0:	87 bb       	out	0x17, r24	; 23
+ 380:	87 b3       	in	r24, 0x17	; 23
+ 382:	8b 7f       	andi	r24, 0xFB	; 251
+ 384:	87 bb       	out	0x17, r24	; 23
 		PORTB &=~(0x01<<SCL);
- 2c2:	88 b3       	in	r24, 0x18	; 24
- 2c4:	8b 7f       	andi	r24, 0xFB	; 251
- 2c6:	88 bb       	out	0x18, r24	; 24
- 2c8:	8d e0       	ldi	r24, 0x0D	; 13
- 2ca:	8a 95       	dec	r24
- 2cc:	f1 f7       	brne	.-4      	; 0x2ca <__stack+0x6b>
- 2ce:	00 00       	nop
+ 386:	88 b3       	in	r24, 0x18	; 24
+ 388:	8b 7f       	andi	r24, 0xFB	; 251
+ 38a:	88 bb       	out	0x18, r24	; 24
+ 38c:	8d e0       	ldi	r24, 0x0D	; 13
+ 38e:	8a 95       	dec	r24
+ 390:	f1 f7       	brne	.-4      	; 0x38e <__vector_14+0x102>
+ 392:	00 00       	nop
 		TWI_DELAY()
 		//Free SDA line (goes to high)
 		DDRB &= ~(0x01<<SDA);
- 2d0:	87 b3       	in	r24, 0x17	; 23
- 2d2:	8e 7f       	andi	r24, 0xFE	; 254
- 2d4:	87 bb       	out	0x17, r24	; 23
+ 394:	87 b3       	in	r24, 0x17	; 23
+ 396:	8e 7f       	andi	r24, 0xFE	; 254
+ 398:	87 bb       	out	0x17, r24	; 23
 		PORTB &=~(0x01<<SDA);
- 2d6:	88 b3       	in	r24, 0x18	; 24
- 2d8:	8e 7f       	andi	r24, 0xFE	; 254
- 2da:	88 bb       	out	0x18, r24	; 24
+ 39a:	88 b3       	in	r24, 0x18	; 24
+ 39c:	8e 7f       	andi	r24, 0xFE	; 254
+ 39e:	88 bb       	out	0x18, r24	; 24
 		
 		usi_state = usi_idle;
- 2dc:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <usi_state>
+ 3a0:	10 92 6d 00 	sts	0x006D, r1	; 0x80006d <usi_state>
 		break;
- 2e0:	02 c0       	rjmp	.+4      	; 0x2e6 <__stack+0x87>
+ 3a4:	02 c0       	rjmp	.+4      	; 0x3aa <__vector_14+0x11e>
 		default:
 		usi_state = usi_idle;
- 2e2:	10 92 66 00 	sts	0x0066, r1	; 0x800066 <usi_state>
+ 3a6:	10 92 6d 00 	sts	0x006D, r1	; 0x80006d <usi_state>
 		break;
 	}
 
 }
- 2e6:	ff 91       	pop	r31
- 2e8:	ef 91       	pop	r30
- 2ea:	9f 91       	pop	r25
- 2ec:	8f 91       	pop	r24
- 2ee:	0f 90       	pop	r0
- 2f0:	0f be       	out	0x3f, r0	; 63
- 2f2:	0f 90       	pop	r0
- 2f4:	1f 90       	pop	r1
- 2f6:	18 95       	reti
+ 3aa:	ff 91       	pop	r31
+ 3ac:	ef 91       	pop	r30
+ 3ae:	9f 91       	pop	r25
+ 3b0:	8f 91       	pop	r24
+ 3b2:	0f 90       	pop	r0
+ 3b4:	0f be       	out	0x3f, r0	; 63
+ 3b6:	0f 90       	pop	r0
+ 3b8:	1f 90       	pop	r1
+ 3ba:	18 95       	reti
 
-000002f8 <attiny_timer_deinit>:
+000003bc <attiny_timer_deinit>:
 	  sei();
 
 
 	  //Test LED
 	  DDRB |= (0x01<<LED); //LED as Out
 	  PORTB&=~(0x01<<LED); //LED off
- 2f8:	89 b7       	in	r24, 0x39	; 57
- 2fa:	8f 7e       	andi	r24, 0xEF	; 239
- 2fc:	89 bf       	out	0x39, r24	; 57
- 2fe:	83 b7       	in	r24, 0x33	; 51
- 300:	88 7f       	andi	r24, 0xF8	; 248
- 302:	83 bf       	out	0x33, r24	; 51
- 304:	08 95       	ret
+ 3bc:	89 b7       	in	r24, 0x39	; 57
+ 3be:	8f 7e       	andi	r24, 0xEF	; 239
+ 3c0:	89 bf       	out	0x39, r24	; 57
+ 3c2:	83 b7       	in	r24, 0x33	; 51
+ 3c4:	88 7f       	andi	r24, 0xF8	; 248
+ 3c6:	83 bf       	out	0x33, r24	; 51
+ 3c8:	08 95       	ret
 
-00000306 <__vector_10>:
+000003ca <__vector_10>:
 
 
 
 //ISRs
 ISR(TIMER0_COMPA_vect)
 {
- 306:	1f 92       	push	r1
- 308:	0f 92       	push	r0
- 30a:	0f b6       	in	r0, 0x3f	; 63
- 30c:	0f 92       	push	r0
- 30e:	11 24       	eor	r1, r1
- 310:	8f 93       	push	r24
+ 3ca:	1f 92       	push	r1
+ 3cc:	0f 92       	push	r0
+ 3ce:	0f b6       	in	r0, 0x3f	; 63
+ 3d0:	0f 92       	push	r0
+ 3d2:	11 24       	eor	r1, r1
+ 3d4:	8f 93       	push	r24
 	//  USICR |= (1<<USITC);
 	
 	//clean the interrupt flag ()
 	TIFR |= (1<<OCF0A);
- 312:	88 b7       	in	r24, 0x38	; 56
- 314:	80 61       	ori	r24, 0x10	; 16
- 316:	88 bf       	out	0x38, r24	; 56
+ 3d6:	88 b7       	in	r24, 0x38	; 56
+ 3d8:	80 61       	ori	r24, 0x10	; 16
+ 3da:	88 bf       	out	0x38, r24	; 56
 	
 	if(usi_state!=usi_idle)
- 318:	80 91 66 00 	lds	r24, 0x0066	; 0x800066 <usi_state>
- 31c:	88 23       	and	r24, r24
- 31e:	19 f0       	breq	.+6      	; 0x326 <__vector_10+0x20>
+ 3dc:	80 91 6d 00 	lds	r24, 0x006D	; 0x80006d <usi_state>
+ 3e0:	88 23       	and	r24, r24
+ 3e2:	19 f0       	breq	.+6      	; 0x3ea <__vector_10+0x20>
 	{
 		
 		USICR |= (1<<USITC);   // un tick del USI
- 320:	8d b1       	in	r24, 0x0d	; 13
- 322:	81 60       	ori	r24, 0x01	; 1
- 324:	8d b9       	out	0x0d, r24	; 13
+ 3e4:	8d b1       	in	r24, 0x0d	; 13
+ 3e6:	81 60       	ori	r24, 0x01	; 1
+ 3e8:	8d b9       	out	0x0d, r24	; 13
 	}
 
 	//set the count to 0
 	TCNT0 = 0x00;
- 326:	12 be       	out	0x32, r1	; 50
+ 3ea:	12 be       	out	0x32, r1	; 50
 }
- 328:	8f 91       	pop	r24
- 32a:	0f 90       	pop	r0
- 32c:	0f be       	out	0x3f, r0	; 63
- 32e:	0f 90       	pop	r0
- 330:	1f 90       	pop	r1
- 332:	18 95       	reti
+ 3ec:	8f 91       	pop	r24
+ 3ee:	0f 90       	pop	r0
+ 3f0:	0f be       	out	0x3f, r0	; 63
+ 3f2:	0f 90       	pop	r0
+ 3f4:	1f 90       	pop	r1
+ 3f6:	18 95       	reti
 
-00000334 <main>:
+000003f8 <main>:
 
 
 int main(void)
 {
 	
 	DDRB |= (0x01<<LED); //LED as Out
- 334:	87 b3       	in	r24, 0x17	; 23
- 336:	80 61       	ori	r24, 0x10	; 16
- 338:	87 bb       	out	0x17, r24	; 23
+ 3f8:	87 b3       	in	r24, 0x17	; 23
+ 3fa:	80 61       	ori	r24, 0x10	; 16
+ 3fc:	87 bb       	out	0x17, r24	; 23
 	DDRB |= (0x01<<PB3);
- 33a:	87 b3       	in	r24, 0x17	; 23
- 33c:	88 60       	ori	r24, 0x08	; 8
- 33e:	87 bb       	out	0x17, r24	; 23
+ 3fe:	87 b3       	in	r24, 0x17	; 23
+ 400:	88 60       	ori	r24, 0x08	; 8
+ 402:	87 bb       	out	0x17, r24	; 23
 	PORTB&=~(0x01<<LED); //LED off
- 340:	88 b3       	in	r24, 0x18	; 24
- 342:	8f 7e       	andi	r24, 0xEF	; 239
- 344:	88 bb       	out	0x18, r24	; 24
+ 404:	88 b3       	in	r24, 0x18	; 24
+ 406:	8f 7e       	andi	r24, 0xEF	; 239
+ 408:	88 bb       	out	0x18, r24	; 24
 	PORTB&=~(0x01<<PB3);
- 346:	88 b3       	in	r24, 0x18	; 24
- 348:	87 7f       	andi	r24, 0xF7	; 247
- 34a:	88 bb       	out	0x18, r24	; 24
- 34c:	8d e0       	ldi	r24, 0x0D	; 13
- 34e:	8a 95       	dec	r24
- 350:	f1 f7       	brne	.-4      	; 0x34e <main+0x1a>
- 352:	00 00       	nop
- 354:	8d e0       	ldi	r24, 0x0D	; 13
- 356:	8a 95       	dec	r24
- 358:	f1 f7       	brne	.-4      	; 0x356 <main+0x22>
- 35a:	00 00       	nop
- 35c:	8d e0       	ldi	r24, 0x0D	; 13
- 35e:	8a 95       	dec	r24
- 360:	f1 f7       	brne	.-4      	; 0x35e <main+0x2a>
- 362:	00 00       	nop
- 364:	8d e0       	ldi	r24, 0x0D	; 13
- 366:	8a 95       	dec	r24
- 368:	f1 f7       	brne	.-4      	; 0x366 <main+0x32>
- 36a:	00 00       	nop
+ 40a:	88 b3       	in	r24, 0x18	; 24
+ 40c:	87 7f       	andi	r24, 0xF7	; 247
+ 40e:	88 bb       	out	0x18, r24	; 24
+ 410:	8d e0       	ldi	r24, 0x0D	; 13
+ 412:	8a 95       	dec	r24
+ 414:	f1 f7       	brne	.-4      	; 0x412 <__LOCK_REGION_LENGTH__+0x12>
+ 416:	00 00       	nop
+ 418:	8d e0       	ldi	r24, 0x0D	; 13
+ 41a:	8a 95       	dec	r24
+ 41c:	f1 f7       	brne	.-4      	; 0x41a <__LOCK_REGION_LENGTH__+0x1a>
+ 41e:	00 00       	nop
+ 420:	8d e0       	ldi	r24, 0x0D	; 13
+ 422:	8a 95       	dec	r24
+ 424:	f1 f7       	brne	.-4      	; 0x422 <__LOCK_REGION_LENGTH__+0x22>
+ 426:	00 00       	nop
+ 428:	8d e0       	ldi	r24, 0x0D	; 13
+ 42a:	8a 95       	dec	r24
+ 42c:	f1 f7       	brne	.-4      	; 0x42a <__LOCK_REGION_LENGTH__+0x2a>
+ 42e:	00 00       	nop
 	TWI_DELAY();
 	TWI_DELAY();
+	TWI_DELAY();
+	TWI_DELAY();
+	
+	attiny_dht_init();
+ 430:	32 de       	rcall	.-924    	; 0x96 <attiny_dht_init>
     /* Replace with your application code */
     while (1) 
     {
 		if (a==0)
- 36c:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
- 370:	81 11       	cpse	r24, r1
- 372:	16 c0       	rjmp	.+44     	; 0x3a0 <main+0x6c>
+ 432:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 436:	81 11       	cpse	r24, r1
+ 438:	16 c0       	rjmp	.+44     	; 0x466 <__LOCK_REGION_LENGTH__+0x66>
 		{
 			//attiny_i2c_tx();
 			//turn on display
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xAF);
- 374:	4f ea       	ldi	r20, 0xAF	; 175
- 376:	60 e0       	ldi	r22, 0x00	; 0
- 378:	88 e7       	ldi	r24, 0x78	; 120
- 37a:	16 df       	rcall	.-468    	; 0x1a8 <attiny_i2c_send_byte>
+ 43a:	4f ea       	ldi	r20, 0xAF	; 175
+ 43c:	60 e0       	ldi	r22, 0x00	; 0
+ 43e:	88 e7       	ldi	r24, 0x78	; 120
+ 440:	15 df       	rcall	.-470    	; 0x26c <attiny_i2c_send_byte>
 			//full-on display
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA5);
- 37c:	45 ea       	ldi	r20, 0xA5	; 165
- 37e:	60 e0       	ldi	r22, 0x00	; 0
- 380:	88 e7       	ldi	r24, 0x78	; 120
- 382:	12 df       	rcall	.-476    	; 0x1a8 <attiny_i2c_send_byte>
+ 442:	45 ea       	ldi	r20, 0xA5	; 165
+ 444:	60 e0       	ldi	r22, 0x00	; 0
+ 446:	88 e7       	ldi	r24, 0x78	; 120
+ 448:	11 df       	rcall	.-478    	; 0x26c <attiny_i2c_send_byte>
 			//display sleep mode
 			//attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 			oled_clean(standar_mode);
- 384:	80 e0       	ldi	r24, 0x00	; 0
- 386:	3c d0       	rcall	.+120    	; 0x400 <oled_clean>
+ 44a:	80 e0       	ldi	r24, 0x00	; 0
+ 44c:	33 d0       	rcall	.+102    	; 0x4b4 <oled_clean>
 			
 			//write text
 			//oled_print_text("TEMP: 0°C",2,32);
 			//oled_print_text("HUM:  70%",5,32);
 			oled_draw_weather(sunny,2,32);
- 388:	40 e2       	ldi	r20, 0x20	; 32
- 38a:	62 e0       	ldi	r22, 0x02	; 2
- 38c:	80 e0       	ldi	r24, 0x00	; 0
- 38e:	62 d0       	rcall	.+196    	; 0x454 <oled_draw_weather>
+ 44e:	40 e2       	ldi	r20, 0x20	; 32
+ 450:	62 e0       	ldi	r22, 0x02	; 2
+ 452:	80 e0       	ldi	r24, 0x00	; 0
+ 454:	59 d0       	rcall	.+178    	; 0x508 <oled_draw_weather>
 			//full-on display (using gdram)
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
- 390:	44 ea       	ldi	r20, 0xA4	; 164
- 392:	60 e0       	ldi	r22, 0x00	; 0
- 394:	88 e7       	ldi	r24, 0x78	; 120
- 396:	08 df       	rcall	.-496    	; 0x1a8 <attiny_i2c_send_byte>
+ 456:	44 ea       	ldi	r20, 0xA4	; 164
+ 458:	60 e0       	ldi	r22, 0x00	; 0
+ 45a:	88 e7       	ldi	r24, 0x78	; 120
+ 45c:	07 df       	rcall	.-498    	; 0x26c <attiny_i2c_send_byte>
 			
 			attiny_timer_deinit();
- 398:	af df       	rcall	.-162    	; 0x2f8 <attiny_timer_deinit>
+ 45e:	ae df       	rcall	.-164    	; 0x3bc <attiny_timer_deinit>
 
 			a=1;
- 39a:	81 e0       	ldi	r24, 0x01	; 1
- 39c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
-		}
-		
-
-		if(b==0)
- 3a0:	80 91 68 00 	lds	r24, 0x0068	; 0x800068 <b>
- 3a4:	81 11       	cpse	r24, r1
- 3a6:	06 c0       	rjmp	.+12     	; 0x3b4 <main+0x80>
-			//PORTB|=(0x01<<PB3); //ON
-			//_delay_ms(500);
-			//PORTB &= ~((0x01 << PB3)); //OFF
+ 460:	81 e0       	ldi	r24, 0x01	; 1
+ 462:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
 			//_delay_ms(500);
 			
-			attiny_dht_init();
- 3a8:	76 de       	rcall	.-788    	; 0x96 <attiny_dht_init>
-			timer1_init();
- 3aa:	96 de       	rcall	.-724    	; 0xd8 <timer1_init>
-			dht_start();
- 3ac:	99 de       	rcall	.-718    	; 0xe0 <dht_start>
-			b=1;
- 3ae:	81 e0       	ldi	r24, 0x01	; 1
- 3b0:	80 93 68 00 	sts	0x0068, r24	; 0x800068 <b>
+		
+			
+			//dht_start();
+			dht_read();
+ 466:	94 de       	rcall	.-728    	; 0x190 <dht_read>
+			//b=1;
 		}
 
 		
 		
 		if(f_nack)
- 3b4:	80 91 64 00 	lds	r24, 0x0064	; 0x800064 <f_nack>
- 3b8:	88 23       	and	r24, r24
- 3ba:	c1 f2       	breq	.-80     	; 0x36c <main+0x38>
+ 468:	80 91 6b 00 	lds	r24, 0x006B	; 0x80006b <f_nack>
+ 46c:	88 23       	and	r24, r24
+ 46e:	09 f3       	breq	.-62     	; 0x432 <__LOCK_REGION_LENGTH__+0x32>
 		{
 			f_nack = 0;
- 3bc:	10 92 64 00 	sts	0x0064, r1	; 0x800064 <f_nack>
+ 470:	10 92 6b 00 	sts	0x006B, r1	; 0x80006b <f_nack>
 			GLED_ON;
- 3c0:	88 b3       	in	r24, 0x18	; 24
- 3c2:	80 61       	ori	r24, 0x10	; 16
- 3c4:	88 bb       	out	0x18, r24	; 24
- 3c6:	d2 cf       	rjmp	.-92     	; 0x36c <main+0x38>
+ 474:	88 b3       	in	r24, 0x18	; 24
+ 476:	80 61       	ori	r24, 0x10	; 16
+ 478:	88 bb       	out	0x18, r24	; 24
+ 47a:	db cf       	rjmp	.-74     	; 0x432 <__LOCK_REGION_LENGTH__+0x32>
 
-000003c8 <set_page>:
+0000047c <set_page>:
 			//leave one pixel column separation
 			oled_write_byte(0x00);
 		}
 	}
 		
 }
- 3c8:	88 30       	cpi	r24, 0x08	; 8
- 3ca:	30 f4       	brcc	.+12     	; 0x3d8 <set_page+0x10>
- 3cc:	48 2f       	mov	r20, r24
- 3ce:	4f 70       	andi	r20, 0x0F	; 15
- 3d0:	40 6b       	ori	r20, 0xB0	; 176
- 3d2:	60 e0       	ldi	r22, 0x00	; 0
- 3d4:	88 e7       	ldi	r24, 0x78	; 120
- 3d6:	e8 de       	rcall	.-560    	; 0x1a8 <attiny_i2c_send_byte>
- 3d8:	08 95       	ret
+ 47c:	88 30       	cpi	r24, 0x08	; 8
+ 47e:	30 f4       	brcc	.+12     	; 0x48c <set_page+0x10>
+ 480:	48 2f       	mov	r20, r24
+ 482:	4f 70       	andi	r20, 0x0F	; 15
+ 484:	40 6b       	ori	r20, 0xB0	; 176
+ 486:	60 e0       	ldi	r22, 0x00	; 0
+ 488:	88 e7       	ldi	r24, 0x78	; 120
+ 48a:	f0 de       	rcall	.-544    	; 0x26c <attiny_i2c_send_byte>
+ 48c:	08 95       	ret
 
-000003da <set_column>:
- 3da:	cf 93       	push	r28
- 3dc:	88 23       	and	r24, r24
- 3de:	74 f0       	brlt	.+28     	; 0x3fc <set_column+0x22>
- 3e0:	c2 e0       	ldi	r28, 0x02	; 2
- 3e2:	c8 0f       	add	r28, r24
- 3e4:	4c 2f       	mov	r20, r28
- 3e6:	4f 70       	andi	r20, 0x0F	; 15
- 3e8:	60 e0       	ldi	r22, 0x00	; 0
- 3ea:	88 e7       	ldi	r24, 0x78	; 120
- 3ec:	dd de       	rcall	.-582    	; 0x1a8 <attiny_i2c_send_byte>
- 3ee:	4c 2f       	mov	r20, r28
- 3f0:	42 95       	swap	r20
- 3f2:	4f 70       	andi	r20, 0x0F	; 15
- 3f4:	40 61       	ori	r20, 0x10	; 16
- 3f6:	60 e0       	ldi	r22, 0x00	; 0
- 3f8:	88 e7       	ldi	r24, 0x78	; 120
- 3fa:	d6 de       	rcall	.-596    	; 0x1a8 <attiny_i2c_send_byte>
- 3fc:	cf 91       	pop	r28
- 3fe:	08 95       	ret
+0000048e <set_column>:
+ 48e:	cf 93       	push	r28
+ 490:	88 23       	and	r24, r24
+ 492:	74 f0       	brlt	.+28     	; 0x4b0 <set_column+0x22>
+ 494:	c2 e0       	ldi	r28, 0x02	; 2
+ 496:	c8 0f       	add	r28, r24
+ 498:	4c 2f       	mov	r20, r28
+ 49a:	4f 70       	andi	r20, 0x0F	; 15
+ 49c:	60 e0       	ldi	r22, 0x00	; 0
+ 49e:	88 e7       	ldi	r24, 0x78	; 120
+ 4a0:	e5 de       	rcall	.-566    	; 0x26c <attiny_i2c_send_byte>
+ 4a2:	4c 2f       	mov	r20, r28
+ 4a4:	42 95       	swap	r20
+ 4a6:	4f 70       	andi	r20, 0x0F	; 15
+ 4a8:	40 61       	ori	r20, 0x10	; 16
+ 4aa:	60 e0       	ldi	r22, 0x00	; 0
+ 4ac:	88 e7       	ldi	r24, 0x78	; 120
+ 4ae:	de de       	rcall	.-580    	; 0x26c <attiny_i2c_send_byte>
+ 4b0:	cf 91       	pop	r28
+ 4b2:	08 95       	ret
 
-00000400 <oled_clean>:
- 400:	cf 93       	push	r28
- 402:	df 93       	push	r29
- 404:	d0 e0       	ldi	r29, 0x00	; 0
- 406:	1c c0       	rjmp	.+56     	; 0x440 <oled_clean+0x40>
- 408:	4d 2f       	mov	r20, r29
- 40a:	4f 70       	andi	r20, 0x0F	; 15
- 40c:	40 6b       	ori	r20, 0xB0	; 176
- 40e:	60 e0       	ldi	r22, 0x00	; 0
- 410:	88 e7       	ldi	r24, 0x78	; 120
- 412:	ca de       	rcall	.-620    	; 0x1a8 <attiny_i2c_send_byte>
- 414:	42 e0       	ldi	r20, 0x02	; 2
- 416:	60 e0       	ldi	r22, 0x00	; 0
- 418:	88 e7       	ldi	r24, 0x78	; 120
- 41a:	c6 de       	rcall	.-628    	; 0x1a8 <attiny_i2c_send_byte>
- 41c:	40 e1       	ldi	r20, 0x10	; 16
- 41e:	60 e0       	ldi	r22, 0x00	; 0
- 420:	88 e7       	ldi	r24, 0x78	; 120
- 422:	c2 de       	rcall	.-636    	; 0x1a8 <attiny_i2c_send_byte>
- 424:	c0 e0       	ldi	r28, 0x00	; 0
- 426:	05 c0       	rjmp	.+10     	; 0x432 <oled_clean+0x32>
- 428:	40 e0       	ldi	r20, 0x00	; 0
- 42a:	60 e4       	ldi	r22, 0x40	; 64
- 42c:	88 e7       	ldi	r24, 0x78	; 120
- 42e:	bc de       	rcall	.-648    	; 0x1a8 <attiny_i2c_send_byte>
- 430:	cf 5f       	subi	r28, 0xFF	; 255
- 432:	cc 23       	and	r28, r28
- 434:	cc f7       	brge	.-14     	; 0x428 <oled_clean+0x28>
- 436:	8d e0       	ldi	r24, 0x0D	; 13
- 438:	8a 95       	dec	r24
- 43a:	f1 f7       	brne	.-4      	; 0x438 <oled_clean+0x38>
- 43c:	00 00       	nop
- 43e:	df 5f       	subi	r29, 0xFF	; 255
- 440:	d8 30       	cpi	r29, 0x08	; 8
- 442:	10 f3       	brcs	.-60     	; 0x408 <oled_clean+0x8>
- 444:	df 91       	pop	r29
- 446:	cf 91       	pop	r28
- 448:	08 95       	ret
+000004b4 <oled_clean>:
+ 4b4:	cf 93       	push	r28
+ 4b6:	df 93       	push	r29
+ 4b8:	d0 e0       	ldi	r29, 0x00	; 0
+ 4ba:	1c c0       	rjmp	.+56     	; 0x4f4 <oled_clean+0x40>
+ 4bc:	4d 2f       	mov	r20, r29
+ 4be:	4f 70       	andi	r20, 0x0F	; 15
+ 4c0:	40 6b       	ori	r20, 0xB0	; 176
+ 4c2:	60 e0       	ldi	r22, 0x00	; 0
+ 4c4:	88 e7       	ldi	r24, 0x78	; 120
+ 4c6:	d2 de       	rcall	.-604    	; 0x26c <attiny_i2c_send_byte>
+ 4c8:	42 e0       	ldi	r20, 0x02	; 2
+ 4ca:	60 e0       	ldi	r22, 0x00	; 0
+ 4cc:	88 e7       	ldi	r24, 0x78	; 120
+ 4ce:	ce de       	rcall	.-612    	; 0x26c <attiny_i2c_send_byte>
+ 4d0:	40 e1       	ldi	r20, 0x10	; 16
+ 4d2:	60 e0       	ldi	r22, 0x00	; 0
+ 4d4:	88 e7       	ldi	r24, 0x78	; 120
+ 4d6:	ca de       	rcall	.-620    	; 0x26c <attiny_i2c_send_byte>
+ 4d8:	c0 e0       	ldi	r28, 0x00	; 0
+ 4da:	05 c0       	rjmp	.+10     	; 0x4e6 <oled_clean+0x32>
+ 4dc:	40 e0       	ldi	r20, 0x00	; 0
+ 4de:	60 e4       	ldi	r22, 0x40	; 64
+ 4e0:	88 e7       	ldi	r24, 0x78	; 120
+ 4e2:	c4 de       	rcall	.-632    	; 0x26c <attiny_i2c_send_byte>
+ 4e4:	cf 5f       	subi	r28, 0xFF	; 255
+ 4e6:	cc 23       	and	r28, r28
+ 4e8:	cc f7       	brge	.-14     	; 0x4dc <oled_clean+0x28>
+ 4ea:	8d e0       	ldi	r24, 0x0D	; 13
+ 4ec:	8a 95       	dec	r24
+ 4ee:	f1 f7       	brne	.-4      	; 0x4ec <oled_clean+0x38>
+ 4f0:	00 00       	nop
+ 4f2:	df 5f       	subi	r29, 0xFF	; 255
+ 4f4:	d8 30       	cpi	r29, 0x08	; 8
+ 4f6:	10 f3       	brcs	.-60     	; 0x4bc <oled_clean+0x8>
+ 4f8:	df 91       	pop	r29
+ 4fa:	cf 91       	pop	r28
+ 4fc:	08 95       	ret
 
-0000044a <oled_write_byte>:
- 44a:	48 2f       	mov	r20, r24
- 44c:	60 e4       	ldi	r22, 0x40	; 64
- 44e:	88 e7       	ldi	r24, 0x78	; 120
- 450:	ab de       	rcall	.-682    	; 0x1a8 <attiny_i2c_send_byte>
- 452:	08 95       	ret
+000004fe <oled_write_byte>:
+ 4fe:	48 2f       	mov	r20, r24
+ 500:	60 e4       	ldi	r22, 0x40	; 64
+ 502:	88 e7       	ldi	r24, 0x78	; 120
+ 504:	b3 de       	rcall	.-666    	; 0x26c <attiny_i2c_send_byte>
+ 506:	08 95       	ret
 
-00000454 <oled_draw_weather>:
+00000508 <oled_draw_weather>:
 		page:	the page on to write the text
 		column: the column on to write the text
 	@return:
 */
 void oled_draw_weather(uint8_t id,uint8_t page, uint8_t column)
 {
- 454:	cf 93       	push	r28
- 456:	df 93       	push	r29
- 458:	d8 2f       	mov	r29, r24
- 45a:	86 2f       	mov	r24, r22
- 45c:	c4 2f       	mov	r28, r20
+ 508:	cf 93       	push	r28
+ 50a:	df 93       	push	r29
+ 50c:	d8 2f       	mov	r29, r24
+ 50e:	86 2f       	mov	r24, r22
+ 510:	c4 2f       	mov	r28, r20
 	uint8_t pixel_slice = 0;	//current slice of the character to be drawn
 	uint8_t slice_index = 0;	//
 
 	
 	//set page
 	set_page(page);
- 45e:	b4 df       	rcall	.-152    	; 0x3c8 <set_page>
+ 512:	b4 df       	rcall	.-152    	; 0x47c <set_page>
 	
 	//set column
 	set_column(column);
- 460:	8c 2f       	mov	r24, r28
- 462:	bb df       	rcall	.-138    	; 0x3da <set_column>
+ 514:	8c 2f       	mov	r24, r28
+ 516:	bb df       	rcall	.-138    	; 0x48e <set_column>
 		//font_index = id * 16;
 		
 		
 		
 		//draw character
 		for(slice_index=0;slice_index<16;slice_index++)
- 464:	c0 e0       	ldi	r28, 0x00	; 0
- 466:	0f c0       	rjmp	.+30     	; 0x486 <oled_draw_weather+0x32>
+ 518:	c0 e0       	ldi	r28, 0x00	; 0
+ 51a:	0f c0       	rjmp	.+30     	; 0x53a <oled_draw_weather+0x32>
 		{
 			//read the character slice from the font table in flash memory
 			pixel_slice = pgm_read_byte(&weathericons[id][slice_index]);
- 468:	ed 2f       	mov	r30, r29
- 46a:	f0 e0       	ldi	r31, 0x00	; 0
- 46c:	e2 95       	swap	r30
- 46e:	f2 95       	swap	r31
- 470:	f0 7f       	andi	r31, 0xF0	; 240
- 472:	fe 27       	eor	r31, r30
- 474:	e0 7f       	andi	r30, 0xF0	; 240
- 476:	fe 27       	eor	r31, r30
- 478:	ec 0f       	add	r30, r28
- 47a:	f1 1d       	adc	r31, r1
- 47c:	e2 5e       	subi	r30, 0xE2	; 226
- 47e:	ff 4f       	sbci	r31, 0xFF	; 255
- 480:	84 91       	lpm	r24, Z
+ 51c:	ed 2f       	mov	r30, r29
+ 51e:	f0 e0       	ldi	r31, 0x00	; 0
+ 520:	e2 95       	swap	r30
+ 522:	f2 95       	swap	r31
+ 524:	f0 7f       	andi	r31, 0xF0	; 240
+ 526:	fe 27       	eor	r31, r30
+ 528:	e0 7f       	andi	r30, 0xF0	; 240
+ 52a:	fe 27       	eor	r31, r30
+ 52c:	ec 0f       	add	r30, r28
+ 52e:	f1 1d       	adc	r31, r1
+ 530:	e2 5e       	subi	r30, 0xE2	; 226
+ 532:	ff 4f       	sbci	r31, 0xFF	; 255
+ 534:	84 91       	lpm	r24, Z
 			oled_write_byte(pixel_slice);	
- 482:	e3 df       	rcall	.-58     	; 0x44a <oled_write_byte>
+ 536:	e3 df       	rcall	.-58     	; 0x4fe <oled_write_byte>
 		//font_index = id * 16;
 		
 		
 		
 		//draw character
 		for(slice_index=0;slice_index<16;slice_index++)
- 484:	cf 5f       	subi	r28, 0xFF	; 255
- 486:	c0 31       	cpi	r28, 0x10	; 16
- 488:	78 f3       	brcs	.-34     	; 0x468 <oled_draw_weather+0x14>
+ 538:	cf 5f       	subi	r28, 0xFF	; 255
+ 53a:	c0 31       	cpi	r28, 0x10	; 16
+ 53c:	78 f3       	brcs	.-34     	; 0x51c <oled_draw_weather+0x14>
 			pixel_slice = pgm_read_byte(&weathericons[id][slice_index]);
 			oled_write_byte(pixel_slice);	
 			
 		}	
 
- 48a:	df 91       	pop	r29
- 48c:	cf 91       	pop	r28
- 48e:	08 95       	ret
+ 53e:	df 91       	pop	r29
+ 540:	cf 91       	pop	r28
+ 542:	08 95       	ret
 
-00000490 <_exit>:
- 490:	f8 94       	cli
+00000544 <_exit>:
+ 544:	f8 94       	cli
 
-00000492 <__stop_program>:
- 492:	ff cf       	rjmp	.-2      	; 0x492 <__stop_program>
+00000546 <__stop_program>:
+ 546:	ff cf       	rjmp	.-2      	; 0x546 <__stop_program>

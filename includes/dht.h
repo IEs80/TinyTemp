@@ -18,7 +18,7 @@
 #define LOW 0
 
 
-enum DHT_ERROR_FLAGS{NO_ERROR,START_ERROR,COM_ERROR};
+enum DHT_ERROR_FLAGS{NO_ERROR,START_ERROR,RESPONSE_ERROR,COM_ERROR};
 enum {dht_idle,dht_send_start,dht_read_response,dht_read_bits,dht_stop,dht_error};
 //macros
 
@@ -26,4 +26,6 @@ enum {dht_idle,dht_send_start,dht_read_response,dht_read_bits,dht_stop,dht_error
 void attiny_dht_init();
 void timer1_init();
 void dht_start();
+void dht_response();
+void dht_read();
 #endif /* DHT_H_ */

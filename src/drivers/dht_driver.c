@@ -16,8 +16,11 @@ volatile uint8_t	_v_dht_rh_int = 0;
 volatile uint8_t	_v_dht_rh_dec = 0;
 volatile uint8_t	_v_dht_data_shift_index = 7;
 volatile uint16_t	_v_dht_temporizer = 0;
-volatile uint8_t	f_dht_error = 0;	 
+volatile uint8_t	_v_response_pulses = 0;
+volatile uint8_t	f_dht_error = NO_ERROR;	 
 volatile uint8_t	f_pcint = 0;
+volatile uint8_t	f_measuring = 0;
+volatile uint8_t	f_measure_ready = 0;
 
 volatile	uint8_t dht_state = dht_idle;
 
@@ -75,6 +78,9 @@ void init_pcint()
 	//bit 3: PCINT3 (PB3)
 	PCMSK |= (0x01<<DHT_PIN);
 	
+	
+	GIFR = (1<<PCIF);
+	
 	//enables global interrupts
 	sei();
 }
@@ -117,13 +123,27 @@ ISR(PCINT0_vect)
 	switch(dht_state)
 	{
 		case dht_send_start:
-			TCNT1 = 0;
-			_v_dht_time = 0;
+			break;
+		case dht_read_response:
+			if(f_measuring)
+			{
+				
+				_v_dht_temporizer = TCNT1;
+				TCNT1 = 0;
+				f_measure_ready = 1;
+			}
+			else
+			{
+				
+				TCNT1 = 0;
+				_v_dht_temporizer = 0;
+				f_measuring = 1;
+			}
 			break;
 		
 	}
 	
-	PORTB|=(0x01<<PB4) ;	
+		
 	
 
 }
@@ -185,66 +205,54 @@ void dht_start()
 	//and release the line
 	PORTB&=~(0x01<<DHT_PIN); 
 	
-	//while(TCNT1<20); //wait
-
-	//set TIMER1 pre-scaler to 8
+	
+	//set TIMER1 pre-scaler to 8, so one tick equals 1uS
 	TCCR1 = 0x04;
-	
-	
-	//check for DHT response signal:
-	//	80uS LOW, then 80uS HIGH
-	while(!f_dht_error)
-	{
-		//The DHT takes some u-seconds to respond
-		while((PINB>>DHT_PIN)&0x01);
-		init_pcint();
-
-		
-		//check for LOW state
-		while(TCNT1<=80)
-		{
-			//check DHT_PIN status
-			if((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==1)
-			{
-				
-				f_dht_error = START_ERROR;
-				break;
-			}
-		}
-		
-		//reset timer count 
-		TCNT1 = 0;
-		//check for HIGH state
-		while(TCNT1<80)
-		{
-			//check DHT_PIN status
-			if((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==0)
-			{
-				
-				f_dht_error = START_ERROR;
-				break;
-			}
-		}
-		
-		
-
-	}
-	
-	if(f_dht_error){
-		//stop timer1
-		//return 1
-		//PORTB&=~(0x01<<PB4) ;
-		//PORTB|=(0x01<<PB5) ;	
-		
-	}
-	else
-	{
-		//PORTB&=~(0x01<<PB5) ;
-		//PORTB|=(0x01<<PB4) ;	
-		
-	}
-
+	//set counter to 0
+	TCNT1=0x00;
 }
+
+/*	
+	@fn:  dht_response
+	@brief: read the 80uS response signals from the DHT
+	@params: none
+	@returns: none
+*/
+void dht_response()
+{
+		//the DHT 
+		//while((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==1);
+		
+
+		
+
+		
+		//check for DHT response signal:
+		//	80uS LOW, then 80uS HIGH
+		if(f_measure_ready)
+		{
+			f_measure_ready = 0;
+			//check if the obtained measure is between accepted time limits (time limits obtained empirically with logic analyzer)
+			if( (78<=_v_dht_temporizer) && (87>=_v_dht_temporizer))
+			{
+				//re-init temporizer
+				_v_dht_temporizer = 0;
+				//we have to read to pulses, so before continuing in the state machine, we repeat for the second pulse 
+				if(_v_response_pulses<2)
+				{
+					_v_response_pulses++;
+				}
+				
+			}
+			else
+			{
+				f_dht_error = RESPONSE_ERROR;
+			}
+			
+		}	
+}
+
+
 
 /*	
 	@fn:  dht_read
@@ -272,14 +280,35 @@ void dht_read()
 			}
 			else
 			{
+				while( !(PINB & (0x01 << DHT_PIN)) );
+				//inits Pin Change Interrupts
+				init_pcint();
 				dht_state = dht_read_response;
 			}
 			break;
 		
 		//reads rh and temp values
 		case dht_read_response:
+			
+			dht_response();
+			if(f_dht_error!=NO_ERROR)
+			{
+				
+				dht_state = dht_error;
+			}
+			else
+			{
+				
+				if(_v_response_pulses == 2)
+				{
+					
+					dht_state = dht_read_bits;	
+				}
+				
+			}
 			break;
 		case dht_read_bits:
+			
 			break;
 		
 		//check for stop signal
@@ -288,6 +317,7 @@ void dht_read()
 			break;
 		
 		case dht_error:
+			PORTB|=(0x01<<PB4) ;
 			break;
 		default:
 			break; 
