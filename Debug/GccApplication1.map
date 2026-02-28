@@ -20,20 +20,12 @@ Discarded input sections
  .data          0x00000000        0x0 src/drivers/dht_driver.o
  .bss           0x00000000        0x0 src/drivers/dht_driver.o
  .text.setPin   0x00000000       0x3e src/drivers/dht_driver.o
+ .text.init_pcint
+                0x00000000       0x14 src/drivers/dht_driver.o
  .text.deinit_pcint
                 0x00000000        0xe src/drivers/dht_driver.o
- .bss._v_dht_time
-                0x00000000        0x1 src/drivers/dht_driver.o
- .data._v_dht_data_shift_index
-                0x00000000        0x1 src/drivers/dht_driver.o
- .bss._v_dht_rh_dec
-                0x00000000        0x1 src/drivers/dht_driver.o
- .bss._v_dht_rh_int
-                0x00000000        0x1 src/drivers/dht_driver.o
- .bss._v_dht_temp_dec
-                0x00000000        0x1 src/drivers/dht_driver.o
- .bss._v_dht_temp_int
-                0x00000000        0x1 src/drivers/dht_driver.o
+ .bss._v_dht_temporizer
+                0x00000000        0x2 src/drivers/dht_driver.o
  .text          0x00000000        0x0 src/i2c_driver.o
  .data          0x00000000        0x0 src/i2c_driver.o
  .bss           0x00000000        0x0 src/i2c_driver.o
@@ -236,7 +228,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x548
+.text           0x00000000      0x5ee
  *(.vectors)
  .vectors       0x00000000       0x1e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
                 0x00000000                __vector_default
@@ -308,67 +300,65 @@ END GROUP
                 0x00000094                __vector_5
                 0x00000094                __vector_4
                 0x00000094                __vector_9
+                0x00000094                __vector_2
                 0x00000094                __vector_8
                 0x00000096                . = ALIGN (0x2)
  *(.text.*)
  .text.attiny_dht_init
                 0x00000096        0xe src/drivers/dht_driver.o
                 0x00000096                attiny_dht_init
- .text.init_pcint
-                0x000000a4       0x14 src/drivers/dht_driver.o
-                0x000000a4                init_pcint
- .text.__vector_2
-                0x000000b8       0x5e src/drivers/dht_driver.o
-                0x000000b8                __vector_2
  .text.timer1_init
-                0x00000116        0x8 src/drivers/dht_driver.o
-                0x00000116                timer1_init
+                0x000000a4        0x8 src/drivers/dht_driver.o
+                0x000000a4                timer1_init
  .text.dht_start
-                0x0000011e       0x26 src/drivers/dht_driver.o
-                0x0000011e                dht_start
+                0x000000ac       0x26 src/drivers/dht_driver.o
+                0x000000ac                dht_start
  .text.dht_response
-                0x00000144       0x4c src/drivers/dht_driver.o
-                0x00000144                dht_response
+                0x000000d2       0x4e src/drivers/dht_driver.o
+                0x000000d2                dht_response
+ .text.dht_gets_data
+                0x00000120       0x68 src/drivers/dht_driver.o
+                0x00000120                dht_gets_data
  .text.dht_read
-                0x00000190       0x78 src/drivers/dht_driver.o
-                0x00000190                dht_read
+                0x00000188      0x11c src/drivers/dht_driver.o
+                0x00000188                dht_read
  .text.attiny_i2c_tx
-                0x00000208       0x64 src/i2c_driver.o
-                0x00000208                attiny_i2c_tx
+                0x000002a4       0x64 src/i2c_driver.o
+                0x000002a4                attiny_i2c_tx
  .text.attiny_i2c_send_byte
-                0x0000026c       0x20 src/i2c_driver.o
-                0x0000026c                attiny_i2c_send_byte
+                0x00000308       0x20 src/i2c_driver.o
+                0x00000308                attiny_i2c_send_byte
  .text.__vector_14
-                0x0000028c      0x130 src/i2c_driver.o
-                0x0000028c                __vector_14
+                0x00000328      0x130 src/i2c_driver.o
+                0x00000328                __vector_14
  .text.attiny_timer_deinit
-                0x000003bc        0xe src/main.o
-                0x000003bc                attiny_timer_deinit
+                0x00000458        0xe src/main.o
+                0x00000458                attiny_timer_deinit
  .text.__vector_10
-                0x000003ca       0x2e src/main.o
-                0x000003ca                __vector_10
- .text.main     0x000003f8       0x84 src/main.o
-                0x000003f8                main
+                0x00000466       0x2e src/main.o
+                0x00000466                __vector_10
+ .text.main     0x00000494       0x8e src/main.o
+                0x00000494                main
  .text.set_page
-                0x0000047c       0x12 src/oled.o
-                0x0000047c                set_page
+                0x00000522       0x12 src/oled.o
+                0x00000522                set_page
  .text.set_column
-                0x0000048e       0x26 src/oled.o
-                0x0000048e                set_column
+                0x00000534       0x26 src/oled.o
+                0x00000534                set_column
  .text.oled_clean
-                0x000004b4       0x4a src/oled.o
-                0x000004b4                oled_clean
+                0x0000055a       0x4a src/oled.o
+                0x0000055a                oled_clean
  .text.oled_write_byte
-                0x000004fe        0xa src/oled.o
-                0x000004fe                oled_write_byte
+                0x000005a4        0xa src/oled.o
+                0x000005a4                oled_write_byte
  .text.oled_draw_weather
-                0x00000508       0x3c src/oled.o
-                0x00000508                oled_draw_weather
-                0x00000544                . = ALIGN (0x2)
+                0x000005ae       0x3c src/oled.o
+                0x000005ae                oled_draw_weather
+                0x000005ea                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000544        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
-                0x00000544                _exit
-                0x00000544                exit
+ .fini9         0x000005ea        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+                0x000005ea                _exit
+                0x000005ea                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -387,73 +377,82 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000544        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+ .fini0         0x000005ea        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000548                _etext = .
+                0x000005ee                _etext = .
 
-.data           0x00800060        0x2 load address 0x00000548
+.data           0x00800060        0x2 load address 0x000005ee
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
- .data.a        0x00800060        0x1 src/main.o
+ .data._v_dht_data_shift_index
+                0x00800060        0x1 src/drivers/dht_driver.o
+                0x00800060                _v_dht_data_shift_index
+ .data.a        0x00800061        0x1 src/main.o
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  *(.gnu.linkonce.r*)
                 0x00800062                . = ALIGN (0x2)
- *fill*         0x00800061        0x1 
                 0x00800062                _edata = .
                 0x00800062                PROVIDE (__data_end, .)
 
-.bss            0x00800062       0x14
+.bss            0x00800062       0x18
                 0x00800062                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.dht_state
+ .bss._v_dht_data_ready
                 0x00800062        0x1 src/drivers/dht_driver.o
-                0x00800062                dht_state
- .bss.f_measure_ready
+                0x00800062                _v_dht_data_ready
+ .bss.dht_state
                 0x00800063        0x1 src/drivers/dht_driver.o
-                0x00800063                f_measure_ready
- .bss.f_measuring
-                0x00800064        0x1 src/drivers/dht_driver.o
-                0x00800064                f_measuring
- .bss.f_pcint   0x00800065        0x1 src/drivers/dht_driver.o
-                0x00800065                f_pcint
+                0x00800063                dht_state
  .bss.f_dht_error
-                0x00800066        0x1 src/drivers/dht_driver.o
-                0x00800066                f_dht_error
+                0x00800064        0x1 src/drivers/dht_driver.o
+                0x00800064                f_dht_error
  .bss._v_response_pulses
-                0x00800067        0x1 src/drivers/dht_driver.o
-                0x00800067                _v_response_pulses
- .bss._v_dht_temporizer
-                0x00800068        0x2 src/drivers/dht_driver.o
-                0x00800068                _v_dht_temporizer
+                0x00800065        0x1 src/drivers/dht_driver.o
+                0x00800065                _v_response_pulses
+ .bss._v_dht_data
+                0x00800066        0x4 src/drivers/dht_driver.o
+                0x00800066                _v_dht_data
+ .bss._v_dht_rh_dec
+                0x0080006a        0x1 src/drivers/dht_driver.o
+                0x0080006a                _v_dht_rh_dec
+ .bss._v_dht_rh_int
+                0x0080006b        0x1 src/drivers/dht_driver.o
+                0x0080006b                _v_dht_rh_int
+ .bss._v_dht_temp_dec
+                0x0080006c        0x1 src/drivers/dht_driver.o
+                0x0080006c                _v_dht_temp_dec
+ .bss._v_dht_temp_int
+                0x0080006d        0x1 src/drivers/dht_driver.o
+                0x0080006d                _v_dht_temp_int
  .bss.i2c_tx_bytes
-                0x0080006a        0x1 src/i2c_driver.o
-                0x0080006a                i2c_tx_bytes
- .bss.f_nack    0x0080006b        0x1 src/i2c_driver.o
-                0x0080006b                f_nack
- .bss.i2c_indx  0x0080006c        0x1 src/i2c_driver.o
-                0x0080006c                i2c_indx
- .bss.usi_state
-                0x0080006d        0x1 src/i2c_driver.o
-                0x0080006d                usi_state
- .bss.usi_status
                 0x0080006e        0x1 src/i2c_driver.o
-                0x0080006e                usi_status
+                0x0080006e                i2c_tx_bytes
+ .bss.f_nack    0x0080006f        0x1 src/i2c_driver.o
+                0x0080006f                f_nack
+ .bss.i2c_indx  0x00800070        0x1 src/i2c_driver.o
+                0x00800070                i2c_indx
+ .bss.usi_state
+                0x00800071        0x1 src/i2c_driver.o
+                0x00800071                usi_state
+ .bss.usi_status
+                0x00800072        0x1 src/i2c_driver.o
+                0x00800072                usi_status
  *(COMMON)
- COMMON         0x0080006f        0x7 src/i2c_driver.o
-                0x0080006f                i2c_buff
-                0x00800076                PROVIDE (__bss_end, .)
-                0x00000548                __data_load_start = LOADADDR (.data)
-                0x0000054a                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00800073        0x7 src/i2c_driver.o
+                0x00800073                i2c_buff
+                0x0080007a                PROVIDE (__bss_end, .)
+                0x000005ee                __data_load_start = LOADADDR (.data)
+                0x000005f0                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800076        0x0
+.noinit         0x0080007a        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00800076                _end = .
+                0x0080007a                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -535,55 +534,55 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x13f2
+.debug_info     0x00000000     0x13eb
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x420 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
- .debug_info    0x00000420      0x2d2 src/drivers/dht_driver.o
- .debug_info    0x000006f2      0x349 src/i2c_driver.o
- .debug_info    0x00000a3b      0x3d1 src/main.o
- .debug_info    0x00000e0c      0x5e6 src/oled.o
+ .debug_info    0x00000420      0x2be src/drivers/dht_driver.o
+ .debug_info    0x000006de      0x349 src/i2c_driver.o
+ .debug_info    0x00000a27      0x3de src/main.o
+ .debug_info    0x00000e05      0x5e6 src/oled.o
 
-.debug_abbrev   0x00000000      0xa16
+.debug_abbrev   0x00000000      0xa14
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x3e8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
- .debug_abbrev  0x000003e8      0x103 src/drivers/dht_driver.o
- .debug_abbrev  0x000004eb      0x18e src/i2c_driver.o
- .debug_abbrev  0x00000679      0x1ab src/main.o
- .debug_abbrev  0x00000824      0x1f2 src/oled.o
+ .debug_abbrev  0x000003e8      0x101 src/drivers/dht_driver.o
+ .debug_abbrev  0x000004e9      0x18e src/i2c_driver.o
+ .debug_abbrev  0x00000677      0x1ab src/main.o
+ .debug_abbrev  0x00000822      0x1f2 src/oled.o
 
-.debug_line     0x00000000      0xd5f
+.debug_line     0x00000000      0xddb
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0xf2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
- .debug_line    0x000000f2      0x303 src/drivers/dht_driver.o
- .debug_line    0x000003f5      0x3a6 src/i2c_driver.o
- .debug_line    0x0000079b      0x29e src/main.o
- .debug_line    0x00000a39      0x326 src/oled.o
+ .debug_line    0x000000f2      0x373 src/drivers/dht_driver.o
+ .debug_line    0x00000465      0x3a6 src/i2c_driver.o
+ .debug_line    0x0000080b      0x2aa src/main.o
+ .debug_line    0x00000ab5      0x326 src/oled.o
 
-.debug_frame    0x00000000      0x268
+.debug_frame    0x00000000      0x254
  *(.debug_frame)
- .debug_frame   0x00000000       0xb8 src/drivers/dht_driver.o
- .debug_frame   0x000000b8       0x84 src/i2c_driver.o
- .debug_frame   0x0000013c       0x74 src/main.o
- .debug_frame   0x000001b0       0xb8 src/oled.o
+ .debug_frame   0x00000000       0xa4 src/drivers/dht_driver.o
+ .debug_frame   0x000000a4       0x84 src/i2c_driver.o
+ .debug_frame   0x00000128       0x74 src/main.o
+ .debug_frame   0x0000019c       0xb8 src/oled.o
 
-.debug_str      0x00000000      0x71a
+.debug_str      0x00000000      0x70b
  *(.debug_str)
  .debug_str     0x00000000      0x169 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
- .debug_str     0x00000169      0x2fa src/drivers/dht_driver.o
-                                0x349 (size before relaxing)
- .debug_str     0x00000463      0x140 src/i2c_driver.o
+ .debug_str     0x00000169      0x2f9 src/drivers/dht_driver.o
+                                0x348 (size before relaxing)
+ .debug_str     0x00000462      0x132 src/i2c_driver.o
                                 0x2c0 (size before relaxing)
- .debug_str     0x000005a3       0xa2 src/main.o
-                                0x2ef (size before relaxing)
- .debug_str     0x00000645       0xd5 src/oled.o
+ .debug_str     0x00000594       0xa2 src/main.o
+                                0x301 (size before relaxing)
+ .debug_str     0x00000636       0xd5 src/oled.o
                                 0x2ef (size before relaxing)
 
-.debug_loc      0x00000000      0x8ce
+.debug_loc      0x00000000      0x885
  *(.debug_loc)
- .debug_loc     0x00000000       0xbd src/drivers/dht_driver.o
- .debug_loc     0x000000bd      0x240 src/i2c_driver.o
- .debug_loc     0x000002fd      0x150 src/main.o
- .debug_loc     0x0000044d      0x481 src/oled.o
+ .debug_loc     0x00000000       0x74 src/drivers/dht_driver.o
+ .debug_loc     0x00000074      0x240 src/i2c_driver.o
+ .debug_loc     0x000002b4      0x150 src/main.o
+ .debug_loc     0x00000404      0x481 src/oled.o
 
 .debug_macinfo
  *(.debug_macinfo)

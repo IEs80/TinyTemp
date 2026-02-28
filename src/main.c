@@ -28,6 +28,15 @@ static char	b = 0;
 extern volatile uint8_t usi_state;	//defined in i2c_driver.c
 extern volatile uint8_t f_nack;		//defined in i2c_driver.c
 
+extern volatile uint8_t _v_dht_data_ready;
+extern volatile uint8_t	_v_dht_temp_int
+extern volatile uint8_t	_v_dht_temp_dec
+extern volatile uint8_t	_v_dht_rh_int 
+extern volatile uint8_t	_v_dht_rh_dec 
+
+
+
+
 //Function prototypes
 void attiny_timer_init(void);
 
@@ -132,6 +141,27 @@ int main(void)
     /* Replace with your application code */
     while (1) 
     {
+		
+		
+		if(b==0)
+		{
+
+			//PORTB|=(0x01<<PB3); //ON
+			//_delay_ms(500);
+			//PORTB &= ~((0x01 << PB3)); //OFF
+			//_delay_ms(500);
+					
+					
+					
+			//dht_start();
+			dht_read();
+			if(_v_dht_data_ready)
+			{
+				a=0;	
+			}
+			//b=1;
+		}
+		
 		if (a==0)
 		{
 			//attiny_i2c_tx();
@@ -156,20 +186,7 @@ int main(void)
 		}
 		
 		
-		if(b==0)
-		{
 
-			//PORTB|=(0x01<<PB3); //ON
-			//_delay_ms(500);
-			//PORTB &= ~((0x01 << PB3)); //OFF
-			//_delay_ms(500);
-			
-		
-			
-			//dht_start();
-			dht_read();
-			//b=1;
-		}
 
 		
 		

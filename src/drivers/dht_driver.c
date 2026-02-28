@@ -14,17 +14,20 @@ volatile uint8_t	_v_dht_temp_int = 0;
 volatile uint8_t	_v_dht_temp_dec = 0;
 volatile uint8_t	_v_dht_rh_int = 0;
 volatile uint8_t	_v_dht_rh_dec = 0;
-volatile uint8_t	_v_dht_data_shift_index = 7;
+volatile uint32_t	_v_dht_data = 0;
+
+volatile uint8_t	_v_dht_data_shift_index = 32;
+
 volatile uint16_t	_v_dht_temporizer = 0;
 volatile uint8_t	_v_response_pulses = 0;
 volatile uint8_t	f_dht_error = NO_ERROR;	 
-volatile uint8_t	f_pcint = 0;
-volatile uint8_t	f_measuring = 0;
-volatile uint8_t	f_measure_ready = 0;
+//volatile uint8_t	f_pcint = 0;
+//volatile uint8_t	f_measuring = 0;
+//volatile uint8_t	f_measure_ready = 0;
 
 volatile	uint8_t dht_state = dht_idle;
 
-volatile uint8_t _v_dht_time = 0;
+volatile uint8_t _v_dht_data_ready = 0;
 
 void setPin(uint8_t pin,uint8_t state)
 {
@@ -109,7 +112,7 @@ void deinit_pcint()
 	
 }
 
-
+/*
 ISR(PCINT0_vect)
 {
 	
@@ -147,7 +150,7 @@ ISR(PCINT0_vect)
 	
 
 }
-
+*/
 
 /*	
 	@fn:  timer1_init
@@ -220,39 +223,84 @@ void dht_start()
 */
 void dht_response()
 {
-		//the DHT 
-		//while((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==1);
+	//the DHT 
+	//while((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==1);
 		
 
-		
 
-		
-		//check for DHT response signal:
-		//	80uS LOW, then 80uS HIGH
-		if(f_measure_ready)
-		{
-			f_measure_ready = 0;
-			//check if the obtained measure is between accepted time limits (time limits obtained empirically with logic analyzer)
-			if( (78<=_v_dht_temporizer) && (87>=_v_dht_temporizer))
-			{
-				//re-init temporizer
-				_v_dht_temporizer = 0;
-				//we have to read to pulses, so before continuing in the state machine, we repeat for the second pulse 
-				if(_v_response_pulses<2)
-				{
-					_v_response_pulses++;
-				}
 				
+		//the DHT takes 10-20uS to start responding: we wait for the line to go low
+		while((PINB & (0x01 << DHT_PIN)));
+			
+		//re-init counter
+		TCNT1 = 0;
+			
+		//wait while the line is low
+		while( !(PINB & (0x01 << DHT_PIN)) );
+			
+		//check the counter values
+		if( (75<=TCNT1) && (90>=TCNT1))
+		{
+			TCNT1=0;
+			//we have to read to pulses, so before continuing in the state machine, we repeat for the second pulse
+			_v_response_pulses++;
+				
+			//restart count
+				
+			//now we wait while the line is high
+			while((PINB & (0x01 << DHT_PIN)));	
+				
+			if( (75<=TCNT1) && (90>=TCNT1))
+			{
+				_v_response_pulses++;
 			}
 			else
-			{
+			{					
 				f_dht_error = RESPONSE_ERROR;
 			}
-			
-		}	
+				
+						
+		}
+		else
+		{
+			f_dht_error = RESPONSE_ERROR;
+		}
 }
 
 
+/*	
+	@fn:  dht_gets_values
+	@brief: reads the values from the sensor
+	@params: none
+	@returns: none
+*/
+void dht_gets_data()
+{
+	
+	while(_v_dht_data_shift_index>0)
+	{
+		//decrement index
+		_v_dht_data_shift_index--;	
+		
+		//wait while the line is low
+		while( !(PINB & (0x01 << DHT_PIN)) );
+			
+		//restart counter
+		TCNT1 = 0;
+			
+		//now we wait while the line is high
+		while((PINB & (0x01 << DHT_PIN)));
+		
+		//we only check for the ones (given the values variables are started at 0
+		if(TCNT1>=45)
+		{
+			_v_dht_data |= (1<<_v_dht_data_shift_index);
+		}
+					
+	}
+
+	
+}
 
 /*	
 	@fn:  dht_read
@@ -267,7 +315,18 @@ void dht_read()
 	switch(dht_state)
 	{
 		case dht_idle:
+			
+			//initialize variables
+			_v_dht_rh_int = 0;
+			_v_dht_rh_dec = 0;
+			_v_dht_temp_int = 0;
+			_v_dht_temp_dec = 0;
+			_v_dht_data = 0;
+			_v_dht_data_ready = 0;
+			//start timer
 			timer1_init();
+			
+			//star FSM
 			dht_state = dht_send_start;
 			break;
 			
@@ -280,9 +339,9 @@ void dht_read()
 			}
 			else
 			{
-				while( !(PINB & (0x01 << DHT_PIN)) );
+				//while( !(PINB & (0x01 << DHT_PIN)) );
 				//inits Pin Change Interrupts
-				init_pcint();
+				//init_pcint();
 				dht_state = dht_read_response;
 			}
 			break;
@@ -308,16 +367,33 @@ void dht_read()
 			}
 			break;
 		case dht_read_bits:
-			
+			dht_gets_data();
+			if(f_dht_error!=NO_ERROR)
+			{
+				dht_state = dht_error;
+			}
+			else
+			{
+				dht_state = dht_stop;	
+			}
 			break;
 		
 		//check for stop signal
 		case dht_stop:
+			PORTB|=(0x01<<PB4) ;
+			
+			_v_dht_temp_dec = (_v_dht_data & 0xFF);
+			_v_dht_temp_dec = ((_v_dht_data>>8) & 0xFF);
+			_v_dht_temp_dec = ((_v_dht_data>>16) & 0xFF);
+			_v_dht_temp_dec = ((_v_dht_data>>32) & 0xFF);
+			
+			_v_dht_data_ready = 1;
+			
 			dht_state = dht_idle;
 			break;
 		
 		case dht_error:
-			PORTB|=(0x01<<PB4) ;
+			
 			break;
 		default:
 			break; 
