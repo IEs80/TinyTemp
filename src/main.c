@@ -44,11 +44,12 @@ void attiny_timer_init(void);
 
 
 
-void mostrar_temperatura() {
+void print_temperature() {
 	char buffer_oled[16]; // full final string
 	char buffer_num[4];   // int temperature
 	char buffer_dec[4];   // dec temperature
 	
+	//temperatura
 	
 	//Copy texto to the buffer
 	strcpy(buffer_oled, "TEMP: ");
@@ -71,6 +72,37 @@ void mostrar_temperatura() {
 	
 	//print
 	oled_print_text(buffer_oled, 2, 32);
+}
+
+
+void print_humidity() {
+	char buffer_oled[16]; // full final string
+	char buffer_num[4];   // int temperature
+	char buffer_dec[4];   // dec temperature
+	
+	//temperatura
+	
+	//Copy texto to the buffer
+	strcpy(buffer_oled, "HUM:  ");
+	
+	//Convert _v_dht_temp_int to string base 10
+	itoa(_v_dht_rh_int, buffer_num, 10);
+	
+	//Convert _v_dht_temp_dec to string base 10
+	itoa(_v_dht_rh_dec, buffer_dec, 10);
+	
+	//concat integer part to string
+	strcat(buffer_oled, buffer_num);
+	
+	//concat decimal part to string
+	strcat(buffer_oled, ".");
+	strcat(buffer_oled, buffer_dec);
+	
+	//finish the string
+	strcat(buffer_oled, " %");
+	
+	//print
+	oled_print_text(buffer_oled, 5, 32);
 }
 
 
@@ -161,11 +193,12 @@ int main(void)
 	char	b = 0;
 	uint8_t init_oled = 0;
 	
-	TWI_DELAY();
-	TWI_DELAY();
-	TWI_DELAY();
-	TWI_DELAY();
 	
+	TWI_DELAY();
+	TWI_DELAY();
+	TWI_DELAY();
+	TWI_DELAY();
+
 	//attiny_dht_init();
     /* Replace with your application code */
     while (1) 
@@ -208,10 +241,12 @@ int main(void)
 			
 			//write text
 			//oled_print_text("TEMP: 0°C",2,32);
-			mostrar_temperatura();
-			
+			print_temperature();
+			print_humidity();
 			//oled_print_text("HUM:  70%",5,32);
 			//oled_draw_weather(sunny,2,32);
+			
+			
 			//full-on display (using gdram)
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 			
