@@ -15,8 +15,9 @@ volatile uint8_t	_v_dht_temp_dec = 0;
 volatile uint8_t	_v_dht_rh_int = 0;
 volatile uint8_t	_v_dht_rh_dec = 0;
 volatile uint32_t	_v_dht_data = 0;
+volatile uint32_t	_v_dht_chk = 0;
 
-volatile uint8_t	_v_dht_data_shift_index = 32;
+volatile uint8_t	_v_dht_data_shift_index = 40;
 
 volatile uint16_t	_v_dht_temporizer = 0;
 volatile uint8_t	_v_response_pulses = 0;
@@ -54,8 +55,8 @@ void attiny_dht_init()
 	
 	
 	//RED LED
-	//DDRB |= (0x01<<PB5); //DHT_PIN as Out
-	//PORTB&=~(0x01<<PB5); //DHT_PIN ON (line in idle state)
+	DDRB |= (0x01<<PB4); //PB4 as Out
+	PORTB&=~(0x01<<PB4); //PB4 OFF (line in idle state)
 }
 
 
@@ -181,6 +182,35 @@ void timer1_init()
 	TCNT1 = 0x00;
 }
 
+/*	
+	@fn:  timer1_deinit
+	@brief: de-inits timer1 for it to increment TCNT1 every uSeg
+	@params: none
+	@returns: none
+*/
+void timer1_deinit()
+{
+	//TCCR1
+	/*
+		bit7:	0 (Don't clear on compare match)
+		bit6:	0 (PWM Enable off)
+		bit5-4: 00 (0 because we don't use the compare match)
+		bit3-0:	0100 (CK/8 = 1MHz)
+	*/
+	TCCR1 = 0x00;
+	
+	/*PLL Control and Status Register
+	Bit 7: 0
+	Bit 2: 0 (System Clock)
+	Bit 1: 1
+	Bit 0: 0
+	*/
+	//PLLCSR = 0x02;
+	 
+	//set the count to 0
+	TCNT1 = 0x00;
+}
+
 
 /*	
 	@fn:  dht_start
@@ -291,11 +321,25 @@ void dht_gets_data()
 		//now we wait while the line is high
 		while((PINB & (0x01 << DHT_PIN)));
 		
-		//we only check for the ones (given the values variables are started at 0
-		if(TCNT1>=45)
+		if(_v_dht_data_shift_index>7)
 		{
-			_v_dht_data |= (1<<_v_dht_data_shift_index);
+			//we only check for the ones (given the values variables are started at 0
+			if(TCNT1>=45)
+			{
+				_v_dht_data |= ((uint32_t)1<<(_v_dht_data_shift_index-8));
+			}			
+			
 		}
+		else{
+			
+			//we only check for the ones (given the values variables are started at 0
+			if(TCNT1>=45)
+			{
+				_v_dht_chk |= (1<<_v_dht_data_shift_index);
+			}			
+		}
+		
+
 					
 	}
 
@@ -323,6 +367,9 @@ void dht_read()
 			_v_dht_temp_dec = 0;
 			_v_dht_data = 0;
 			_v_dht_data_ready = 0;
+			
+			//
+			attiny_dht_init();
 			//start timer
 			timer1_init();
 			
@@ -380,20 +427,28 @@ void dht_read()
 		
 		//check for stop signal
 		case dht_stop:
-			PORTB|=(0x01<<PB4) ;
 			
+			//PORTB|=(0x01<<PB4); 
 			_v_dht_temp_dec = (_v_dht_data & 0xFF);
-			_v_dht_temp_dec = ((_v_dht_data>>8) & 0xFF);
-			_v_dht_temp_dec = ((_v_dht_data>>16) & 0xFF);
-			_v_dht_temp_dec = ((_v_dht_data>>32) & 0xFF);
+			_v_dht_temp_int = ((_v_dht_data>>8) & 0xFF);
+			_v_dht_rh_dec = ((_v_dht_data>>16) & 0xFF);
+			_v_dht_rh_int = ((_v_dht_data>>24) & 0xFF);
 			
-			_v_dht_data_ready = 1;
+			if(_v_dht_chk==((_v_dht_temp_dec+_v_dht_temp_int+_v_dht_rh_dec+_v_dht_rh_int) & 0xFF))
+			{
+				_v_dht_data_ready = 1;
+			}
+
 			
+			deinit_pcint();
+			timer1_deinit();
 			dht_state = dht_idle;
 			break;
 		
 		case dht_error:
 			
+			deinit_pcint();
+			timer1_deinit();
 			break;
 		default:
 			break; 

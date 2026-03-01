@@ -29,4 +29,5 @@ void dht_start();
 void dht_response();
 void dht_gets_data();
 void dht_read();
+void timer1_deinit();
 #endif /* DHT_H_ */
