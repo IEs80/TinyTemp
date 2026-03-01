@@ -229,7 +229,7 @@ int main(void)
 				
 			}
 			
-				
+			
 			//attiny_i2c_tx();
 			//turn on display
 			attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xAF);
