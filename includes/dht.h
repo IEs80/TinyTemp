@@ -12,10 +12,9 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+
 //defines
 #define DHT_PIN PB3 
-#define HIGH 1
-#define LOW 0
 #define using_pcint 0
 
 enum DHT_ERROR_FLAGS{NO_ERROR,START_ERROR,RESPONSE_ERROR,GET_DATA_ERROR};
@@ -24,10 +23,10 @@ enum {dht_idle,dht_send_start,dht_read_response,dht_read_bits,dht_stop,dht_error
 
 //Function prototypes
 void attiny_dht_init();
-void timer1_init();
+
 void dht_start();
 void dht_response();
 void dht_gets_data();
 void dht_read();
-void timer1_deinit();
+
 #endif /* DHT_H_ */

@@ -7,7 +7,8 @@
 
 
 #include "dht.h"
-
+#include "gpio_driver.h"
+#include "timer1_driver.h"
 
 //Global variables
 volatile uint8_t	_v_dht_temp_int = 0;
@@ -30,17 +31,7 @@ volatile	uint8_t dht_state = dht_idle;
 
 volatile uint8_t _v_dht_data_ready = 0;
 
-void setPin(uint8_t pin,uint8_t state)
-{
-	if(state==HIGH)
-	{
-		PORTB|=(0x01<<pin);
-	}
-	else if (state==LOW)
-	{
-		PORTB&=~(0x01<<pin); 		
-	}
-}
+
 
 
 
@@ -50,13 +41,17 @@ void setPin(uint8_t pin,uint8_t state)
 void attiny_dht_init()
 {
 	//set DHT_PIN as output
-	DDRB |= (0x01<<DHT_PIN); //DHT_PIN as Out
-	PORTB|=(0x01<<DHT_PIN); //DHT_PIN ON (line in idle state)
+	//DDRB |= (0x01<<DHT_PIN); //DHT_PIN as Out
+	//PORTB|=(0x01<<DHT_PIN); //DHT_PIN ON (line in idle state)
+	setPinDir(DHT_PIN,OUTPUT);
+	setPin(DHT_PIN,HIGH);
 	
 	
 	//RED LED
-	DDRB |= (0x01<<PB4); //PB4 as Out
-	PORTB&=~(0x01<<PB4); //PB4 OFF (line in idle state)
+	//DDRB |= (0x01<<PB4); //PB4 as Out
+	//PORTB&=~(0x01<<PB4); //PB4 OFF (line in idle state)
+	setPinDir(PB4,OUTPUT);
+	setPin(PB4,LOW);
 }
 
 
@@ -154,65 +149,6 @@ ISR(PCINT0_vect)
 */
 
 /*	
-	@fn:  timer1_init
-	@brief: inits timer1 for it to increment TCNT1 every uSeg
-	@params: none
-	@returns: none
-*/
-void timer1_init()
-{
-	//TCCR1
-	/*
-		bit7:	0 (Don't clear on compare match)
-		bit6:	0 (PWM Enable off)
-		bit5-4: 00 (0 because we don't use the compare match)
-		bit3-0:	0100 (CK/8 = 1MHz)
-	*/
-	TCCR1 = 0x04;
-	
-	/*PLL Control and Status Register
-	Bit 7: 0
-	Bit 2: 0 (System Clock)
-	Bit 1: 1
-	Bit 0: 0
-	*/
-	//PLLCSR = 0x02;
-	 
-	//set the count to 0
-	TCNT1 = 0x00;
-}
-
-/*	
-	@fn:  timer1_deinit
-	@brief: de-inits timer1 for it to increment TCNT1 every uSeg
-	@params: none
-	@returns: none
-*/
-void timer1_deinit()
-{
-	//TCCR1
-	/*
-		bit7:	0 (Don't clear on compare match)
-		bit6:	0 (PWM Enable off)
-		bit5-4: 00 (0 because we don't use the compare match)
-		bit3-0:	0100 (CK/8 = 1MHz)
-	*/
-	TCCR1 = 0x00;
-	
-	/*PLL Control and Status Register
-	Bit 7: 0
-	Bit 2: 0 (System Clock)
-	Bit 1: 1
-	Bit 0: 0
-	*/
-	//PLLCSR = 0x02;
-	 
-	//set the count to 0
-	TCNT1 = 0x00;
-}
-
-
-/*	
 	@fn:  dht_start
 	@brief: generates the 18mS start signal for the DHT
 	@params: none
@@ -223,26 +159,35 @@ void dht_start()
 	
 	
 	//set TIMER1 pre-scaler to 4096
-	TCCR1 = 0x0E;
+	//TCCR1 = 0x0E; //OG
+	timer1_set_prescaler(4096);
 	
 	//set DHT_PIN to low
-	PORTB&=~(0x01<<DHT_PIN); 
+	//PORTB&=~(0x01<<DHT_PIN); 
+	setPin(DHT_PIN,LOW);
+	
 	//set counter to 0
-	TCNT1=0x00;	
+	//TCNT1=0x00;	
+	timer1_reset_count();
 	
 	//wait for the 18mS
-	while(TCNT1<18);
+	while(timer1_get_count()<18);
 
 	//set DHT_PIN as input...
-	DDRB&=~(0x01<<DHT_PIN); 
+	//DDRB&=~(0x01<<DHT_PIN); 
+	setPinDir(DHT_PIN,INPUT);
+	
 	//and release the line
-	PORTB&=~(0x01<<DHT_PIN); 
+	//PORTB&=~(0x01<<DHT_PIN); 
+	setPin(DHT_PIN,LOW);
 	
 	
 	//set TIMER1 pre-scaler to 8, so one tick equals 1uS
-	TCCR1 = 0x04;
+	//TCCR1 = 0x04;
+	timer1_set_prescaler(8);
 	//set counter to 0
-	TCNT1=0x00;
+	//TCNT1=0x00;
+	timer1_reset_count();
 }
 
 /*	
@@ -253,34 +198,35 @@ void dht_start()
 */
 void dht_response()
 {
+	uint8_t timer_val = 0;
 	//the DHT 
 	//while((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==1);
 		
-
-
-				
 		//the DHT takes 10-20uS to start responding: we wait for the line to go low
-		while((PINB & (0x01 << DHT_PIN)));
+		while( getPinState(DHT_PIN) );
 			
 		//re-init counter
-		TCNT1 = 0;
+		//TCNT1 = 0;
+		timer1_reset_count();
 			
 		//wait while the line is low
-		while( !(PINB & (0x01 << DHT_PIN)) );
-			
+		while( !getPinState(DHT_PIN) );
+		timer_val = timer1_get_count();				
 		//check the counter values
-		if( (75<=TCNT1) && (90>=TCNT1))
+		if( (75<=timer_val) && (90>=timer_val))
 		{
-			TCNT1=0;
+			//TCNT1=0;
+			timer1_reset_count();
+			timer_val = 0;
 			//we have to read to pulses, so before continuing in the state machine, we repeat for the second pulse
 			_v_response_pulses++;
 				
 			//restart count
 				
 			//now we wait while the line is high
-			while((PINB & (0x01 << DHT_PIN)));	
-				
-			if( (75<=TCNT1) && (90>=TCNT1))
+			while( getPinState(DHT_PIN));	
+			timer_val = timer1_get_count();	
+			if( (75<=timer_val) && (90>=timer_val))
 			{
 				_v_response_pulses++;
 			}
@@ -306,25 +252,27 @@ void dht_response()
 */
 void dht_gets_data()
 {
-	
+	uint8_t timer_value = 0;
 	while(_v_dht_data_shift_index>0)
 	{
 		//decrement index
 		_v_dht_data_shift_index--;	
 		
 		//wait while the line is low
-		while( !(PINB & (0x01 << DHT_PIN)) );
+		while( !getPinState(DHT_PIN) );
 			
 		//restart counter
-		TCNT1 = 0;
-			
+		//TCNT1 = 0;
+		timer1_reset_count();
+		timer_value = 0;
 		//now we wait while the line is high
-		while((PINB & (0x01 << DHT_PIN)));
-		
+		while(getPinState(DHT_PIN));
+		timer_value = timer1_get_count();
 		if(_v_dht_data_shift_index>7)
 		{
+			
 			//we only check for the ones (given the values variables are started at 0
-			if(TCNT1>=45)
+			if(timer_value>=45)
 			{
 				_v_dht_data |= ((uint32_t)1<<(_v_dht_data_shift_index-8));
 			}			
@@ -333,7 +281,7 @@ void dht_gets_data()
 		else{
 			
 			//we only check for the ones (given the values variables are started at 0
-			if(TCNT1>=45)
+			if(timer_value>=45)
 			{
 				_v_dht_chk |= (1<<_v_dht_data_shift_index);
 			}			
