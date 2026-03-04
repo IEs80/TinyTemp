@@ -147,11 +147,8 @@ int main(void)
 	uint8_t dht_status = DHT_WORKING;
 	app_state = READ;	
 	
-	TWI_DELAY();
-	TWI_DELAY();
-	TWI_DELAY();
-	TWI_DELAY();
-
+	_delay_ms(1000);
+	
 	attiny_init();
 
 	//attiny_dht_init();

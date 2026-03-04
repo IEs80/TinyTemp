@@ -3,31 +3,31 @@ GccApplication1.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000b22  00000000  00000000  00000094  2**1
+  0 .text         00000b14  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000010  00800060  00000b22  00000bb6  2**0
+  1 .data         00000010  00800060  00000b14  00000ba8  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000001c  00800070  00800070  00000bc6  2**0
+  2 .bss          0000001c  00800070  00800070  00000bb8  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000bc6  2**0
+  3 .comment      00000030  00000000  00000000  00000bb8  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000bf8  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000be8  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000001b0  00000000  00000000  00000c34  2**0
+  5 .debug_aranges 000001b0  00000000  00000000  00000c24  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00001d8e  00000000  00000000  00000de4  2**0
+  6 .debug_info   00001ca7  00000000  00000000  00000dd4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000c57  00000000  00000000  00002b72  2**0
+  7 .debug_abbrev 00000c39  00000000  00000000  00002a7b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000012bd  00000000  00000000  000037c9  2**0
+  8 .debug_line   000012bb  00000000  00000000  000036b4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000380  00000000  00000000  00004a88  2**2
+  9 .debug_frame  00000380  00000000  00000000  00004970  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000008a4  00000000  00000000  00004e08  2**0
+ 10 .debug_str    000008a4  00000000  00000000  00004cf0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000d89  00000000  00000000  000056ac  2**0
+ 11 .debug_loc    00000cbd  00000000  00000000  00005594  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000150  00000000  00000000  00006435  2**0
+ 12 .debug_ranges 00000150  00000000  00000000  00006251  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -211,7 +211,7 @@ Disassembly of section .text:
  152:	10 e0       	ldi	r17, 0x00	; 0
  154:	a0 e6       	ldi	r26, 0x60	; 96
  156:	b0 e0       	ldi	r27, 0x00	; 0
- 158:	e2 e2       	ldi	r30, 0x22	; 34
+ 158:	e4 e1       	ldi	r30, 0x14	; 20
  15a:	fb e0       	ldi	r31, 0x0B	; 11
  15c:	02 c0       	rjmp	.+4      	; 0x162 <__do_copy_data+0x10>
  15e:	05 90       	lpm	r0, Z+
@@ -234,7 +234,7 @@ Disassembly of section .text:
  174:	b2 07       	cpc	r27, r18
  176:	e1 f7       	brne	.-8      	; 0x170 <.do_clear_bss_loop>
  178:	f7 d2       	rcall	.+1518   	; 0x768 <main>
- 17a:	d1 c4       	rjmp	.+2466   	; 0xb1e <_exit>
+ 17a:	ca c4       	rjmp	.+2452   	; 0xb10 <_exit>
 
 0000017c <__bad_interrupt>:
  17c:	41 cf       	rjmp	.-382    	; 0x0 <__vectors>
@@ -1283,654 +1283,645 @@ ISR(TIMER0_COMPA_vect)
 	app_state = READ;	
  768:	82 e0       	ldi	r24, 0x02	; 2
  76a:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <app_state>
- 76e:	2d e0       	ldi	r18, 0x0D	; 13
- 770:	2a 95       	dec	r18
- 772:	f1 f7       	brne	.-4      	; 0x770 <main+0x8>
- 774:	00 00       	nop
- 776:	8d e0       	ldi	r24, 0x0D	; 13
- 778:	8a 95       	dec	r24
- 77a:	f1 f7       	brne	.-4      	; 0x778 <main+0x10>
- 77c:	00 00       	nop
- 77e:	9d e0       	ldi	r25, 0x0D	; 13
- 780:	9a 95       	dec	r25
- 782:	f1 f7       	brne	.-4      	; 0x780 <main+0x18>
- 784:	00 00       	nop
- 786:	2d e0       	ldi	r18, 0x0D	; 13
- 788:	2a 95       	dec	r18
- 78a:	f1 f7       	brne	.-4      	; 0x788 <main+0x20>
- 78c:	00 00       	nop
-	TWI_DELAY();
-	TWI_DELAY();
-	TWI_DELAY();
-	TWI_DELAY();
-
-	attiny_init();
- 78e:	c8 df       	rcall	.-112    	; 0x720 <attiny_init>
-    /* Replace with your application code */
-    while (1) 
-    {
-		
-		
-		switch(app_state)
- 790:	80 91 84 00 	lds	r24, 0x0084	; 0x800084 <app_state>
- 794:	81 30       	cpi	r24, 0x01	; 1
- 796:	49 f1       	breq	.+82     	; 0x7ea <main+0x82>
- 798:	18 f0       	brcs	.+6      	; 0x7a0 <main+0x38>
- 79a:	82 30       	cpi	r24, 0x02	; 2
- 79c:	89 f0       	breq	.+34     	; 0x7c0 <main+0x58>
- 79e:	3b c0       	rjmp	.+118    	; 0x816 <main+0xae>
-		{
-			case IDLE:
-				//in idle state, we just wait to measure again
-				GLED_OFF;
- 7a0:	88 b3       	in	r24, 0x18	; 24
- 7a2:	8f 7e       	andi	r24, 0xEF	; 239
- 7a4:	88 bb       	out	0x18, r24	; 24
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
- 7a6:	8f ef       	ldi	r24, 0xFF	; 255
- 7a8:	9f e4       	ldi	r25, 0x4F	; 79
- 7aa:	23 ec       	ldi	r18, 0xC3	; 195
- 7ac:	81 50       	subi	r24, 0x01	; 1
- 7ae:	90 40       	sbci	r25, 0x00	; 0
- 7b0:	20 40       	sbci	r18, 0x00	; 0
- 7b2:	e1 f7       	brne	.-8      	; 0x7ac <main+0x44>
- 7b4:	00 c0       	rjmp	.+0      	; 0x7b6 <main+0x4e>
- 7b6:	00 00       	nop
+ 76e:	2f ef       	ldi	r18, 0xFF	; 255
+ 770:	89 e6       	ldi	r24, 0x69	; 105
+ 772:	98 e1       	ldi	r25, 0x18	; 24
+ 774:	21 50       	subi	r18, 0x01	; 1
+ 776:	80 40       	sbci	r24, 0x00	; 0
+ 778:	90 40       	sbci	r25, 0x00	; 0
+ 77a:	e1 f7       	brne	.-8      	; 0x774 <main+0xc>
+ 77c:	00 c0       	rjmp	.+0      	; 0x77e <main+0x16>
+ 77e:	00 00       	nop
+	
+	_delay_ms(1000);
+	
+	attiny_init();
+ 780:	cf df       	rcall	.-98     	; 0x720 <attiny_init>
+    /* Replace with your application code */
+    while (1) 
+    {
+		
+		
+		switch(app_state)
+ 782:	80 91 84 00 	lds	r24, 0x0084	; 0x800084 <app_state>
+ 786:	81 30       	cpi	r24, 0x01	; 1
+ 788:	49 f1       	breq	.+82     	; 0x7dc <main+0x74>
+ 78a:	18 f0       	brcs	.+6      	; 0x792 <main+0x2a>
+ 78c:	82 30       	cpi	r24, 0x02	; 2
+ 78e:	89 f0       	breq	.+34     	; 0x7b2 <main+0x4a>
+ 790:	3b c0       	rjmp	.+118    	; 0x808 <main+0xa0>
+		{
+			case IDLE:
+				//in idle state, we just wait to measure again
+				GLED_OFF;
+ 792:	88 b3       	in	r24, 0x18	; 24
+ 794:	8f 7e       	andi	r24, 0xEF	; 239
+ 796:	88 bb       	out	0x18, r24	; 24
+ 798:	2f ef       	ldi	r18, 0xFF	; 255
+ 79a:	8f e4       	ldi	r24, 0x4F	; 79
+ 79c:	93 ec       	ldi	r25, 0xC3	; 195
+ 79e:	21 50       	subi	r18, 0x01	; 1
+ 7a0:	80 40       	sbci	r24, 0x00	; 0
+ 7a2:	90 40       	sbci	r25, 0x00	; 0
+ 7a4:	e1 f7       	brne	.-8      	; 0x79e <main+0x36>
+ 7a6:	00 c0       	rjmp	.+0      	; 0x7a8 <main+0x40>
+ 7a8:	00 00       	nop
 				_delay_ms(8000);
 				
 				app_state = READ;
- 7b8:	82 e0       	ldi	r24, 0x02	; 2
- 7ba:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <app_state>
+ 7aa:	82 e0       	ldi	r24, 0x02	; 2
+ 7ac:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <app_state>
 				break;
- 7be:	e8 cf       	rjmp	.-48     	; 0x790 <main+0x28>
+ 7b0:	e8 cf       	rjmp	.-48     	; 0x782 <main+0x1a>
 			case READ:
 				GLED_ON;
- 7c0:	88 b3       	in	r24, 0x18	; 24
- 7c2:	80 61       	ori	r24, 0x10	; 16
- 7c4:	88 bb       	out	0x18, r24	; 24
+ 7b2:	88 b3       	in	r24, 0x18	; 24
+ 7b4:	80 61       	ori	r24, 0x10	; 16
+ 7b6:	88 bb       	out	0x18, r24	; 24
 				TIMSK &= ~(1 << OCIE0A);
- 7c6:	89 b7       	in	r24, 0x39	; 57
- 7c8:	8f 7e       	andi	r24, 0xEF	; 239
- 7ca:	89 bf       	out	0x39, r24	; 57
+ 7b8:	89 b7       	in	r24, 0x39	; 57
+ 7ba:	8f 7e       	andi	r24, 0xEF	; 239
+ 7bc:	89 bf       	out	0x39, r24	; 57
 				//attiny_timer_deinit();
 				
 				dht_status = dht_read_2();
- 7cc:	b2 dd       	rcall	.-1180   	; 0x332 <dht_read_2>
+ 7be:	b9 dd       	rcall	.-1166   	; 0x332 <dht_read_2>
 				TIMSK |= (1 << OCIE0A);
- 7ce:	99 b7       	in	r25, 0x39	; 57
- 7d0:	90 61       	ori	r25, 0x10	; 16
- 7d2:	99 bf       	out	0x39, r25	; 57
+ 7c0:	99 b7       	in	r25, 0x39	; 57
+ 7c2:	90 61       	ori	r25, 0x10	; 16
+ 7c4:	99 bf       	out	0x39, r25	; 57
 				if (dht_status==DHT_OK_STATUS)
- 7d4:	84 30       	cpi	r24, 0x04	; 4
- 7d6:	21 f4       	brne	.+8      	; 0x7e0 <main+0x78>
+ 7c6:	84 30       	cpi	r24, 0x04	; 4
+ 7c8:	21 f4       	brne	.+8      	; 0x7d2 <main+0x6a>
 				{
 					dht_status = DHT_WORKING;
 					app_state = PRINT;
- 7d8:	81 e0       	ldi	r24, 0x01	; 1
- 7da:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <app_state>
- 7de:	d8 cf       	rjmp	.-80     	; 0x790 <main+0x28>
+ 7ca:	81 e0       	ldi	r24, 0x01	; 1
+ 7cc:	80 93 84 00 	sts	0x0084, r24	; 0x800084 <app_state>
+ 7d0:	d8 cf       	rjmp	.-80     	; 0x782 <main+0x1a>
 				}
 				else if(dht_status!=DHT_OK_STATUS)
- 7e0:	84 30       	cpi	r24, 0x04	; 4
- 7e2:	b1 f2       	breq	.-84     	; 0x790 <main+0x28>
+ 7d2:	84 30       	cpi	r24, 0x04	; 4
+ 7d4:	b1 f2       	breq	.-84     	; 0x782 <main+0x1a>
 				{
 					dht_status = DHT_WORKING;
 					app_state = IDLE;
- 7e4:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <app_state>
- 7e8:	d3 cf       	rjmp	.-90     	; 0x790 <main+0x28>
+ 7d6:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <app_state>
+ 7da:	d3 cf       	rjmp	.-90     	; 0x782 <main+0x1a>
 				break;
 			case PRINT:
 				
 				
 
 				attiny_timer_init();
- 7ea:	88 df       	rcall	.-240    	; 0x6fc <attiny_timer_init>
+ 7dc:	8f df       	rcall	.-226    	; 0x6fc <attiny_timer_init>
 				//attiny_i2c_tx();
 				//turn on display
 				oled_on();
- 7ec:	50 d1       	rcall	.+672    	; 0xa8e <oled_on>
+ 7de:	50 d1       	rcall	.+672    	; 0xa80 <oled_on>
 				//full-on display
 				oled_full_on();
- 7ee:	54 d1       	rcall	.+680    	; 0xa98 <oled_full_on>
+ 7e0:	54 d1       	rcall	.+680    	; 0xa8a <oled_full_on>
 				//display sleep mode
 				//attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 				oled_clean(standar_mode);
- 7f0:	80 e0       	ldi	r24, 0x00	; 0
- 7f2:	30 d0       	rcall	.+96     	; 0x854 <oled_clean>
+ 7e2:	80 e0       	ldi	r24, 0x00	; 0
+ 7e4:	30 d0       	rcall	.+96     	; 0x846 <oled_clean>
 			
 				//write text
 				//oled_print_text("TEMP: 0°C",2,32);
 				print_temperature(_v_dht_temp_int,_v_dht_temp_dec);
- 7f4:	60 91 7d 00 	lds	r22, 0x007D	; 0x80007d <_v_dht_temp_dec>
- 7f8:	80 91 7e 00 	lds	r24, 0x007E	; 0x80007e <_v_dht_temp_int>
- 7fc:	9f d0       	rcall	.+318    	; 0x93c <print_temperature>
+ 7e6:	60 91 7d 00 	lds	r22, 0x007D	; 0x80007d <_v_dht_temp_dec>
+ 7ea:	80 91 7e 00 	lds	r24, 0x007E	; 0x80007e <_v_dht_temp_int>
+ 7ee:	9f d0       	rcall	.+318    	; 0x92e <print_temperature>
 				print_humidity(_v_dht_rh_int,_v_dht_rh_dec);
- 7fe:	60 91 7b 00 	lds	r22, 0x007B	; 0x80007b <_v_dht_rh_dec>
- 802:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <_v_dht_rh_int>
- 806:	f0 d0       	rcall	.+480    	; 0x9e8 <print_humidity>
+ 7f0:	60 91 7b 00 	lds	r22, 0x007B	; 0x80007b <_v_dht_rh_dec>
+ 7f4:	80 91 7c 00 	lds	r24, 0x007C	; 0x80007c <_v_dht_rh_int>
+ 7f8:	f0 d0       	rcall	.+480    	; 0x9da <print_humidity>
 				//oled_print_text("HUM:  70%",5,32);
 				//oled_draw_weather(sunny,2,32);
 			
 			
 				//full-on display (using gdram)
 				attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
- 808:	44 ea       	ldi	r20, 0xA4	; 164
- 80a:	60 e0       	ldi	r22, 0x00	; 0
- 80c:	88 e7       	ldi	r24, 0x78	; 120
- 80e:	ce de       	rcall	.-612    	; 0x5ac <attiny_i2c_send_byte>
+ 7fa:	44 ea       	ldi	r20, 0xA4	; 164
+ 7fc:	60 e0       	ldi	r22, 0x00	; 0
+ 7fe:	88 e7       	ldi	r24, 0x78	; 120
+ 800:	d5 de       	rcall	.-598    	; 0x5ac <attiny_i2c_send_byte>
 				
 				
 				//init_oled = 0;
 				
 				//set state to IDLE
 				app_state = IDLE;
- 810:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <app_state>
+ 802:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <app_state>
 				
 				break;
- 814:	bd cf       	rjmp	.-134    	; 0x790 <main+0x28>
+ 806:	bd cf       	rjmp	.-134    	; 0x782 <main+0x1a>
 			default:
 				app_state = IDLE;
- 816:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <app_state>
+ 808:	10 92 84 00 	sts	0x0084, r1	; 0x800084 <app_state>
 				break;
- 81a:	ba cf       	rjmp	.-140    	; 0x790 <main+0x28>
+ 80c:	ba cf       	rjmp	.-140    	; 0x782 <main+0x1a>
 
-0000081c <set_page>:
+0000080e <set_page>:
 			pixel_slice = pgm_read_byte(&weathericons[id][slice_index]);
 			oled_write_byte(pixel_slice);	
 			
 		}	
 
 }
- 81c:	88 30       	cpi	r24, 0x08	; 8
- 81e:	30 f4       	brcc	.+12     	; 0x82c <set_page+0x10>
- 820:	48 2f       	mov	r20, r24
- 822:	4f 70       	andi	r20, 0x0F	; 15
- 824:	40 6b       	ori	r20, 0xB0	; 176
- 826:	60 e0       	ldi	r22, 0x00	; 0
- 828:	88 e7       	ldi	r24, 0x78	; 120
- 82a:	c0 de       	rcall	.-640    	; 0x5ac <attiny_i2c_send_byte>
- 82c:	08 95       	ret
+ 80e:	88 30       	cpi	r24, 0x08	; 8
+ 810:	30 f4       	brcc	.+12     	; 0x81e <set_page+0x10>
+ 812:	48 2f       	mov	r20, r24
+ 814:	4f 70       	andi	r20, 0x0F	; 15
+ 816:	40 6b       	ori	r20, 0xB0	; 176
+ 818:	60 e0       	ldi	r22, 0x00	; 0
+ 81a:	88 e7       	ldi	r24, 0x78	; 120
+ 81c:	c7 de       	rcall	.-626    	; 0x5ac <attiny_i2c_send_byte>
+ 81e:	08 95       	ret
 
-0000082e <set_column>:
- 82e:	cf 93       	push	r28
- 830:	88 23       	and	r24, r24
- 832:	74 f0       	brlt	.+28     	; 0x850 <set_column+0x22>
- 834:	c2 e0       	ldi	r28, 0x02	; 2
- 836:	c8 0f       	add	r28, r24
- 838:	4c 2f       	mov	r20, r28
- 83a:	4f 70       	andi	r20, 0x0F	; 15
+00000820 <set_column>:
+ 820:	cf 93       	push	r28
+ 822:	88 23       	and	r24, r24
+ 824:	74 f0       	brlt	.+28     	; 0x842 <set_column+0x22>
+ 826:	c2 e0       	ldi	r28, 0x02	; 2
+ 828:	c8 0f       	add	r28, r24
+ 82a:	4c 2f       	mov	r20, r28
+ 82c:	4f 70       	andi	r20, 0x0F	; 15
+ 82e:	60 e0       	ldi	r22, 0x00	; 0
+ 830:	88 e7       	ldi	r24, 0x78	; 120
+ 832:	bc de       	rcall	.-648    	; 0x5ac <attiny_i2c_send_byte>
+ 834:	4c 2f       	mov	r20, r28
+ 836:	42 95       	swap	r20
+ 838:	4f 70       	andi	r20, 0x0F	; 15
+ 83a:	40 61       	ori	r20, 0x10	; 16
  83c:	60 e0       	ldi	r22, 0x00	; 0
  83e:	88 e7       	ldi	r24, 0x78	; 120
  840:	b5 de       	rcall	.-662    	; 0x5ac <attiny_i2c_send_byte>
- 842:	4c 2f       	mov	r20, r28
- 844:	42 95       	swap	r20
- 846:	4f 70       	andi	r20, 0x0F	; 15
- 848:	40 61       	ori	r20, 0x10	; 16
- 84a:	60 e0       	ldi	r22, 0x00	; 0
- 84c:	88 e7       	ldi	r24, 0x78	; 120
- 84e:	ae de       	rcall	.-676    	; 0x5ac <attiny_i2c_send_byte>
- 850:	cf 91       	pop	r28
- 852:	08 95       	ret
+ 842:	cf 91       	pop	r28
+ 844:	08 95       	ret
 
-00000854 <oled_clean>:
- 854:	cf 93       	push	r28
- 856:	df 93       	push	r29
- 858:	d0 e0       	ldi	r29, 0x00	; 0
- 85a:	1c c0       	rjmp	.+56     	; 0x894 <oled_clean+0x40>
- 85c:	4d 2f       	mov	r20, r29
- 85e:	4f 70       	andi	r20, 0x0F	; 15
- 860:	40 6b       	ori	r20, 0xB0	; 176
- 862:	60 e0       	ldi	r22, 0x00	; 0
- 864:	88 e7       	ldi	r24, 0x78	; 120
- 866:	a2 de       	rcall	.-700    	; 0x5ac <attiny_i2c_send_byte>
- 868:	42 e0       	ldi	r20, 0x02	; 2
- 86a:	60 e0       	ldi	r22, 0x00	; 0
- 86c:	88 e7       	ldi	r24, 0x78	; 120
- 86e:	9e de       	rcall	.-708    	; 0x5ac <attiny_i2c_send_byte>
- 870:	40 e1       	ldi	r20, 0x10	; 16
- 872:	60 e0       	ldi	r22, 0x00	; 0
- 874:	88 e7       	ldi	r24, 0x78	; 120
- 876:	9a de       	rcall	.-716    	; 0x5ac <attiny_i2c_send_byte>
- 878:	c0 e0       	ldi	r28, 0x00	; 0
- 87a:	05 c0       	rjmp	.+10     	; 0x886 <oled_clean+0x32>
- 87c:	40 e0       	ldi	r20, 0x00	; 0
- 87e:	60 e4       	ldi	r22, 0x40	; 64
- 880:	88 e7       	ldi	r24, 0x78	; 120
- 882:	94 de       	rcall	.-728    	; 0x5ac <attiny_i2c_send_byte>
- 884:	cf 5f       	subi	r28, 0xFF	; 255
- 886:	cc 23       	and	r28, r28
- 888:	cc f7       	brge	.-14     	; 0x87c <oled_clean+0x28>
- 88a:	8d e0       	ldi	r24, 0x0D	; 13
- 88c:	8a 95       	dec	r24
- 88e:	f1 f7       	brne	.-4      	; 0x88c <oled_clean+0x38>
- 890:	00 00       	nop
- 892:	df 5f       	subi	r29, 0xFF	; 255
- 894:	d8 30       	cpi	r29, 0x08	; 8
- 896:	10 f3       	brcs	.-60     	; 0x85c <oled_clean+0x8>
- 898:	df 91       	pop	r29
- 89a:	cf 91       	pop	r28
- 89c:	08 95       	ret
+00000846 <oled_clean>:
+ 846:	cf 93       	push	r28
+ 848:	df 93       	push	r29
+ 84a:	d0 e0       	ldi	r29, 0x00	; 0
+ 84c:	1c c0       	rjmp	.+56     	; 0x886 <oled_clean+0x40>
+ 84e:	4d 2f       	mov	r20, r29
+ 850:	4f 70       	andi	r20, 0x0F	; 15
+ 852:	40 6b       	ori	r20, 0xB0	; 176
+ 854:	60 e0       	ldi	r22, 0x00	; 0
+ 856:	88 e7       	ldi	r24, 0x78	; 120
+ 858:	a9 de       	rcall	.-686    	; 0x5ac <attiny_i2c_send_byte>
+ 85a:	42 e0       	ldi	r20, 0x02	; 2
+ 85c:	60 e0       	ldi	r22, 0x00	; 0
+ 85e:	88 e7       	ldi	r24, 0x78	; 120
+ 860:	a5 de       	rcall	.-694    	; 0x5ac <attiny_i2c_send_byte>
+ 862:	40 e1       	ldi	r20, 0x10	; 16
+ 864:	60 e0       	ldi	r22, 0x00	; 0
+ 866:	88 e7       	ldi	r24, 0x78	; 120
+ 868:	a1 de       	rcall	.-702    	; 0x5ac <attiny_i2c_send_byte>
+ 86a:	c0 e0       	ldi	r28, 0x00	; 0
+ 86c:	05 c0       	rjmp	.+10     	; 0x878 <oled_clean+0x32>
+ 86e:	40 e0       	ldi	r20, 0x00	; 0
+ 870:	60 e4       	ldi	r22, 0x40	; 64
+ 872:	88 e7       	ldi	r24, 0x78	; 120
+ 874:	9b de       	rcall	.-714    	; 0x5ac <attiny_i2c_send_byte>
+ 876:	cf 5f       	subi	r28, 0xFF	; 255
+ 878:	cc 23       	and	r28, r28
+ 87a:	cc f7       	brge	.-14     	; 0x86e <oled_clean+0x28>
+ 87c:	8d e0       	ldi	r24, 0x0D	; 13
+ 87e:	8a 95       	dec	r24
+ 880:	f1 f7       	brne	.-4      	; 0x87e <oled_clean+0x38>
+ 882:	00 00       	nop
+ 884:	df 5f       	subi	r29, 0xFF	; 255
+ 886:	d8 30       	cpi	r29, 0x08	; 8
+ 888:	10 f3       	brcs	.-60     	; 0x84e <oled_clean+0x8>
+ 88a:	df 91       	pop	r29
+ 88c:	cf 91       	pop	r28
+ 88e:	08 95       	ret
 
-0000089e <oled_write_byte>:
- 89e:	48 2f       	mov	r20, r24
- 8a0:	60 e4       	ldi	r22, 0x40	; 64
- 8a2:	88 e7       	ldi	r24, 0x78	; 120
- 8a4:	83 de       	rcall	.-762    	; 0x5ac <attiny_i2c_send_byte>
- 8a6:	08 95       	ret
+00000890 <oled_write_byte>:
+ 890:	48 2f       	mov	r20, r24
+ 892:	60 e4       	ldi	r22, 0x40	; 64
+ 894:	88 e7       	ldi	r24, 0x78	; 120
+ 896:	8a de       	rcall	.-748    	; 0x5ac <attiny_i2c_send_byte>
+ 898:	08 95       	ret
 
-000008a8 <oled_print_text>:
- 8a8:	df 92       	push	r13
- 8aa:	ef 92       	push	r14
- 8ac:	ff 92       	push	r15
- 8ae:	0f 93       	push	r16
- 8b0:	1f 93       	push	r17
- 8b2:	cf 93       	push	r28
- 8b4:	df 93       	push	r29
- 8b6:	7c 01       	movw	r14, r24
- 8b8:	86 2f       	mov	r24, r22
- 8ba:	c4 2f       	mov	r28, r20
- 8bc:	f7 01       	movw	r30, r14
- 8be:	01 90       	ld	r0, Z+
- 8c0:	00 20       	and	r0, r0
- 8c2:	e9 f7       	brne	.-6      	; 0x8be <oled_print_text+0x16>
- 8c4:	31 97       	sbiw	r30, 0x01	; 1
- 8c6:	de 2e       	mov	r13, r30
- 8c8:	de 18       	sub	r13, r14
- 8ca:	a8 df       	rcall	.-176    	; 0x81c <set_page>
- 8cc:	8c 2f       	mov	r24, r28
- 8ce:	af df       	rcall	.-162    	; 0x82e <set_column>
- 8d0:	d0 e0       	ldi	r29, 0x00	; 0
- 8d2:	2a c0       	rjmp	.+84     	; 0x928 <oled_print_text+0x80>
- 8d4:	f7 01       	movw	r30, r14
- 8d6:	ed 0f       	add	r30, r29
- 8d8:	f1 1d       	adc	r31, r1
- 8da:	00 81       	ld	r16, Z
- 8dc:	00 3b       	cpi	r16, 0xB0	; 176
- 8de:	59 f4       	brne	.+22     	; 0x8f6 <oled_print_text+0x4e>
- 8e0:	86 e0       	ldi	r24, 0x06	; 6
- 8e2:	dd df       	rcall	.-70     	; 0x89e <oled_write_byte>
- 8e4:	89 e0       	ldi	r24, 0x09	; 9
- 8e6:	db df       	rcall	.-74     	; 0x89e <oled_write_byte>
- 8e8:	89 e0       	ldi	r24, 0x09	; 9
- 8ea:	d9 df       	rcall	.-78     	; 0x89e <oled_write_byte>
- 8ec:	86 e0       	ldi	r24, 0x06	; 6
- 8ee:	d7 df       	rcall	.-82     	; 0x89e <oled_write_byte>
- 8f0:	80 e0       	ldi	r24, 0x00	; 0
- 8f2:	d5 df       	rcall	.-86     	; 0x89e <oled_write_byte>
- 8f4:	18 c0       	rjmp	.+48     	; 0x926 <oled_print_text+0x7e>
- 8f6:	10 e0       	ldi	r17, 0x00	; 0
- 8f8:	00 52       	subi	r16, 0x20	; 32
- 8fa:	11 09       	sbc	r17, r1
- 8fc:	c8 01       	movw	r24, r16
- 8fe:	88 0f       	add	r24, r24
- 900:	99 1f       	adc	r25, r25
- 902:	88 0f       	add	r24, r24
- 904:	99 1f       	adc	r25, r25
- 906:	08 0f       	add	r16, r24
- 908:	19 1f       	adc	r17, r25
- 90a:	c0 e0       	ldi	r28, 0x00	; 0
- 90c:	08 c0       	rjmp	.+16     	; 0x91e <oled_print_text+0x76>
- 90e:	f8 01       	movw	r30, r16
- 910:	ec 0f       	add	r30, r28
- 912:	f1 1d       	adc	r31, r1
- 914:	e2 5e       	subi	r30, 0xE2	; 226
- 916:	ff 4f       	sbci	r31, 0xFF	; 255
- 918:	84 91       	lpm	r24, Z
- 91a:	c1 df       	rcall	.-126    	; 0x89e <oled_write_byte>
- 91c:	cf 5f       	subi	r28, 0xFF	; 255
- 91e:	c5 30       	cpi	r28, 0x05	; 5
- 920:	b0 f3       	brcs	.-20     	; 0x90e <oled_print_text+0x66>
- 922:	80 e0       	ldi	r24, 0x00	; 0
- 924:	bc df       	rcall	.-136    	; 0x89e <oled_write_byte>
- 926:	df 5f       	subi	r29, 0xFF	; 255
- 928:	dd 15       	cp	r29, r13
- 92a:	a0 f2       	brcs	.-88     	; 0x8d4 <oled_print_text+0x2c>
- 92c:	df 91       	pop	r29
- 92e:	cf 91       	pop	r28
- 930:	1f 91       	pop	r17
- 932:	0f 91       	pop	r16
- 934:	ff 90       	pop	r15
- 936:	ef 90       	pop	r14
- 938:	df 90       	pop	r13
- 93a:	08 95       	ret
+0000089a <oled_print_text>:
+ 89a:	df 92       	push	r13
+ 89c:	ef 92       	push	r14
+ 89e:	ff 92       	push	r15
+ 8a0:	0f 93       	push	r16
+ 8a2:	1f 93       	push	r17
+ 8a4:	cf 93       	push	r28
+ 8a6:	df 93       	push	r29
+ 8a8:	7c 01       	movw	r14, r24
+ 8aa:	86 2f       	mov	r24, r22
+ 8ac:	c4 2f       	mov	r28, r20
+ 8ae:	f7 01       	movw	r30, r14
+ 8b0:	01 90       	ld	r0, Z+
+ 8b2:	00 20       	and	r0, r0
+ 8b4:	e9 f7       	brne	.-6      	; 0x8b0 <oled_print_text+0x16>
+ 8b6:	31 97       	sbiw	r30, 0x01	; 1
+ 8b8:	de 2e       	mov	r13, r30
+ 8ba:	de 18       	sub	r13, r14
+ 8bc:	a8 df       	rcall	.-176    	; 0x80e <set_page>
+ 8be:	8c 2f       	mov	r24, r28
+ 8c0:	af df       	rcall	.-162    	; 0x820 <set_column>
+ 8c2:	d0 e0       	ldi	r29, 0x00	; 0
+ 8c4:	2a c0       	rjmp	.+84     	; 0x91a <oled_print_text+0x80>
+ 8c6:	f7 01       	movw	r30, r14
+ 8c8:	ed 0f       	add	r30, r29
+ 8ca:	f1 1d       	adc	r31, r1
+ 8cc:	00 81       	ld	r16, Z
+ 8ce:	00 3b       	cpi	r16, 0xB0	; 176
+ 8d0:	59 f4       	brne	.+22     	; 0x8e8 <oled_print_text+0x4e>
+ 8d2:	86 e0       	ldi	r24, 0x06	; 6
+ 8d4:	dd df       	rcall	.-70     	; 0x890 <oled_write_byte>
+ 8d6:	89 e0       	ldi	r24, 0x09	; 9
+ 8d8:	db df       	rcall	.-74     	; 0x890 <oled_write_byte>
+ 8da:	89 e0       	ldi	r24, 0x09	; 9
+ 8dc:	d9 df       	rcall	.-78     	; 0x890 <oled_write_byte>
+ 8de:	86 e0       	ldi	r24, 0x06	; 6
+ 8e0:	d7 df       	rcall	.-82     	; 0x890 <oled_write_byte>
+ 8e2:	80 e0       	ldi	r24, 0x00	; 0
+ 8e4:	d5 df       	rcall	.-86     	; 0x890 <oled_write_byte>
+ 8e6:	18 c0       	rjmp	.+48     	; 0x918 <oled_print_text+0x7e>
+ 8e8:	10 e0       	ldi	r17, 0x00	; 0
+ 8ea:	00 52       	subi	r16, 0x20	; 32
+ 8ec:	11 09       	sbc	r17, r1
+ 8ee:	c8 01       	movw	r24, r16
+ 8f0:	88 0f       	add	r24, r24
+ 8f2:	99 1f       	adc	r25, r25
+ 8f4:	88 0f       	add	r24, r24
+ 8f6:	99 1f       	adc	r25, r25
+ 8f8:	08 0f       	add	r16, r24
+ 8fa:	19 1f       	adc	r17, r25
+ 8fc:	c0 e0       	ldi	r28, 0x00	; 0
+ 8fe:	08 c0       	rjmp	.+16     	; 0x910 <oled_print_text+0x76>
+ 900:	f8 01       	movw	r30, r16
+ 902:	ec 0f       	add	r30, r28
+ 904:	f1 1d       	adc	r31, r1
+ 906:	e2 5e       	subi	r30, 0xE2	; 226
+ 908:	ff 4f       	sbci	r31, 0xFF	; 255
+ 90a:	84 91       	lpm	r24, Z
+ 90c:	c1 df       	rcall	.-126    	; 0x890 <oled_write_byte>
+ 90e:	cf 5f       	subi	r28, 0xFF	; 255
+ 910:	c5 30       	cpi	r28, 0x05	; 5
+ 912:	b0 f3       	brcs	.-20     	; 0x900 <oled_print_text+0x66>
+ 914:	80 e0       	ldi	r24, 0x00	; 0
+ 916:	bc df       	rcall	.-136    	; 0x890 <oled_write_byte>
+ 918:	df 5f       	subi	r29, 0xFF	; 255
+ 91a:	dd 15       	cp	r29, r13
+ 91c:	a0 f2       	brcs	.-88     	; 0x8c6 <oled_print_text+0x2c>
+ 91e:	df 91       	pop	r29
+ 920:	cf 91       	pop	r28
+ 922:	1f 91       	pop	r17
+ 924:	0f 91       	pop	r16
+ 926:	ff 90       	pop	r15
+ 928:	ef 90       	pop	r14
+ 92a:	df 90       	pop	r13
+ 92c:	08 95       	ret
 
-0000093c <print_temperature>:
+0000092e <print_temperature>:
 
 
 
 void print_temperature(uint8_t temp_in, uint8_t temp_decc) {
- 93c:	ff 92       	push	r15
- 93e:	0f 93       	push	r16
- 940:	1f 93       	push	r17
- 942:	cf 93       	push	r28
- 944:	df 93       	push	r29
- 946:	cd b7       	in	r28, 0x3d	; 61
- 948:	de b7       	in	r29, 0x3e	; 62
- 94a:	68 97       	sbiw	r28, 0x18	; 24
- 94c:	0f b6       	in	r0, 0x3f	; 63
- 94e:	f8 94       	cli
- 950:	de bf       	out	0x3e, r29	; 62
- 952:	0f be       	out	0x3f, r0	; 63
- 954:	cd bf       	out	0x3d, r28	; 61
- 956:	f6 2e       	mov	r15, r22
+ 92e:	ff 92       	push	r15
+ 930:	0f 93       	push	r16
+ 932:	1f 93       	push	r17
+ 934:	cf 93       	push	r28
+ 936:	df 93       	push	r29
+ 938:	cd b7       	in	r28, 0x3d	; 61
+ 93a:	de b7       	in	r29, 0x3e	; 62
+ 93c:	68 97       	sbiw	r28, 0x18	; 24
+ 93e:	0f b6       	in	r0, 0x3f	; 63
+ 940:	f8 94       	cli
+ 942:	de bf       	out	0x3e, r29	; 62
+ 944:	0f be       	out	0x3f, r0	; 63
+ 946:	cd bf       	out	0x3d, r28	; 61
+ 948:	f6 2e       	mov	r15, r22
 	char buffer_dec[4];   // dec temperature
 	
 	//temperatura
 	
 	//Copy texto to the buffer
 	strcpy(buffer_oled, "TEMP: ");
- 958:	97 e0       	ldi	r25, 0x07	; 7
- 95a:	e1 e6       	ldi	r30, 0x61	; 97
- 95c:	f0 e0       	ldi	r31, 0x00	; 0
- 95e:	8e 01       	movw	r16, r28
- 960:	0f 5f       	subi	r16, 0xFF	; 255
- 962:	1f 4f       	sbci	r17, 0xFF	; 255
- 964:	d8 01       	movw	r26, r16
- 966:	01 90       	ld	r0, Z+
- 968:	0d 92       	st	X+, r0
- 96a:	9a 95       	dec	r25
- 96c:	e1 f7       	brne	.-8      	; 0x966 <print_temperature+0x2a>
+ 94a:	97 e0       	ldi	r25, 0x07	; 7
+ 94c:	e1 e6       	ldi	r30, 0x61	; 97
+ 94e:	f0 e0       	ldi	r31, 0x00	; 0
+ 950:	8e 01       	movw	r16, r28
+ 952:	0f 5f       	subi	r16, 0xFF	; 255
+ 954:	1f 4f       	sbci	r17, 0xFF	; 255
+ 956:	d8 01       	movw	r26, r16
+ 958:	01 90       	ld	r0, Z+
+ 95a:	0d 92       	st	X+, r0
+ 95c:	9a 95       	dec	r25
+ 95e:	e1 f7       	brne	.-8      	; 0x958 <print_temperature+0x2a>
     } else if (__radix < 2 || __radix > 36) {
 	*__s = 0;
 	return __s;
     } else {
 	extern char *__itoa_ncheck (int, char *, unsigned char);
 	return __itoa_ncheck (__val, __s, __radix);
- 96e:	4a e0       	ldi	r20, 0x0A	; 10
- 970:	be 01       	movw	r22, r28
- 972:	6f 5e       	subi	r22, 0xEF	; 239
- 974:	7f 4f       	sbci	r23, 0xFF	; 255
+ 960:	4a e0       	ldi	r20, 0x0A	; 10
+ 962:	be 01       	movw	r22, r28
+ 964:	6f 5e       	subi	r22, 0xEF	; 239
+ 966:	7f 4f       	sbci	r23, 0xFF	; 255
+ 968:	90 e0       	ldi	r25, 0x00	; 0
+ 96a:	9f d0       	rcall	.+318    	; 0xaaa <__itoa_ncheck>
+ 96c:	4a e0       	ldi	r20, 0x0A	; 10
+ 96e:	be 01       	movw	r22, r28
+ 970:	6b 5e       	subi	r22, 0xEB	; 235
+ 972:	7f 4f       	sbci	r23, 0xFF	; 255
+ 974:	8f 2d       	mov	r24, r15
  976:	90 e0       	ldi	r25, 0x00	; 0
- 978:	9f d0       	rcall	.+318    	; 0xab8 <__itoa_ncheck>
- 97a:	4a e0       	ldi	r20, 0x0A	; 10
- 97c:	be 01       	movw	r22, r28
- 97e:	6b 5e       	subi	r22, 0xEB	; 235
- 980:	7f 4f       	sbci	r23, 0xFF	; 255
- 982:	8f 2d       	mov	r24, r15
- 984:	90 e0       	ldi	r25, 0x00	; 0
- 986:	98 d0       	rcall	.+304    	; 0xab8 <__itoa_ncheck>
+ 978:	98 d0       	rcall	.+304    	; 0xaaa <__itoa_ncheck>
 	
 	//Convert _v_dht_temp_dec to string base 10
 	itoa(temp_decc, buffer_dec, 10);
 	
 	//concat integer part to string
 	strcat(buffer_oled, buffer_num);
- 988:	be 01       	movw	r22, r28
- 98a:	6f 5e       	subi	r22, 0xEF	; 239
- 98c:	7f 4f       	sbci	r23, 0xFF	; 255
- 98e:	c8 01       	movw	r24, r16
- 990:	88 d0       	rcall	.+272    	; 0xaa2 <strcat>
+ 97a:	be 01       	movw	r22, r28
+ 97c:	6f 5e       	subi	r22, 0xEF	; 239
+ 97e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 980:	c8 01       	movw	r24, r16
+ 982:	88 d0       	rcall	.+272    	; 0xa94 <strcat>
 	
 	//concat decimal part to string
 	strcat(buffer_oled, ".");
- 992:	f8 01       	movw	r30, r16
- 994:	01 90       	ld	r0, Z+
- 996:	00 20       	and	r0, r0
- 998:	e9 f7       	brne	.-6      	; 0x994 <print_temperature+0x58>
- 99a:	31 97       	sbiw	r30, 0x01	; 1
- 99c:	8e e2       	ldi	r24, 0x2E	; 46
- 99e:	90 e0       	ldi	r25, 0x00	; 0
- 9a0:	91 83       	std	Z+1, r25	; 0x01
- 9a2:	80 83       	st	Z, r24
+ 984:	f8 01       	movw	r30, r16
+ 986:	01 90       	ld	r0, Z+
+ 988:	00 20       	and	r0, r0
+ 98a:	e9 f7       	brne	.-6      	; 0x986 <print_temperature+0x58>
+ 98c:	31 97       	sbiw	r30, 0x01	; 1
+ 98e:	8e e2       	ldi	r24, 0x2E	; 46
+ 990:	90 e0       	ldi	r25, 0x00	; 0
+ 992:	91 83       	std	Z+1, r25	; 0x01
+ 994:	80 83       	st	Z, r24
 	strcat(buffer_oled, buffer_dec);
- 9a4:	be 01       	movw	r22, r28
- 9a6:	6b 5e       	subi	r22, 0xEB	; 235
- 9a8:	7f 4f       	sbci	r23, 0xFF	; 255
- 9aa:	c8 01       	movw	r24, r16
- 9ac:	7a d0       	rcall	.+244    	; 0xaa2 <strcat>
+ 996:	be 01       	movw	r22, r28
+ 998:	6b 5e       	subi	r22, 0xEB	; 235
+ 99a:	7f 4f       	sbci	r23, 0xFF	; 255
+ 99c:	c8 01       	movw	r24, r16
+ 99e:	7a d0       	rcall	.+244    	; 0xa94 <strcat>
 	
 	//finish the string
 	strcat(buffer_oled, " °C");
- 9ae:	f8 01       	movw	r30, r16
- 9b0:	01 90       	ld	r0, Z+
- 9b2:	00 20       	and	r0, r0
- 9b4:	e9 f7       	brne	.-6      	; 0x9b0 <print_temperature+0x74>
- 9b6:	31 97       	sbiw	r30, 0x01	; 1
- 9b8:	80 e2       	ldi	r24, 0x20	; 32
- 9ba:	90 eb       	ldi	r25, 0xB0	; 176
- 9bc:	91 83       	std	Z+1, r25	; 0x01
- 9be:	80 83       	st	Z, r24
- 9c0:	83 e4       	ldi	r24, 0x43	; 67
- 9c2:	90 e0       	ldi	r25, 0x00	; 0
- 9c4:	93 83       	std	Z+3, r25	; 0x03
- 9c6:	82 83       	std	Z+2, r24	; 0x02
+ 9a0:	f8 01       	movw	r30, r16
+ 9a2:	01 90       	ld	r0, Z+
+ 9a4:	00 20       	and	r0, r0
+ 9a6:	e9 f7       	brne	.-6      	; 0x9a2 <print_temperature+0x74>
+ 9a8:	31 97       	sbiw	r30, 0x01	; 1
+ 9aa:	80 e2       	ldi	r24, 0x20	; 32
+ 9ac:	90 eb       	ldi	r25, 0xB0	; 176
+ 9ae:	91 83       	std	Z+1, r25	; 0x01
+ 9b0:	80 83       	st	Z, r24
+ 9b2:	83 e4       	ldi	r24, 0x43	; 67
+ 9b4:	90 e0       	ldi	r25, 0x00	; 0
+ 9b6:	93 83       	std	Z+3, r25	; 0x03
+ 9b8:	82 83       	std	Z+2, r24	; 0x02
 	
 	//print
 	oled_print_text(buffer_oled, 2, 32);
- 9c8:	40 e2       	ldi	r20, 0x20	; 32
- 9ca:	62 e0       	ldi	r22, 0x02	; 2
- 9cc:	c8 01       	movw	r24, r16
- 9ce:	6c df       	rcall	.-296    	; 0x8a8 <oled_print_text>
+ 9ba:	40 e2       	ldi	r20, 0x20	; 32
+ 9bc:	62 e0       	ldi	r22, 0x02	; 2
+ 9be:	c8 01       	movw	r24, r16
+ 9c0:	6c df       	rcall	.-296    	; 0x89a <oled_print_text>
 }
- 9d0:	68 96       	adiw	r28, 0x18	; 24
- 9d2:	0f b6       	in	r0, 0x3f	; 63
- 9d4:	f8 94       	cli
- 9d6:	de bf       	out	0x3e, r29	; 62
- 9d8:	0f be       	out	0x3f, r0	; 63
- 9da:	cd bf       	out	0x3d, r28	; 61
- 9dc:	df 91       	pop	r29
- 9de:	cf 91       	pop	r28
- 9e0:	1f 91       	pop	r17
- 9e2:	0f 91       	pop	r16
- 9e4:	ff 90       	pop	r15
- 9e6:	08 95       	ret
+ 9c2:	68 96       	adiw	r28, 0x18	; 24
+ 9c4:	0f b6       	in	r0, 0x3f	; 63
+ 9c6:	f8 94       	cli
+ 9c8:	de bf       	out	0x3e, r29	; 62
+ 9ca:	0f be       	out	0x3f, r0	; 63
+ 9cc:	cd bf       	out	0x3d, r28	; 61
+ 9ce:	df 91       	pop	r29
+ 9d0:	cf 91       	pop	r28
+ 9d2:	1f 91       	pop	r17
+ 9d4:	0f 91       	pop	r16
+ 9d6:	ff 90       	pop	r15
+ 9d8:	08 95       	ret
 
-000009e8 <print_humidity>:
+000009da <print_humidity>:
 
 
 void print_humidity(uint8_t rh_int, uint8_t rh_dec) {
- 9e8:	ff 92       	push	r15
- 9ea:	0f 93       	push	r16
- 9ec:	1f 93       	push	r17
- 9ee:	cf 93       	push	r28
- 9f0:	df 93       	push	r29
- 9f2:	cd b7       	in	r28, 0x3d	; 61
- 9f4:	de b7       	in	r29, 0x3e	; 62
- 9f6:	68 97       	sbiw	r28, 0x18	; 24
- 9f8:	0f b6       	in	r0, 0x3f	; 63
- 9fa:	f8 94       	cli
- 9fc:	de bf       	out	0x3e, r29	; 62
- 9fe:	0f be       	out	0x3f, r0	; 63
- a00:	cd bf       	out	0x3d, r28	; 61
- a02:	f6 2e       	mov	r15, r22
+ 9da:	ff 92       	push	r15
+ 9dc:	0f 93       	push	r16
+ 9de:	1f 93       	push	r17
+ 9e0:	cf 93       	push	r28
+ 9e2:	df 93       	push	r29
+ 9e4:	cd b7       	in	r28, 0x3d	; 61
+ 9e6:	de b7       	in	r29, 0x3e	; 62
+ 9e8:	68 97       	sbiw	r28, 0x18	; 24
+ 9ea:	0f b6       	in	r0, 0x3f	; 63
+ 9ec:	f8 94       	cli
+ 9ee:	de bf       	out	0x3e, r29	; 62
+ 9f0:	0f be       	out	0x3f, r0	; 63
+ 9f2:	cd bf       	out	0x3d, r28	; 61
+ 9f4:	f6 2e       	mov	r15, r22
 	char buffer_dec[4];   // dec temperature
 	
 	//temperatura
 	
 	//Copy texto to the buffer
 	strcpy(buffer_oled, "HUM:  ");
- a04:	97 e0       	ldi	r25, 0x07	; 7
- a06:	e8 e6       	ldi	r30, 0x68	; 104
- a08:	f0 e0       	ldi	r31, 0x00	; 0
- a0a:	8e 01       	movw	r16, r28
- a0c:	0f 5f       	subi	r16, 0xFF	; 255
- a0e:	1f 4f       	sbci	r17, 0xFF	; 255
- a10:	d8 01       	movw	r26, r16
- a12:	01 90       	ld	r0, Z+
- a14:	0d 92       	st	X+, r0
- a16:	9a 95       	dec	r25
- a18:	e1 f7       	brne	.-8      	; 0xa12 <print_humidity+0x2a>
- a1a:	4a e0       	ldi	r20, 0x0A	; 10
- a1c:	be 01       	movw	r22, r28
- a1e:	6f 5e       	subi	r22, 0xEF	; 239
- a20:	7f 4f       	sbci	r23, 0xFF	; 255
+ 9f6:	97 e0       	ldi	r25, 0x07	; 7
+ 9f8:	e8 e6       	ldi	r30, 0x68	; 104
+ 9fa:	f0 e0       	ldi	r31, 0x00	; 0
+ 9fc:	8e 01       	movw	r16, r28
+ 9fe:	0f 5f       	subi	r16, 0xFF	; 255
+ a00:	1f 4f       	sbci	r17, 0xFF	; 255
+ a02:	d8 01       	movw	r26, r16
+ a04:	01 90       	ld	r0, Z+
+ a06:	0d 92       	st	X+, r0
+ a08:	9a 95       	dec	r25
+ a0a:	e1 f7       	brne	.-8      	; 0xa04 <print_humidity+0x2a>
+ a0c:	4a e0       	ldi	r20, 0x0A	; 10
+ a0e:	be 01       	movw	r22, r28
+ a10:	6f 5e       	subi	r22, 0xEF	; 239
+ a12:	7f 4f       	sbci	r23, 0xFF	; 255
+ a14:	90 e0       	ldi	r25, 0x00	; 0
+ a16:	49 d0       	rcall	.+146    	; 0xaaa <__itoa_ncheck>
+ a18:	4a e0       	ldi	r20, 0x0A	; 10
+ a1a:	be 01       	movw	r22, r28
+ a1c:	6b 5e       	subi	r22, 0xEB	; 235
+ a1e:	7f 4f       	sbci	r23, 0xFF	; 255
+ a20:	8f 2d       	mov	r24, r15
  a22:	90 e0       	ldi	r25, 0x00	; 0
- a24:	49 d0       	rcall	.+146    	; 0xab8 <__itoa_ncheck>
- a26:	4a e0       	ldi	r20, 0x0A	; 10
- a28:	be 01       	movw	r22, r28
- a2a:	6b 5e       	subi	r22, 0xEB	; 235
- a2c:	7f 4f       	sbci	r23, 0xFF	; 255
- a2e:	8f 2d       	mov	r24, r15
- a30:	90 e0       	ldi	r25, 0x00	; 0
- a32:	42 d0       	rcall	.+132    	; 0xab8 <__itoa_ncheck>
+ a24:	42 d0       	rcall	.+132    	; 0xaaa <__itoa_ncheck>
 	
 	//Convert _v_dht_temp_dec to string base 10
 	itoa(rh_dec, buffer_dec, 10);
 	
 	//concat integer part to string
 	strcat(buffer_oled, buffer_num);
- a34:	be 01       	movw	r22, r28
- a36:	6f 5e       	subi	r22, 0xEF	; 239
- a38:	7f 4f       	sbci	r23, 0xFF	; 255
- a3a:	c8 01       	movw	r24, r16
- a3c:	32 d0       	rcall	.+100    	; 0xaa2 <strcat>
+ a26:	be 01       	movw	r22, r28
+ a28:	6f 5e       	subi	r22, 0xEF	; 239
+ a2a:	7f 4f       	sbci	r23, 0xFF	; 255
+ a2c:	c8 01       	movw	r24, r16
+ a2e:	32 d0       	rcall	.+100    	; 0xa94 <strcat>
 	
 	//concat decimal part to string
 	strcat(buffer_oled, ".");
- a3e:	f8 01       	movw	r30, r16
- a40:	01 90       	ld	r0, Z+
- a42:	00 20       	and	r0, r0
- a44:	e9 f7       	brne	.-6      	; 0xa40 <print_humidity+0x58>
- a46:	31 97       	sbiw	r30, 0x01	; 1
- a48:	8e e2       	ldi	r24, 0x2E	; 46
- a4a:	90 e0       	ldi	r25, 0x00	; 0
- a4c:	91 83       	std	Z+1, r25	; 0x01
- a4e:	80 83       	st	Z, r24
+ a30:	f8 01       	movw	r30, r16
+ a32:	01 90       	ld	r0, Z+
+ a34:	00 20       	and	r0, r0
+ a36:	e9 f7       	brne	.-6      	; 0xa32 <print_humidity+0x58>
+ a38:	31 97       	sbiw	r30, 0x01	; 1
+ a3a:	8e e2       	ldi	r24, 0x2E	; 46
+ a3c:	90 e0       	ldi	r25, 0x00	; 0
+ a3e:	91 83       	std	Z+1, r25	; 0x01
+ a40:	80 83       	st	Z, r24
 	strcat(buffer_oled, buffer_dec);
- a50:	be 01       	movw	r22, r28
- a52:	6b 5e       	subi	r22, 0xEB	; 235
- a54:	7f 4f       	sbci	r23, 0xFF	; 255
- a56:	c8 01       	movw	r24, r16
- a58:	24 d0       	rcall	.+72     	; 0xaa2 <strcat>
+ a42:	be 01       	movw	r22, r28
+ a44:	6b 5e       	subi	r22, 0xEB	; 235
+ a46:	7f 4f       	sbci	r23, 0xFF	; 255
+ a48:	c8 01       	movw	r24, r16
+ a4a:	24 d0       	rcall	.+72     	; 0xa94 <strcat>
 	
 	//finish the string
 	strcat(buffer_oled, " %");
- a5a:	f8 01       	movw	r30, r16
- a5c:	01 90       	ld	r0, Z+
- a5e:	00 20       	and	r0, r0
- a60:	e9 f7       	brne	.-6      	; 0xa5c <print_humidity+0x74>
- a62:	31 97       	sbiw	r30, 0x01	; 1
- a64:	80 e2       	ldi	r24, 0x20	; 32
- a66:	95 e2       	ldi	r25, 0x25	; 37
- a68:	91 83       	std	Z+1, r25	; 0x01
- a6a:	80 83       	st	Z, r24
- a6c:	12 82       	std	Z+2, r1	; 0x02
+ a4c:	f8 01       	movw	r30, r16
+ a4e:	01 90       	ld	r0, Z+
+ a50:	00 20       	and	r0, r0
+ a52:	e9 f7       	brne	.-6      	; 0xa4e <print_humidity+0x74>
+ a54:	31 97       	sbiw	r30, 0x01	; 1
+ a56:	80 e2       	ldi	r24, 0x20	; 32
+ a58:	95 e2       	ldi	r25, 0x25	; 37
+ a5a:	91 83       	std	Z+1, r25	; 0x01
+ a5c:	80 83       	st	Z, r24
+ a5e:	12 82       	std	Z+2, r1	; 0x02
 	
 	//print
 	oled_print_text(buffer_oled, 5, 32);
- a6e:	40 e2       	ldi	r20, 0x20	; 32
- a70:	65 e0       	ldi	r22, 0x05	; 5
- a72:	c8 01       	movw	r24, r16
- a74:	19 df       	rcall	.-462    	; 0x8a8 <oled_print_text>
+ a60:	40 e2       	ldi	r20, 0x20	; 32
+ a62:	65 e0       	ldi	r22, 0x05	; 5
+ a64:	c8 01       	movw	r24, r16
+ a66:	19 df       	rcall	.-462    	; 0x89a <oled_print_text>
 }
- a76:	68 96       	adiw	r28, 0x18	; 24
- a78:	0f b6       	in	r0, 0x3f	; 63
- a7a:	f8 94       	cli
- a7c:	de bf       	out	0x3e, r29	; 62
- a7e:	0f be       	out	0x3f, r0	; 63
- a80:	cd bf       	out	0x3d, r28	; 61
- a82:	df 91       	pop	r29
- a84:	cf 91       	pop	r28
- a86:	1f 91       	pop	r17
- a88:	0f 91       	pop	r16
- a8a:	ff 90       	pop	r15
- a8c:	08 95       	ret
+ a68:	68 96       	adiw	r28, 0x18	; 24
+ a6a:	0f b6       	in	r0, 0x3f	; 63
+ a6c:	f8 94       	cli
+ a6e:	de bf       	out	0x3e, r29	; 62
+ a70:	0f be       	out	0x3f, r0	; 63
+ a72:	cd bf       	out	0x3d, r28	; 61
+ a74:	df 91       	pop	r29
+ a76:	cf 91       	pop	r28
+ a78:	1f 91       	pop	r17
+ a7a:	0f 91       	pop	r16
+ a7c:	ff 90       	pop	r15
+ a7e:	08 95       	ret
 
-00000a8e <oled_on>:
+00000a80 <oled_on>:
 	@param: 
 	@return:
 */
 void oled_on()
 {
 	attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xAF);
- a8e:	4f ea       	ldi	r20, 0xAF	; 175
- a90:	60 e0       	ldi	r22, 0x00	; 0
- a92:	88 e7       	ldi	r24, 0x78	; 120
- a94:	8b dd       	rcall	.-1258   	; 0x5ac <attiny_i2c_send_byte>
- a96:	08 95       	ret
+ a80:	4f ea       	ldi	r20, 0xAF	; 175
+ a82:	60 e0       	ldi	r22, 0x00	; 0
+ a84:	88 e7       	ldi	r24, 0x78	; 120
+ a86:	92 dd       	rcall	.-1244   	; 0x5ac <attiny_i2c_send_byte>
+ a88:	08 95       	ret
 
-00000a98 <oled_full_on>:
+00000a8a <oled_full_on>:
 	@param: 
 	@return:
 */
 void oled_full_on()
 {
 	attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA5);
- a98:	45 ea       	ldi	r20, 0xA5	; 165
- a9a:	60 e0       	ldi	r22, 0x00	; 0
- a9c:	88 e7       	ldi	r24, 0x78	; 120
- a9e:	86 dd       	rcall	.-1268   	; 0x5ac <attiny_i2c_send_byte>
- aa0:	08 95       	ret
+ a8a:	45 ea       	ldi	r20, 0xA5	; 165
+ a8c:	60 e0       	ldi	r22, 0x00	; 0
+ a8e:	88 e7       	ldi	r24, 0x78	; 120
+ a90:	8d dd       	rcall	.-1254   	; 0x5ac <attiny_i2c_send_byte>
+ a92:	08 95       	ret
 
-00000aa2 <strcat>:
- aa2:	fb 01       	movw	r30, r22
- aa4:	dc 01       	movw	r26, r24
- aa6:	0d 90       	ld	r0, X+
- aa8:	00 20       	and	r0, r0
- aaa:	e9 f7       	brne	.-6      	; 0xaa6 <strcat+0x4>
- aac:	11 97       	sbiw	r26, 0x01	; 1
- aae:	01 90       	ld	r0, Z+
- ab0:	0d 92       	st	X+, r0
- ab2:	00 20       	and	r0, r0
- ab4:	e1 f7       	brne	.-8      	; 0xaae <strcat+0xc>
- ab6:	08 95       	ret
+00000a94 <strcat>:
+ a94:	fb 01       	movw	r30, r22
+ a96:	dc 01       	movw	r26, r24
+ a98:	0d 90       	ld	r0, X+
+ a9a:	00 20       	and	r0, r0
+ a9c:	e9 f7       	brne	.-6      	; 0xa98 <strcat+0x4>
+ a9e:	11 97       	sbiw	r26, 0x01	; 1
+ aa0:	01 90       	ld	r0, Z+
+ aa2:	0d 92       	st	X+, r0
+ aa4:	00 20       	and	r0, r0
+ aa6:	e1 f7       	brne	.-8      	; 0xaa0 <strcat+0xc>
+ aa8:	08 95       	ret
 
-00000ab8 <__itoa_ncheck>:
- ab8:	bb 27       	eor	r27, r27
- aba:	4a 30       	cpi	r20, 0x0A	; 10
- abc:	31 f4       	brne	.+12     	; 0xaca <__itoa_ncheck+0x12>
- abe:	99 23       	and	r25, r25
- ac0:	22 f4       	brpl	.+8      	; 0xaca <__itoa_ncheck+0x12>
- ac2:	bd e2       	ldi	r27, 0x2D	; 45
- ac4:	90 95       	com	r25
- ac6:	81 95       	neg	r24
- ac8:	9f 4f       	sbci	r25, 0xFF	; 255
- aca:	01 c0       	rjmp	.+2      	; 0xace <__utoa_common>
+00000aaa <__itoa_ncheck>:
+ aaa:	bb 27       	eor	r27, r27
+ aac:	4a 30       	cpi	r20, 0x0A	; 10
+ aae:	31 f4       	brne	.+12     	; 0xabc <__itoa_ncheck+0x12>
+ ab0:	99 23       	and	r25, r25
+ ab2:	22 f4       	brpl	.+8      	; 0xabc <__itoa_ncheck+0x12>
+ ab4:	bd e2       	ldi	r27, 0x2D	; 45
+ ab6:	90 95       	com	r25
+ ab8:	81 95       	neg	r24
+ aba:	9f 4f       	sbci	r25, 0xFF	; 255
+ abc:	01 c0       	rjmp	.+2      	; 0xac0 <__utoa_common>
 
-00000acc <__utoa_ncheck>:
- acc:	bb 27       	eor	r27, r27
+00000abe <__utoa_ncheck>:
+ abe:	bb 27       	eor	r27, r27
 
-00000ace <__utoa_common>:
- ace:	fb 01       	movw	r30, r22
- ad0:	55 27       	eor	r21, r21
- ad2:	aa 27       	eor	r26, r26
- ad4:	88 0f       	add	r24, r24
- ad6:	99 1f       	adc	r25, r25
- ad8:	aa 1f       	adc	r26, r26
- ada:	a4 17       	cp	r26, r20
- adc:	10 f0       	brcs	.+4      	; 0xae2 <__utoa_common+0x14>
- ade:	a4 1b       	sub	r26, r20
- ae0:	83 95       	inc	r24
- ae2:	50 51       	subi	r21, 0x10	; 16
- ae4:	b9 f7       	brne	.-18     	; 0xad4 <__utoa_common+0x6>
- ae6:	a0 5d       	subi	r26, 0xD0	; 208
- ae8:	aa 33       	cpi	r26, 0x3A	; 58
- aea:	08 f0       	brcs	.+2      	; 0xaee <__utoa_common+0x20>
- aec:	a9 5d       	subi	r26, 0xD9	; 217
- aee:	a1 93       	st	Z+, r26
- af0:	00 97       	sbiw	r24, 0x00	; 0
- af2:	79 f7       	brne	.-34     	; 0xad2 <__utoa_common+0x4>
- af4:	b1 11       	cpse	r27, r1
- af6:	b1 93       	st	Z+, r27
- af8:	11 92       	st	Z+, r1
- afa:	cb 01       	movw	r24, r22
- afc:	00 c0       	rjmp	.+0      	; 0xafe <strrev>
+00000ac0 <__utoa_common>:
+ ac0:	fb 01       	movw	r30, r22
+ ac2:	55 27       	eor	r21, r21
+ ac4:	aa 27       	eor	r26, r26
+ ac6:	88 0f       	add	r24, r24
+ ac8:	99 1f       	adc	r25, r25
+ aca:	aa 1f       	adc	r26, r26
+ acc:	a4 17       	cp	r26, r20
+ ace:	10 f0       	brcs	.+4      	; 0xad4 <__utoa_common+0x14>
+ ad0:	a4 1b       	sub	r26, r20
+ ad2:	83 95       	inc	r24
+ ad4:	50 51       	subi	r21, 0x10	; 16
+ ad6:	b9 f7       	brne	.-18     	; 0xac6 <__utoa_common+0x6>
+ ad8:	a0 5d       	subi	r26, 0xD0	; 208
+ ada:	aa 33       	cpi	r26, 0x3A	; 58
+ adc:	08 f0       	brcs	.+2      	; 0xae0 <__utoa_common+0x20>
+ ade:	a9 5d       	subi	r26, 0xD9	; 217
+ ae0:	a1 93       	st	Z+, r26
+ ae2:	00 97       	sbiw	r24, 0x00	; 0
+ ae4:	79 f7       	brne	.-34     	; 0xac4 <__utoa_common+0x4>
+ ae6:	b1 11       	cpse	r27, r1
+ ae8:	b1 93       	st	Z+, r27
+ aea:	11 92       	st	Z+, r1
+ aec:	cb 01       	movw	r24, r22
+ aee:	00 c0       	rjmp	.+0      	; 0xaf0 <strrev>
 
-00000afe <strrev>:
- afe:	dc 01       	movw	r26, r24
- b00:	fc 01       	movw	r30, r24
- b02:	67 2f       	mov	r22, r23
- b04:	71 91       	ld	r23, Z+
- b06:	77 23       	and	r23, r23
- b08:	e1 f7       	brne	.-8      	; 0xb02 <strrev+0x4>
- b0a:	32 97       	sbiw	r30, 0x02	; 2
- b0c:	04 c0       	rjmp	.+8      	; 0xb16 <strrev+0x18>
- b0e:	7c 91       	ld	r23, X
- b10:	6d 93       	st	X+, r22
- b12:	70 83       	st	Z, r23
- b14:	62 91       	ld	r22, -Z
- b16:	ae 17       	cp	r26, r30
- b18:	bf 07       	cpc	r27, r31
- b1a:	c8 f3       	brcs	.-14     	; 0xb0e <strrev+0x10>
- b1c:	08 95       	ret
+00000af0 <strrev>:
+ af0:	dc 01       	movw	r26, r24
+ af2:	fc 01       	movw	r30, r24
+ af4:	67 2f       	mov	r22, r23
+ af6:	71 91       	ld	r23, Z+
+ af8:	77 23       	and	r23, r23
+ afa:	e1 f7       	brne	.-8      	; 0xaf4 <strrev+0x4>
+ afc:	32 97       	sbiw	r30, 0x02	; 2
+ afe:	04 c0       	rjmp	.+8      	; 0xb08 <strrev+0x18>
+ b00:	7c 91       	ld	r23, X
+ b02:	6d 93       	st	X+, r22
+ b04:	70 83       	st	Z, r23
+ b06:	62 91       	ld	r22, -Z
+ b08:	ae 17       	cp	r26, r30
+ b0a:	bf 07       	cpc	r27, r31
+ b0c:	c8 f3       	brcs	.-14     	; 0xb00 <strrev+0x10>
+ b0e:	08 95       	ret
 
-00000b1e <_exit>:
- b1e:	f8 94       	cli
+00000b10 <_exit>:
+ b10:	f8 94       	cli
 
-00000b20 <__stop_program>:
- b20:	ff cf       	rjmp	.-2      	; 0xb20 <__stop_program>
+00000b12 <__stop_program>:
+ b12:	ff cf       	rjmp	.-2      	; 0xb12 <__stop_program>

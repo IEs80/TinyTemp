@@ -266,7 +266,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xb22
+.text           0x00000000      0xb14
  *(.vectors)
  .vectors       0x00000000       0x1e C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
                 0x00000000                __vector_default
@@ -403,52 +403,52 @@ END GROUP
  .text.__vector_10
                 0x0000073a       0x2e src/main.o
                 0x0000073a                __vector_10
- .text.main     0x00000768       0xb4 src/main.o
+ .text.main     0x00000768       0xa6 src/main.o
                 0x00000768                main
  .text.set_page
-                0x0000081c       0x12 src/oled.o
-                0x0000081c                set_page
+                0x0000080e       0x12 src/oled.o
+                0x0000080e                set_page
  .text.set_column
-                0x0000082e       0x26 src/oled.o
-                0x0000082e                set_column
+                0x00000820       0x26 src/oled.o
+                0x00000820                set_column
  .text.oled_clean
-                0x00000854       0x4a src/oled.o
-                0x00000854                oled_clean
+                0x00000846       0x4a src/oled.o
+                0x00000846                oled_clean
  .text.oled_write_byte
-                0x0000089e        0xa src/oled.o
-                0x0000089e                oled_write_byte
+                0x00000890        0xa src/oled.o
+                0x00000890                oled_write_byte
  .text.oled_print_text
-                0x000008a8       0x94 src/oled.o
-                0x000008a8                oled_print_text
+                0x0000089a       0x94 src/oled.o
+                0x0000089a                oled_print_text
  .text.print_temperature
-                0x0000093c       0xac src/oled.o
-                0x0000093c                print_temperature
+                0x0000092e       0xac src/oled.o
+                0x0000092e                print_temperature
  .text.print_humidity
-                0x000009e8       0xa6 src/oled.o
-                0x000009e8                print_humidity
- .text.oled_on  0x00000a8e        0xa src/oled.o
-                0x00000a8e                oled_on
+                0x000009da       0xa6 src/oled.o
+                0x000009da                print_humidity
+ .text.oled_on  0x00000a80        0xa src/oled.o
+                0x00000a80                oled_on
  .text.oled_full_on
-                0x00000a98        0xa src/oled.o
-                0x00000a98                oled_full_on
+                0x00000a8a        0xa src/oled.o
+                0x00000a8a                oled_full_on
  .text.avr-libc
-                0x00000aa2       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr25\libc.a(strcat.o)
-                0x00000aa2                strcat
+                0x00000a94       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr25\libc.a(strcat.o)
+                0x00000a94                strcat
  .text.avr-libc
-                0x00000ab8       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr25\libc.a(itoa_ncheck.o)
-                0x00000ab8                __itoa_ncheck
+                0x00000aaa       0x14 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr25\libc.a(itoa_ncheck.o)
+                0x00000aaa                __itoa_ncheck
  .text.avr-libc
-                0x00000acc       0x32 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr25\libc.a(utoa_ncheck.o)
-                0x00000acc                __utoa_ncheck
-                0x00000ace                __utoa_common
+                0x00000abe       0x32 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr25\libc.a(utoa_ncheck.o)
+                0x00000abe                __utoa_ncheck
+                0x00000ac0                __utoa_common
  .text.avr-libc
-                0x00000afe       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr25\libc.a(strrev.o)
-                0x00000afe                strrev
-                0x00000b1e                . = ALIGN (0x2)
+                0x00000af0       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr25\libc.a(strrev.o)
+                0x00000af0                strrev
+                0x00000b10                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000b1e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
-                0x00000b1e                _exit
-                0x00000b1e                exit
+ .fini9         0x00000b10        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+                0x00000b10                _exit
+                0x00000b10                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -467,11 +467,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000b1e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
+ .fini0         0x00000b10        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr25\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000b22                _etext = .
+                0x00000b14                _etext = .
 
-.data           0x00800060       0x10 load address 0x00000b22
+.data           0x00800060       0x10 load address 0x00000b14
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -540,8 +540,8 @@ END GROUP
  COMMON         0x00800085        0x7 src/i2c_driver.o
                 0x00800085                i2c_buff
                 0x0080008c                PROVIDE (__bss_end, .)
-                0x00000b22                __data_load_start = LOADADDR (.data)
-                0x00000b32                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000b14                __data_load_start = LOADADDR (.data)
+                0x00000b24                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0080008c        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -635,35 +635,35 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x1d8e
+.debug_info     0x00000000     0x1ca7
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x420 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
  .debug_info    0x00000420      0x56b src/drivers/dht_driver.o
  .debug_info    0x0000098b      0x109 src/drivers/gpio_driver.o
  .debug_info    0x00000a94       0xfa src/drivers/timer1_driver.o
  .debug_info    0x00000b8e      0x349 src/i2c_driver.o
- .debug_info    0x00000ed7      0x4ca src/main.o
- .debug_info    0x000013a1      0x9ed src/oled.o
+ .debug_info    0x00000ed7      0x3e3 src/main.o
+ .debug_info    0x000012ba      0x9ed src/oled.o
 
-.debug_abbrev   0x00000000      0xc57
+.debug_abbrev   0x00000000      0xc39
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x3e8 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
  .debug_abbrev  0x000003e8      0x153 src/drivers/dht_driver.o
  .debug_abbrev  0x0000053b       0x8b src/drivers/gpio_driver.o
  .debug_abbrev  0x000005c6       0x90 src/drivers/timer1_driver.o
  .debug_abbrev  0x00000656      0x18e src/i2c_driver.o
- .debug_abbrev  0x000007e4      0x1e0 src/main.o
- .debug_abbrev  0x000009c4      0x293 src/oled.o
+ .debug_abbrev  0x000007e4      0x1c2 src/main.o
+ .debug_abbrev  0x000009a6      0x293 src/oled.o
 
-.debug_line     0x00000000     0x12bd
+.debug_line     0x00000000     0x12bb
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000       0xf2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATtiny_DFP/1.10.348/gcc/dev/attiny85/avr25/crtattiny85.o
  .debug_line    0x000000f2      0x4f8 src/drivers/dht_driver.o
  .debug_line    0x000005ea      0x108 src/drivers/gpio_driver.o
  .debug_line    0x000006f2      0x13f src/drivers/timer1_driver.o
  .debug_line    0x00000831      0x3a6 src/i2c_driver.o
- .debug_line    0x00000bd7      0x2f0 src/main.o
- .debug_line    0x00000ec7      0x3f6 src/oled.o
+ .debug_line    0x00000bd7      0x2ee src/main.o
+ .debug_line    0x00000ec5      0x3f6 src/oled.o
 
 .debug_frame    0x00000000      0x380
  *(.debug_frame)
@@ -686,18 +686,18 @@ END GROUP
  .debug_str     0x00000541      0x132 src/i2c_driver.o
                                 0x2c0 (size before relaxing)
  .debug_str     0x00000673       0xec src/main.o
-                                0x3d9 (size before relaxing)
+                                0x3ca (size before relaxing)
  .debug_str     0x0000075f      0x145 src/oled.o
                                 0x396 (size before relaxing)
 
-.debug_loc      0x00000000      0xd89
+.debug_loc      0x00000000      0xcbd
  *(.debug_loc)
  .debug_loc     0x00000000       0xf5 src/drivers/dht_driver.o
  .debug_loc     0x000000f5      0x109 src/drivers/gpio_driver.o
  .debug_loc     0x000001fe       0x54 src/drivers/timer1_driver.o
  .debug_loc     0x00000252      0x240 src/i2c_driver.o
- .debug_loc     0x00000492      0x1da src/main.o
- .debug_loc     0x0000066c      0x71d src/oled.o
+ .debug_loc     0x00000492      0x10e src/main.o
+ .debug_loc     0x000005a0      0x71d src/oled.o
 
 .debug_macinfo
  *(.debug_macinfo)
