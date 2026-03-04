@@ -16,11 +16,12 @@ src/main.d src/main.o: ../src/main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h \
  C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/gpio_driver.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -56,12 +57,14 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
-
 C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h:
 
 C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
 C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h:
+
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/gpio_driver.h:

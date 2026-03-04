@@ -7,6 +7,7 @@
  */ 
 #include <avr/io.h>
 #include <avr/pgmspace.h>
+#include <stdlib.h>
 #include "string.h"
 
 
@@ -144,6 +145,27 @@ void oled_print_text(char* data,uint8_t page, uint8_t column);
 */
 void oled_draw_weather(uint8_t id,uint8_t page, uint8_t column);
 
+
+void print_temperature(uint8_t,uint8_t);
+void print_humidity(uint8_t,uint8_t);
+
+/*
+	@fn:	oled_on
+	@brief:	sends command to turn on the oled display
+	@param: 
+	@return:
+*/
+void oled_on();
+
+
+/*
+	@fn:	oled_full_on
+	@brief:	sets the full display on
+	@param: 
+	@return:
+*/
+void oled_full_on();
+
 //tables
 // "PROGMEM" tells the compiler: "Keep this in Flash, do not load into RAM"
 extern const uint8_t font5x7[] PROGMEM;
@@ -152,6 +174,7 @@ extern const uint8_t font5x7[] PROGMEM;
 
 
 /*
+
 	TODO: 
 		definir funciones para implementar comandos de seteo de página y columna
 		modificar i2c para poder enviar comandos multi-byte (no sólo 3 bytes). Utilizar memcpy 

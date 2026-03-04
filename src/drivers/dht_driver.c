@@ -50,8 +50,8 @@ void attiny_dht_init()
 	//RED LED
 	//DDRB |= (0x01<<PB4); //PB4 as Out
 	//PORTB&=~(0x01<<PB4); //PB4 OFF (line in idle state)
-	setPinDir(PB4,OUTPUT);
-	setPin(PB4,LOW);
+	//setPinDir(PB4,OUTPUT);
+	//setPin(PB4,LOW);
 }
 
 
@@ -201,16 +201,32 @@ void dht_response()
 	uint8_t timer_val = 0;
 	//the DHT 
 	//while((PINB&(0x01<<DHT_PIN)>>DHT_PIN)==1);
-		
+		timer1_reset_count();
 		//the DHT takes 10-20uS to start responding: we wait for the line to go low
-		while( getPinState(DHT_PIN) );
+		while( getPinState(DHT_PIN) )
+		{
+			if(timer1_get_count()>TIMEOUT)
+			{
+				f_dht_error = GET_DATA_ERROR;
+				return;
+			}
+		}
+		
 			
 		//re-init counter
 		//TCNT1 = 0;
 		timer1_reset_count();
 			
 		//wait while the line is low
-		while( !getPinState(DHT_PIN) );
+		while( !getPinState(DHT_PIN) )
+		{
+			if(timer1_get_count()>TIMEOUT)
+			{
+				f_dht_error = GET_DATA_ERROR;
+				return;
+			}
+			
+		}
 		timer_val = timer1_get_count();				
 		//check the counter values
 		if( (75<=timer_val) && (90>=timer_val))
@@ -224,7 +240,15 @@ void dht_response()
 			//restart count
 				
 			//now we wait while the line is high
-			while( getPinState(DHT_PIN));	
+			while( getPinState(DHT_PIN))
+			{
+				if(timer1_get_count()>TIMEOUT)
+				{
+					f_dht_error = GET_DATA_ERROR;
+					return;
+				}
+				
+			}	
 			timer_val = timer1_get_count();	
 			if( (75<=timer_val) && (90>=timer_val))
 			{
@@ -258,15 +282,31 @@ void dht_gets_data()
 		//decrement index
 		_v_dht_data_shift_index--;	
 		
+		timer1_reset_count();
+		timer_value = 0;		
 		//wait while the line is low
-		while( !getPinState(DHT_PIN) );
+		while( !getPinState(DHT_PIN) )
+		{
+			if(timer1_get_count()>TIMEOUT)				
+			{
+				f_dht_error = GET_DATA_ERROR; 
+				return;
+			}
+		}
 			
 		//restart counter
 		//TCNT1 = 0;
 		timer1_reset_count();
 		timer_value = 0;
 		//now we wait while the line is high
-		while(getPinState(DHT_PIN));
+		while(getPinState(DHT_PIN))
+		{
+			if(timer1_get_count()>TIMEOUT)
+			{
+				f_dht_error = GET_DATA_ERROR;
+				return;
+			}
+		}
 		timer_value = timer1_get_count();
 		if(_v_dht_data_shift_index>7)
 		{
@@ -300,7 +340,7 @@ void dht_gets_data()
 	@params: none
 	@returns: none
 */
-void dht_read()
+uint8_t dht_read()
 {
 	//dht_start();
 	
@@ -391,15 +431,90 @@ void dht_read()
 			deinit_pcint();
 			timer1_deinit();
 			dht_state = dht_idle;
+			return DHT_OK_STATUS;
 			break;
 		
 		case dht_error:
 			
 			deinit_pcint();
 			timer1_deinit();
+			return GET_DATA_ERROR;
 			break;
 		default:
+		return GET_DATA_ERROR;
 			break; 
+	}
+	return GET_DATA_ERROR;
+}
+
+
+
+uint8_t dht_read_2()
+{
+	//dht_start();
+
+	//initialize variables
+	_v_dht_rh_int = 0;
+	_v_dht_rh_dec = 0;
+	_v_dht_temp_int = 0;
+	_v_dht_temp_dec = 0;
+	_v_dht_data = 0;
+	_v_dht_data_ready = 0;
+	f_dht_error = NO_ERROR;
+	_v_dht_chk = 0; 
+	_v_dht_data_shift_index = 40;
+	_v_response_pulses = 0;
+	
+	setPinDir(DHT_PIN,OUTPUT);
+	setPin(DHT_PIN,HIGH);
+	
+	//
+	//attiny_dht_init();
+	//start timer
+	timer1_init();
+	
+	//star FSM
+	//sends start signal
+	dht_start();
+	if(f_dht_error!=NO_ERROR)
+	{
+		return GET_DATA_ERROR;
+	}
+
+	
+	//reads rh and temp values
+	dht_response();
+	if(f_dht_error!=NO_ERROR)
+	{
+		return GET_DATA_ERROR;
+	}
+
+
+	dht_gets_data();
+	if(f_dht_error!=NO_ERROR)
+	{
+		return GET_DATA_ERROR;
+	}
+
+	
+	//check for stop signal
+	//deinit_pcint();
+	timer1_deinit();
+
+	
+	//PORTB|=(0x01<<PB4);
+	_v_dht_temp_dec = (_v_dht_data & 0xFF);
+	_v_dht_temp_int = ((_v_dht_data>>8) & 0xFF);
+	_v_dht_rh_dec = ((_v_dht_data>>16) & 0xFF);
+	_v_dht_rh_int = ((_v_dht_data>>24) & 0xFF);
+	
+	if(_v_dht_chk==((_v_dht_temp_dec+_v_dht_temp_int+_v_dht_rh_dec+_v_dht_rh_int) & 0xFF))
+	{
+		return DHT_OK_STATUS;	//_v_dht_data_ready = 1;
+	}
+	else
+	{
+		return GET_DATA_ERROR;	//_v_dht_data_ready = 1;
 	}
 	
 }

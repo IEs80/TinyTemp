@@ -10,22 +10,27 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <string.h>
-#include <stdlib.h>
+
 
 //includes
 #include "i2c.h"
 #include "oled.h"
 #include "dht.h"
+#include "gpio_driver.h"
 
 //Defines
 #define LED PB4
+#define RLED PB5
+
+enum FSM_STATES{IDLE,PRINT,READ};
 //Macros
 #define GLED_ON     PORTB|=(0x01<<LED) //LED on
+#define GLED_OFF    PORTB&=~(0x01<<LED) //LED on
 #define YLED_ON     PORTB|=(0x01<<LED) //LED on
 #define RLED_ON     PORTB|=(0x01<<LED) //LED on
 
 //Global variables
-
+volatile uint8_t app_state = IDLE;
 
 extern volatile uint8_t usi_state;	//defined in i2c_driver.c
 extern volatile uint8_t f_nack;		//defined in i2c_driver.c
@@ -43,67 +48,6 @@ extern volatile uint8_t	_v_dht_rh_dec;
 void attiny_timer_init(void);
 
 
-
-void print_temperature() {
-	char buffer_oled[16]; // full final string
-	char buffer_num[4];   // int temperature
-	char buffer_dec[4];   // dec temperature
-	
-	//temperatura
-	
-	//Copy texto to the buffer
-	strcpy(buffer_oled, "TEMP: ");
-	
-	//Convert _v_dht_temp_int to string base 10
-	itoa(_v_dht_temp_int, buffer_num, 10);
-	
-	//Convert _v_dht_temp_dec to string base 10
-	itoa(_v_dht_temp_dec, buffer_dec, 10);
-	
-	//concat integer part to string
-	strcat(buffer_oled, buffer_num);
-	
-	//concat decimal part to string
-	strcat(buffer_oled, ".");
-	strcat(buffer_oled, buffer_dec);
-	
-	//finish the string
-	strcat(buffer_oled, " °C");
-	
-	//print
-	oled_print_text(buffer_oled, 2, 32);
-}
-
-
-void print_humidity() {
-	char buffer_oled[16]; // full final string
-	char buffer_num[4];   // int temperature
-	char buffer_dec[4];   // dec temperature
-	
-	//temperatura
-	
-	//Copy texto to the buffer
-	strcpy(buffer_oled, "HUM:  ");
-	
-	//Convert _v_dht_temp_int to string base 10
-	itoa(_v_dht_rh_int, buffer_num, 10);
-	
-	//Convert _v_dht_temp_dec to string base 10
-	itoa(_v_dht_rh_dec, buffer_dec, 10);
-	
-	//concat integer part to string
-	strcat(buffer_oled, buffer_num);
-	
-	//concat decimal part to string
-	strcat(buffer_oled, ".");
-	strcat(buffer_oled, buffer_dec);
-	
-	//finish the string
-	strcat(buffer_oled, " %");
-	
-	//print
-	oled_print_text(buffer_oled, 5, 32);
-}
 
 
 //Function definitions
@@ -150,17 +94,25 @@ void attiny_timer_deinit()
 */
 void attiny_init()
 {
-	  //init Timer 0
-	  attiny_timer_init();
-	  //init USI 
-	  attiny_i2c_init();
+	//init Timer 0
+	//attiny_timer_init();
+	//init USI 
+	attiny_i2c_init();
+	
+	app_state = READ;		
+	// enable interrupts 
+	sei();
 
-	  // enable interrupts 
-	  sei();
-
-	  //Test LED
-	 // DDRB |= (0x01<<LED); //LED as Out
-	 // PORTB&=~(0x01<<LED); //LED off
+	attiny_dht_init();	
+	//Test LED
+	//DDRB |= (0x01<<LED); //LED as Out
+	//PORTB&=~(0x01<<LED); //LED off
+	setPinDir(LED,OUTPUT);
+	setPin(LED,LOW);
+	
+	//setPinDir(PB4,OUTPUT);
+	//setPin(PB4,LOW);
+	
 }
 
 
@@ -189,15 +141,18 @@ int main(void)
 {
 	
 	//Init ATtiny
-	char	a = 1;
-	char	b = 0;
-	uint8_t init_oled = 0;
+	//char	a = 1;
+	//char	b = 0;
+	//uint8_t init_oled = 0;
+	uint8_t dht_status = DHT_WORKING;
+	app_state = READ;	
 	
-	
 	TWI_DELAY();
 	TWI_DELAY();
 	TWI_DELAY();
 	TWI_DELAY();
+
+	attiny_init();
 
 	//attiny_dht_init();
     /* Replace with your application code */
@@ -205,7 +160,76 @@ int main(void)
     {
 		
 		
-		if(b==0)
+		switch(app_state)
+		{
+			case IDLE:
+				//in idle state, we just wait to measure again
+				GLED_OFF;
+				_delay_ms(8000);
+				
+				app_state = READ;
+				break;
+			case READ:
+				GLED_ON;
+				TIMSK &= ~(1 << OCIE0A);
+				//attiny_timer_deinit();
+				
+				dht_status = dht_read_2();
+				TIMSK |= (1 << OCIE0A);
+				if (dht_status==DHT_OK_STATUS)
+				{
+					dht_status = DHT_WORKING;
+					app_state = PRINT;
+				}
+				else if(dht_status!=DHT_OK_STATUS)
+				{
+					dht_status = DHT_WORKING;
+					app_state = IDLE;
+					//TODO: take actions
+				}
+			
+				break;
+			case PRINT:
+				
+				
+
+				attiny_timer_init();
+				//attiny_i2c_tx();
+				//turn on display
+				oled_on();
+				//full-on display
+				oled_full_on();
+				//display sleep mode
+				//attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
+				oled_clean(standar_mode);
+			
+				//write text
+				//oled_print_text("TEMP: 0°C",2,32);
+				print_temperature(_v_dht_temp_int,_v_dht_temp_dec);
+				print_humidity(_v_dht_rh_int,_v_dht_rh_dec);
+				//oled_print_text("HUM:  70%",5,32);
+				//oled_draw_weather(sunny,2,32);
+			
+			
+				//full-on display (using gdram)
+				attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
+				
+				
+				
+				//init_oled = 0;
+				
+				//set state to IDLE
+				app_state = IDLE;
+				
+				break;
+			default:
+				app_state = IDLE;
+				break;
+			
+		}
+		
+		
+		/*if(b==0)
 		{	
 			
 			dht_read();
@@ -241,8 +265,8 @@ int main(void)
 			
 			//write text
 			//oled_print_text("TEMP: 0°C",2,32);
-			print_temperature();
-			print_humidity();
+			print_temperature(_v_dht_temp_int,_v_dht_temp_dec);
+			print_humidity(_v_dht_rh_int,_v_dht_rh_dec);
 			//oled_print_text("HUM:  70%",5,32);
 			//oled_draw_weather(sunny,2,32);
 			
@@ -259,7 +283,7 @@ int main(void)
 		{
 			f_nack = 0;
 			//
-		}
+		}*/
 	
 	}
 }

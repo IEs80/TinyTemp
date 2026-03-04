@@ -419,3 +419,89 @@ void oled_draw_weather(uint8_t id,uint8_t page, uint8_t column)
 		}	
 
 }
+
+
+
+void print_temperature(uint8_t temp_in, uint8_t temp_decc) {
+	char buffer_oled[16]; // full final string
+	char buffer_num[4];   // int temperature
+	char buffer_dec[4];   // dec temperature
+	
+	//temperatura
+	
+	//Copy texto to the buffer
+	strcpy(buffer_oled, "TEMP: ");
+	
+	//Convert _v_dht_temp_int to string base 10
+	itoa(temp_in, buffer_num, 10);
+	
+	//Convert _v_dht_temp_dec to string base 10
+	itoa(temp_decc, buffer_dec, 10);
+	
+	//concat integer part to string
+	strcat(buffer_oled, buffer_num);
+	
+	//concat decimal part to string
+	strcat(buffer_oled, ".");
+	strcat(buffer_oled, buffer_dec);
+	
+	//finish the string
+	strcat(buffer_oled, " °C");
+	
+	//print
+	oled_print_text(buffer_oled, 2, 32);
+}
+
+
+void print_humidity(uint8_t rh_int, uint8_t rh_dec) {
+	char buffer_oled[16]; // full final string
+	char buffer_num[4];   // int temperature
+	char buffer_dec[4];   // dec temperature
+	
+	//temperatura
+	
+	//Copy texto to the buffer
+	strcpy(buffer_oled, "HUM:  ");
+	
+	//Convert _v_dht_temp_int to string base 10
+	itoa(rh_int, buffer_num, 10);
+	
+	//Convert _v_dht_temp_dec to string base 10
+	itoa(rh_dec, buffer_dec, 10);
+	
+	//concat integer part to string
+	strcat(buffer_oled, buffer_num);
+	
+	//concat decimal part to string
+	strcat(buffer_oled, ".");
+	strcat(buffer_oled, buffer_dec);
+	
+	//finish the string
+	strcat(buffer_oled, " %");
+	
+	//print
+	oled_print_text(buffer_oled, 5, 32);
+}
+
+/*
+	@fn:	oled_on
+	@brief:	sends command to turn on the oled display
+	@param: 
+	@return:
+*/
+void oled_on()
+{
+	attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xAF);
+}
+
+/*
+	@fn:	oled_full_on
+	@brief:	sets the full display on
+	@param: 
+	@return:
+*/
+void oled_full_on()
+{
+	attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA5);
+}
+
