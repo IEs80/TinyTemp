@@ -166,6 +166,14 @@ void oled_on();
 */
 void oled_full_on();
 
+/*
+	@fn:	oled_show_data
+	@brief:	shows the data stored in the oled gdram
+	@param: 
+	@return:
+*/
+void oled_show_data();
+
 //tables
 // "PROGMEM" tells the compiler: "Keep this in Flash, do not load into RAM"
 extern const uint8_t font5x7[] PROGMEM;

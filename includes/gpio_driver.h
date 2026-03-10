@@ -15,6 +15,13 @@
 
 #define	 DHT_PIN PB3 
 
+#define GLED_ON     PORTB|=(0x01<<LED) //LED on
+#define GLED_OFF    PORTB&=~(0x01<<LED) //LED on
+#define YLED_ON     PORTB|=(0x01<<LED) //LED on
+#define RLED_ON     PORTB|=(0x01<<LED) //LED on
+
+#define LED  PB4
+#define RLED PB5
 
 
 //Functions

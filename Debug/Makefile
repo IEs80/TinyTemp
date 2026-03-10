@@ -42,13 +42,15 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../src/app/main.c \
 ../src/drivers/dht_driver.c \
 ../src/drivers/gpio_driver.c \
+../src/drivers/i2c_driver.c \
+../src/drivers/timer0_driver.c \
 ../src/drivers/timer1_driver.c \
-../src/i2c_driver.c \
-../src/main.c \
-../src/oled.c \
-../src/primitives/dht_primitive.c
+../src/primitives/dht_primitive.c \
+../src/primitives/oled.c \
+../src/primitives/timer0_primitives.c
 
 
 PREPROCESSING_SRCS += 
@@ -58,40 +60,48 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+src/app/main.o \
 src/drivers/dht_driver.o \
 src/drivers/gpio_driver.o \
+src/drivers/i2c_driver.o \
+src/drivers/timer0_driver.o \
 src/drivers/timer1_driver.o \
-src/i2c_driver.o \
-src/main.o \
-src/oled.o \
-src/primitives/dht_primitive.o
+src/primitives/dht_primitive.o \
+src/primitives/oled.o \
+src/primitives/timer0_primitives.o
 
 OBJS_AS_ARGS +=  \
+src/app/main.o \
 src/drivers/dht_driver.o \
 src/drivers/gpio_driver.o \
+src/drivers/i2c_driver.o \
+src/drivers/timer0_driver.o \
 src/drivers/timer1_driver.o \
-src/i2c_driver.o \
-src/main.o \
-src/oled.o \
-src/primitives/dht_primitive.o
+src/primitives/dht_primitive.o \
+src/primitives/oled.o \
+src/primitives/timer0_primitives.o
 
 C_DEPS +=  \
+src/app/main.d \
 src/drivers/dht_driver.d \
 src/drivers/gpio_driver.d \
+src/drivers/i2c_driver.d \
+src/drivers/timer0_driver.d \
 src/drivers/timer1_driver.d \
-src/i2c_driver.d \
-src/main.d \
-src/oled.d \
-src/primitives/dht_primitive.d
+src/primitives/dht_primitive.d \
+src/primitives/oled.d \
+src/primitives/timer0_primitives.d
 
 C_DEPS_AS_ARGS +=  \
+src/app/main.d \
 src/drivers/dht_driver.d \
 src/drivers/gpio_driver.d \
+src/drivers/i2c_driver.d \
+src/drivers/timer0_driver.d \
 src/drivers/timer1_driver.d \
-src/i2c_driver.d \
-src/main.d \
-src/oled.d \
-src/primitives/dht_primitive.d
+src/primitives/dht_primitive.d \
+src/primitives/oled.d \
+src/primitives/timer0_primitives.d
 
 OUTPUT_FILE_PATH +=GccApplication1.elf
 
@@ -107,6 +117,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+src/app/main.o: ../src/app/main.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 src/drivers/dht_driver.o: ../src/drivers/dht_driver.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -121,6 +138,20 @@ src/drivers/gpio_driver.o: ../src/drivers/gpio_driver.c
 	@echo Finished building: $<
 	
 
+src/drivers/i2c_driver.o: ../src/drivers/i2c_driver.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/drivers/timer0_driver.o: ../src/drivers/timer0_driver.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 src/drivers/timer1_driver.o: ../src/drivers/timer1_driver.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -128,28 +159,21 @@ src/drivers/timer1_driver.o: ../src/drivers/timer1_driver.c
 	@echo Finished building: $<
 	
 
-src/i2c_driver.o: ../src/i2c_driver.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-src/main.o: ../src/main.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-src/oled.o: ../src/oled.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 src/primitives/dht_primitive.o: ../src/primitives/dht_primitive.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/primitives/oled.o: ../src/primitives/oled.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/primitives/timer0_primitives.o: ../src/primitives/timer0_primitives.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

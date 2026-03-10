@@ -1,4 +1,4 @@
-src/main.d src/main.o: ../src/main.c \
+src/app/main.d src/app/main.o: ../src/app/main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -20,8 +20,11 @@ src/main.d src/main.o: ../src/main.c \
  C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht_primitive.h \
  C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/gpio_driver.h
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/gpio_driver.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_primitive.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_driver.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -65,6 +68,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht_primitive.h:
+
 C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h:
 
 C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/gpio_driver.h:
+
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_primitive.h:
+
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_driver.h:

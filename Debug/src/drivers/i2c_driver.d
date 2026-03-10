@@ -1,4 +1,5 @@
-src/i2c_driver.d src/i2c_driver.o: ../src/i2c_driver.c \
+src/drivers/i2c_driver.d src/drivers/i2c_driver.o: \
+ ../src/drivers/i2c_driver.c \
  C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \

@@ -27,7 +27,7 @@ volatile uint8_t	f_dht_error = NO_ERROR;
 //volatile uint8_t	f_measuring = 0;
 //volatile uint8_t	f_measure_ready = 0;
 
-volatile	uint8_t dht_state = dht_idle;
+//volatile	uint8_t dht_state = dht_idle;
 
 volatile uint8_t _v_dht_data_ready = 0;
 
@@ -334,6 +334,7 @@ void dht_gets_data()
 	
 }
 
+
 /*	
 	@fn:  dht_read
 	@brief: updates the temp and rh values with new sensor data
@@ -341,115 +342,6 @@ void dht_gets_data()
 	@returns: none
 */
 uint8_t dht_read()
-{
-	//dht_start();
-	
-	switch(dht_state)
-	{
-		case dht_idle:
-			
-			//initialize variables
-			_v_dht_rh_int = 0;
-			_v_dht_rh_dec = 0;
-			_v_dht_temp_int = 0;
-			_v_dht_temp_dec = 0;
-			_v_dht_data = 0;
-			_v_dht_data_ready = 0;
-			
-			//
-			attiny_dht_init();
-			//start timer
-			timer1_init();
-			
-			//star FSM
-			dht_state = dht_send_start;
-			break;
-			
-		case dht_send_start:
-			//sends start signal
-			dht_start();
-			if(f_dht_error!=NO_ERROR)
-			{
-				dht_state = dht_error;
-			}
-			else
-			{
-				//while( !(PINB & (0x01 << DHT_PIN)) );
-				//inits Pin Change Interrupts
-				//init_pcint();
-				dht_state = dht_read_response;
-			}
-			break;
-		
-		//reads rh and temp values
-		case dht_read_response:
-			
-			dht_response();
-			if(f_dht_error!=NO_ERROR)
-			{
-				
-				dht_state = dht_error;
-			}
-			else
-			{
-				
-				if(_v_response_pulses == 2)
-				{
-					
-					dht_state = dht_read_bits;	
-				}
-				
-			}
-			break;
-		case dht_read_bits:
-			dht_gets_data();
-			if(f_dht_error!=NO_ERROR)
-			{
-				dht_state = dht_error;
-			}
-			else
-			{
-				dht_state = dht_stop;	
-			}
-			break;
-		
-		//check for stop signal
-		case dht_stop:
-			
-			//PORTB|=(0x01<<PB4); 
-			_v_dht_temp_dec = (_v_dht_data & 0xFF);
-			_v_dht_temp_int = ((_v_dht_data>>8) & 0xFF);
-			_v_dht_rh_dec = ((_v_dht_data>>16) & 0xFF);
-			_v_dht_rh_int = ((_v_dht_data>>24) & 0xFF);
-			
-			if(_v_dht_chk==((_v_dht_temp_dec+_v_dht_temp_int+_v_dht_rh_dec+_v_dht_rh_int) & 0xFF))
-			{
-				_v_dht_data_ready = 1;
-			}
-
-			
-			deinit_pcint();
-			timer1_deinit();
-			dht_state = dht_idle;
-			return DHT_OK_STATUS;
-			break;
-		
-		case dht_error:
-			
-			deinit_pcint();
-			timer1_deinit();
-			return GET_DATA_ERROR;
-			break;
-		default:
-		return GET_DATA_ERROR;
-			break; 
-	}
-	return GET_DATA_ERROR;
-}
-
-
-
-uint8_t dht_read_2()
 {
 	//dht_start();
 

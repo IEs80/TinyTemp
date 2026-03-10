@@ -505,3 +505,14 @@ void oled_full_on()
 	attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA5);
 }
 
+/*
+	@fn:	oled_show_data
+	@brief:	shows the data stored in the oled gdram
+	@param: 
+	@return:
+*/
+void oled_show_data()
+{
+	
+	attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
+}

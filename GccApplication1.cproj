@@ -152,6 +152,9 @@
     <Compile Include="includes\dht.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="includes\dht_primitive.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="includes\gpio_driver.h">
       <SubType>compile</SubType>
     </Compile>
@@ -161,7 +164,16 @@
     <Compile Include="includes\oled.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="includes\timer0_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="includes\timer0_primitive.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="includes\timer1_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\app\main.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\drivers\dht_driver.c">
@@ -170,19 +182,22 @@
     <Compile Include="src\drivers\gpio_driver.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\drivers\i2c_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\timer0_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\drivers\timer1_driver.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\i2c_driver.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\oled.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\primitives\dht_primitive.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\primitives\oled.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\primitives\timer0_primitives.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
