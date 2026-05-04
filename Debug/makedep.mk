@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\app\fsm.c
+
 src\app\main.c
 
 src\drivers\dht_driver.c

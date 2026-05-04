@@ -1,4 +1,5 @@
-src/app/main.d src/app/main.o: ../src/app/main.c \
+src/app/fsm.d src/app/fsm.o: ../src/app/fsm.c \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/fsm.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -10,27 +11,23 @@ src/app/main.d src/app/main.o: ../src/app/main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_primitive.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_driver.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
+ C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht_primitive.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/gpio_driver.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_primitive.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_driver.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/fsm.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_primitive.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h \
- C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h \
  C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht_primitive.h \
  C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/gpio_driver.h
+
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/fsm.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -54,7 +51,21 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
 
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h:
+
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
+
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_primitive.h:
+
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_driver.h:
+
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
 
@@ -62,35 +73,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
+C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h:
+
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht_primitive.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/gpio_driver.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_primitive.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_driver.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/fsm.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/timer0_primitive.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/i2c.h:
-
-C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/oled.h:
 
 C:\Users\IESz\Documents\Atmel\ Studio\7.0\Test1\GccApplication1\GccApplication1\includes/dht_primitive.h:
 

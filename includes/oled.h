@@ -45,6 +45,28 @@
 
 enum {standar_mode,inverted_mode}; 
 enum {sunny,cloudy,rainy,snowy};
+	
+	
+
+//////////////////////// Thermometer ////////////////////////////
+#define TH_X  56
+#define TH_Y  16
+
+#define TH_W  16
+#define TH_H  32
+
+#define FILL_X      6
+#define FILL_W      4
+#define FILL_Y      4
+#define FILL_H      22   // dejamos espacio para bulbo	
+
+void draw_thermometer(int temp);
+void sh1106_set_pos(uint8_t x, uint8_t page);
+uint8_t temp_to_level(int temp);
+void update_fill(uint8_t target);
+uint8_t is_scale_pixel(uint8_t x, uint8_t y);
+uint8_t is_bulb_pixel(uint8_t x, uint8_t y);
+	
 //Addressing mode
 
 

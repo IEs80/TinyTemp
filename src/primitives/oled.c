@@ -516,3 +516,143 @@ void oled_show_data()
 	
 	attiny_i2c_send_byte(OLED_ADDR_W,0x00,0xA4);
 }
+
+
+
+
+
+//////////////////////// Thermometer ////////////////////////////
+#define TH_X  56
+#define TH_Y  16
+
+#define TH_W  16
+#define TH_H  32
+
+#define FILL_X      6
+#define FILL_W      4
+#define FILL_Y      4
+#define FILL_H      22   // dejamos espacio para bulbo
+
+
+void oled_write_cmd(uint8_t c)
+{
+	attiny_i2c_send_byte(OLED_ADDR_W,OLED_CONTROL_BYTE,c);
+}
+
+uint8_t is_bulb_pixel(uint8_t x, uint8_t y)
+{
+	int cx = TH_W / 2;
+	int cy = TH_H - 5;
+	int r  = 5;
+
+	int dx = x - cx;
+	int dy = y - cy;
+
+	return (dx*dx + dy*dy) <= (r*r);
+}
+
+uint8_t is_scale_pixel(uint8_t x, uint8_t y)
+{
+	// Línea vertical izquierda
+	if (x == 2 && y > 2 && y < TH_H - 6)
+	return 1;
+
+	// Ticks cada 5 píxeles
+	if ((y % 5 == 0) && x >= 0 && x <= 2)
+	return 1;
+
+	return 0;
+}
+
+uint8_t current_fill = 0;
+
+void update_fill(uint8_t target)
+{
+	if (current_fill < target)
+	current_fill++;
+	else if (current_fill > target)
+	current_fill--;
+}
+
+uint8_t temp_to_level(int temp)
+{
+	if (temp < 0) temp = 0;
+	if (temp > 50) temp = 50;
+
+	return (uint8_t)(((uint16_t)(temp - 0) * FILL_H) / (50 - 0));
+}
+
+void sh1106_set_pos(uint8_t x, uint8_t page)
+{
+	oled_write_cmd(0xB0 | page);
+	oled_write_cmd(0x00 | (x & 0x0F));
+	oled_write_cmd(0x10 | (x >> 4));
+}
+
+void draw_thermometer(int temp)
+{
+	uint8_t target = temp_to_level(temp);
+	update_fill(target);
+
+	for (uint8_t page = 0; page < 4; page++)
+	{
+		sh1106_set_pos(TH_X, (TH_Y / 8) + page);
+
+		for (uint8_t col = 0; col < TH_W; col++)
+		{
+			uint8_t byte = 0;
+
+			for (uint8_t bit = 0; bit < 8; bit++)
+			{
+				uint8_t y = page * 8 + bit;
+				uint8_t pixel = 0;
+
+				// --- BORDE ---
+				if (
+				col == 4 || col == TH_W-5 ||
+				y == 2
+				)
+				pixel = 1;
+
+				// --- TUBO ---
+				if (
+				col >= 5 && col <= TH_W-6 &&
+				y > 2 && y < TH_H - 6
+				)
+				{
+					// borde interior
+					if (col == 5 || col == TH_W-6)
+					pixel = 1;
+				}
+
+				// --- BULBO ---
+				if (is_bulb_pixel(col, y))
+				pixel = 1;
+
+				// --- RELLENO ---
+				uint8_t fill_start = FILL_H - current_fill;
+
+				if (
+				col >= FILL_X && col < (FILL_X + FILL_W) &&
+				y >= FILL_Y &&
+				y < (FILL_Y + FILL_H) &&
+				y >= (FILL_Y + fill_start)
+				)
+				pixel = 1;
+
+				// rellenar bulbo completamente si hay temperatura
+				if (current_fill > 0 && is_bulb_pixel(col, y))
+				pixel = 1;
+
+				// --- ESCALA ---
+				if (is_scale_pixel(col, y))
+				pixel = 1;
+
+				if (pixel)
+				byte |= (1 << bit);
+			}
+
+			oled_write_byte(byte);
+		}
+	}
+}

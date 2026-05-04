@@ -42,6 +42,7 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../src/app/fsm.c \
 ../src/app/main.c \
 ../src/drivers/dht_driver.c \
 ../src/drivers/gpio_driver.c \
@@ -60,6 +61,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+src/app/fsm.o \
 src/app/main.o \
 src/drivers/dht_driver.o \
 src/drivers/gpio_driver.o \
@@ -71,6 +73,7 @@ src/primitives/oled.o \
 src/primitives/timer0_primitives.o
 
 OBJS_AS_ARGS +=  \
+src/app/fsm.o \
 src/app/main.o \
 src/drivers/dht_driver.o \
 src/drivers/gpio_driver.o \
@@ -82,6 +85,7 @@ src/primitives/oled.o \
 src/primitives/timer0_primitives.o
 
 C_DEPS +=  \
+src/app/fsm.d \
 src/app/main.d \
 src/drivers/dht_driver.d \
 src/drivers/gpio_driver.d \
@@ -93,6 +97,7 @@ src/primitives/oled.d \
 src/primitives/timer0_primitives.d
 
 C_DEPS_AS_ARGS +=  \
+src/app/fsm.d \
 src/app/main.d \
 src/drivers/dht_driver.d \
 src/drivers/gpio_driver.d \
@@ -117,6 +122,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+src/app/fsm.o: ../src/app/fsm.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\include" -I"C:\Users\IESz\Documents\Atmel Studio\7.0\Test1\GccApplication1\GccApplication1\includes"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\gcc\dev\attiny85" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 src/app/main.o: ../src/app/main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
